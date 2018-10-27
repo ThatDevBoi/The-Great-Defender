@@ -4,31 +4,29 @@ using UnityEngine;
 
 public class PC_Space_Ship_Controller : Base_Class
 {
-
-	// Use this for initialization
-	void Start ()
+    #region Start Function
+    // Use this for initialization
+    protected override void Start ()
     {
-        PC_RB = gameObject.AddComponent<Rigidbody2D>();     // Adding a rigidbody2D component to the gameObject
-        PC_RB.isKinematic = true;           // Makes the rigidbody limited with graphics. turns off gravity and mass
-
-        PC_SR = GetComponent<SpriteRenderer>();     // Find the sprite renderer on this gameObject
-        Debug.Assert(PC_SR != null, "Sprite Renderer Missing!");        // Calls an error when there is no sprite renderer
-
-
-
-        PC_BC = gameObject.AddComponent<BoxCollider2D>();           // Adds a BoxCollider to monitor Collision
-        PC_BC.isTrigger = true;         // Makes the box collider attached to gameObject a trigger
-        PC_BC.size = new Vector2(0.52f, 0.37f);     // Scales the size of the x and y of the BoxColliders size values 
+        base.Start();
     }
-	
-	// Update is called once per frame
-	void Update ()
+    #endregion
+
+
+    #region Update Function
+    // Update is called once per frame
+    void Update ()
     {
         DoMove();
 	}
+    #endregion
 
+
+    #region Base Class Do Move
     protected override void DoMove()
     {
         base.DoMove();
     }
+    #endregion
+
 }
