@@ -57,4 +57,16 @@ public abstract class Base_Class : MonoBehaviour
     }
     #endregion
 
+
+    #region GameObject Restriction
+    protected virtual void Movement_Restriction()
+    {
+        // When the GameObject moves up or down on the Y axis
+        if (transform.position.y <= -7.2f)                                                              // If the Transform component position is more than or equal to -7.5
+            transform.position = new Vector3(transform.position.x, -7.2f, transform.position.z);        // The new position for any GameObject will be restricted to -7.5 (Down on the Y axis)
+        else if(transform.position.y >= 7.2f)                                                           // However if the transform position is less than 7.5
+            transform.position = new Vector3(transform.position.x, 7.2f, transform.position.z);         // The new position of any GameObject is restricted to 7.5 (Up on Y axis)
+
+    }
+    #endregion
 }

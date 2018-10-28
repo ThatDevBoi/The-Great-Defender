@@ -17,7 +17,9 @@ public class PC_Space_Ship_Controller : Base_Class
     // Update is called once per frame
     void Update ()
     {
+        // Functions To Be Called 
         DoMove();
+        Movement_Restriction();
 	}
     #endregion
 
@@ -28,5 +30,11 @@ public class PC_Space_Ship_Controller : Base_Class
         base.DoMove();
     }
     #endregion
+
+
+    protected override void Movement_Restriction()
+    {
+        base.Movement_Restriction();
+    }
 
 }
