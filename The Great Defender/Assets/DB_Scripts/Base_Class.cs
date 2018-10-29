@@ -69,4 +69,5 @@ public abstract class Base_Class : MonoBehaviour
 
     }
     #endregion
+
 }

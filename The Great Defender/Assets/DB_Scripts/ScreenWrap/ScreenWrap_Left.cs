@@ -9,7 +9,7 @@ public class ScreenWrap_Left : MonoBehaviour
     {
         if (other.tag == "Player")
         {
-            other.gameObject.transform.position = new Vector3(69.5f, other.gameObject.transform.position.y, 0);
+            other.gameObject.transform.position = new Vector3(70f, other.gameObject.transform.position.y, 0);
         }
     }
 }
