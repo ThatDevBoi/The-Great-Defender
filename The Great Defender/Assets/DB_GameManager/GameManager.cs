@@ -6,6 +6,9 @@ public class GameManager : MonoBehaviour
 {
     public static int score;
 
+    public GameObject PC_Prefab;
+    public GameObject Abducter_Prefab;
+
 
     public static GameManager s_GM;
 
@@ -23,13 +26,33 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    private void Start()
+    {
+        InitialiseGame();
+    }
+
     private void Update()
     {
         Debug.Log(score);
     }
 
 
-    void ScorePoints(int AddPoints)
+
+    void InitialiseGame()
+    {
+        CreatePlayer();
+    }
+
+
+
+    public static void CreatePlayer()
+    {
+        Instantiate(s_GM.PC_Prefab, Vector3.zero, Quaternion.identity);     // Spawns the player prefab
+    }
+
+
+// Add Points Reciver
+void ScorePoints(int AddPoints)
     {
         score += AddPoints;
     }

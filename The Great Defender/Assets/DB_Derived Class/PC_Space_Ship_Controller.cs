@@ -115,6 +115,17 @@ public class PC_Space_Ship_Controller : Base_Class
     protected override void ObjectHit(Base_Class other_objects)
     {
         base.ObjectHit(other_objects);
+
+        PC_BC.enabled = false;
+
+        if(PC_BC.enabled == false)
+        {
+            Destroy(gameObject);
+
+            // Respawn if i have lifes
+
+        // with no life gameoever scene appears
+        }
     }
     #endregion
 }

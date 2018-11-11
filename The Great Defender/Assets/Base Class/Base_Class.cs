@@ -1,4 +1,7 @@
-﻿using System.Collections;
+﻿// Referneces 
+// https://www.youtube.com/watch?v=2EFuWjTAqyk&t=250s <-- used to Helped with making the shooting system
+
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -45,8 +48,6 @@ public abstract class Base_Class : MonoBehaviour
 
     #region NPC Variables
     protected static int add_points_for_charge = 2;      // Should go in gameManager
-    protected float fl_NPC_Health = 100;
-    protected float fl_NPC_damage = 50;
     #endregion
 
     #region Environment Renderer Class
@@ -109,6 +110,7 @@ public abstract class Base_Class : MonoBehaviour
     void Update ()
     {
         DoMove();
+        Movement_Restriction();
     }
     #endregion
 
@@ -149,6 +151,15 @@ public abstract class Base_Class : MonoBehaviour
         else if(transform.position.y >= 7.2f)                                                           // However if the transform position is less than 7.5
             transform.position = new Vector3(transform.position.x, 7.2f, transform.position.z);         // The new position of any GameObject is restricted to 7.5 (Up on Y axis)
 
+        // Screen Wrapping coordinates (X axis restriction)
+        if(transform.position.x >= 70f)     // if the transforms position is greater then 70f
+        {
+            transform.position = new Vector3(-70f, 0, 0); // Then wrap the object and place gameobject at -70 on the x 
+        }
+        else if(transform.position.x <= -70) // However if the transforms position is less than -70f
+        {
+            transform.position = new Vector3(70, 0, 0); // Place gameobject at 70 on the x
+        }
     }
     #endregion
     #endregion
@@ -167,8 +178,6 @@ public abstract class Base_Class : MonoBehaviour
             if (Hit.collider != null)
             {
                 Debug.Log("We hit the fucker");
-
-                fl_NPC_Health -= fl_NPC_damage;
             }
             Quaternion rot = (FacingRight) ? Quaternion.Euler(0, 0, 0) : Quaternion.Euler(0, 180, 0);      // Rot allows the Game to know if the player faces right the bullet wont need rotation however needs to be flipped 180 degrees if its the opposite
             GameObject BulletPre = Instantiate(bulletPrefab, fire_position.position, rot);     // Spawning the bulletPrefab at the fireposition and taking considertion of rot.

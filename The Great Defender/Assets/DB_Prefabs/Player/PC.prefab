@@ -84,6 +84,7 @@ GameObject:
   - component: {fileID: 4976617377110006}
   - component: {fileID: 212322945450767572}
   - component: {fileID: 114518937361613638}
+  - component: {fileID: 61656255234860534}
   m_Layer: 8
   m_Name: PC
   m_TagString: Player
@@ -98,7 +99,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1864569895252534}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.379, y: 0, z: 0}
+  m_LocalPosition: {x: 0.46, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4976617377110006}
@@ -124,7 +125,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1770155877819236}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.009, y: 0.128, z: 0}
+  m_LocalPosition: {x: -0.093, y: 0.232, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4976617377110006}
@@ -137,7 +138,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1009529101976290}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.008, y: -0.128, z: 0}
+  m_LocalPosition: {x: -0.093, y: -0.232, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4976617377110006}
@@ -200,6 +201,31 @@ Camera:
   m_OcclusionCulling: 0
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
+--- !u!61 &61656255234860534
+BoxCollider2D:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1939276393088754}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.09, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 0.64, y: 0.64}
+    newSize: {x: 0.64, y: 0.64}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 0.33, y: 0.31}
+  m_EdgeRadius: 0
 --- !u!81 &81978355648100712
 AudioListener:
   m_ObjectHideFlags: 1
@@ -222,7 +248,7 @@ MonoBehaviour:
   Yspeed: 10
   FacingRight: 1
   travelSpeed: 10
-  range: 100
+  range: 10
   damage: 10
   fire_position: {fileID: 0}
   double_fire_position_1: {fileID: 0}
@@ -232,9 +258,13 @@ MonoBehaviour:
     m_Bits: 1536
   bulletPrefab: {fileID: 1078421195682886, guid: 6320117e4624c2144b37477fd8c7ee4e,
     type: 2}
-  DefaultShot: 0
-  doubleShoot: 1
-  powerShoot: 0
+  chargeShotPrefab: {fileID: 1487862622438026, guid: 6c54348770a9d14438bc6d20bfa637f9,
+    type: 2}
+  DefaultShot: 1
+  doubleShoot: 0
+  chargeShoot: 1
+  ButtonCooler: 0.5
+  ButtonCount: 0
 --- !u!114 &114742451595473864
 MonoBehaviour:
   m_ObjectHideFlags: 1
