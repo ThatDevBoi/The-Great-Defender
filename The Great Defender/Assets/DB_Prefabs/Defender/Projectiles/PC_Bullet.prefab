@@ -54,7 +54,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 2, y: 0}
+  m_Offset: {x: 0.7, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -65,7 +65,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 4.09, y: 0.09}
+  m_Size: {x: 1.3, y: 0.09}
   m_EdgeRadius: 0
 --- !u!114 &114884909392200824
 MonoBehaviour:
@@ -95,7 +95,7 @@ MonoBehaviour:
   DefaultShot: 1
   doubleShoot: 0
   chargeShoot: 0
-  travelSpeed: 50
+  movement_Speed: 20
 --- !u!120 &120297194242235792
 LineRenderer:
   m_ObjectHideFlags: 1
@@ -133,7 +133,7 @@ LineRenderer:
   m_SortingOrder: 0
   m_Positions:
   - {x: 0, y: 0, z: 0}
-  - {x: 4, y: 0, z: 0}
+  - {x: 1.5, y: 0, z: 0}
   m_Parameters:
     serializedVersion: 2
     widthMultiplier: 0.09
@@ -149,15 +149,6 @@ LineRenderer:
         weightedMode: 0
         inWeight: 0.33333334
         outWeight: 0.33333334
-      - serializedVersion: 3
-        time: 0.9820896
-        value: 1
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4

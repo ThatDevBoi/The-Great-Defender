@@ -5,7 +5,7 @@ using UnityEngine;
 public class DB_Bullet_Move : Base_Class
 {
     [SerializeField]
-    private float travelSpeed = 20f;     // How fast is this bullet going to travel at
+    private float TravelSpeed = 20f;     // How fast is this bullet going to travel at
 
     private void Update()
     {

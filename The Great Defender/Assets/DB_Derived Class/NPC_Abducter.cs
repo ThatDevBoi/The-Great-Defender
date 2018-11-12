@@ -18,6 +18,9 @@ public class NPC_Abducter : Base_Class
     protected Transform Target;
     [SerializeField]
     private float timer = 2f;
+    [SerializeField]
+    private Transform Fire_Pos;
+
 
     protected override void Start()
     {
@@ -30,7 +33,7 @@ public class NPC_Abducter : Base_Class
     {
         DoMove();
         Movement_Restriction();
-
+        Lazer_Beam();
         // Random Movement      // NPC in defender doesnt follow the player instead the abducter NPC move randomly and pick out a human to abduct 
         timer -= Time.deltaTime;
         if(timer <= 0)
@@ -46,6 +49,28 @@ public class NPC_Abducter : Base_Class
     {
         transform.position += mvelocity * Time.deltaTime;
     }
+
+    protected override void Lazer_Beam()
+    {
+        // Declaring the fire position 
+        Vector2 firepos = new Vector2(Fire_Pos.position.x, Fire_Pos.position.y);
+        // The Direction Of Fire
+        Vector2 direction = Vector2.down;
+
+        RaycastHit2D Hit = Physics2D.Raycast(firepos, direction, range, whatTohit);
+        Debug.DrawRay(firepos, direction * range, Color.red, 1);
+
+        if(Hit.collider != null)
+        {
+            Debug.Log("We Hit Some Shit");
+        }
+        #region Note
+        // Dont Add A Prefab to find a Human. For One It'll just kill the human.
+        // Secondly the behavouir of how the NPC abducter moves can kill it when it bumps into its open bullet. 
+        // thirdly using an invisiable ray just adds feedback to the player for the player will never know what human is being a bducted
+        #endregion
+    }
+
     // Needs to be called as if its not then the NPC can leave the play area
     protected override void Movement_Restriction()
     {
