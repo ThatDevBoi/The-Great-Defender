@@ -98,7 +98,7 @@ public abstract class Base_Class : MonoBehaviour
         PC_SR = GetComponent<SpriteRenderer>();     // Find the sprite renderer on this gameObject
         //Debug.Assert(PC_SR != null, "Sprite Renderer Missing!");        // Calls an error when there is no sprite renderer
         PC_BC = gameObject.GetComponent<Collider2D>();           // Adds a BoxCollider to monitor Collision
-        PC_BC.isTrigger = true;         // Makes the box collider attached to gameObject a trigger
+        PC_BC.isTrigger = false;         // Makes the box collider attached to gameObject a trigger
         fire_position = GameObject.Find("Fire_Position").GetComponent<Transform>();       // Finds GameObject childed to player called Fire_Position. Needs its Transform
         double_fire_position_1 = GameObject.Find("Fire_Position_Double_Shot_Left_Wing").GetComponent<Transform>();
         double_fire_position_2 = GameObject.Find("Fire_Position_Double_Shot_Right_Wing").GetComponent<Transform>();
@@ -259,8 +259,8 @@ public abstract class Base_Class : MonoBehaviour
     public void OnTriggerEnter2D(Collider2D collision)
     {
         Base_Class m_otherObjects = collision.gameObject.GetComponent<Base_Class>();
-        Debug.Assert(m_otherObjects != null, "other Objects is not BaseClass Compatible");
-        ObjectHit(m_otherObjects);
+        Debug.Assert(m_otherObjects != null, "other Objects is not BaseClass Compatible");  // Appears in console
+        ObjectHit(m_otherObjects);      // Detects when an object hits the collider
     }
     #endregion
 }

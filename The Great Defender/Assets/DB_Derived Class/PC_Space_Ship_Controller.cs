@@ -14,6 +14,7 @@ public class PC_Space_Ship_Controller : Base_Class
     protected override void Start ()
     {
         base.Start();
+        PC_BC.isTrigger = true;
     }
     #endregion
 

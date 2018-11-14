@@ -20,6 +20,8 @@ public class NPC_Abducter : Base_Class
     private float timer = 2f;
     [SerializeField]
     private Transform Fire_Pos;
+    [SerializeField]
+    private bool abduction_choice = false;
 
 
     protected override void Start()
