@@ -9,9 +9,6 @@ public class GameManager : MonoBehaviour
     public GameObject PC_Prefab;
     public GameObject Abducter_Prefab;
 
-    public GameObject spawn_point;
-
-
     public static GameManager s_GM;
 
 

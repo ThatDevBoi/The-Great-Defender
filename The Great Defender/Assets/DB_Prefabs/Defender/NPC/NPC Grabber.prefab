@@ -11,6 +11,21 @@ Prefab:
   m_SourcePrefab: {fileID: 0}
   m_RootGameObject: {fileID: 1762876623335236}
   m_IsPrefabAsset: 1
+--- !u!1 &1459055068324088
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4948856106563126}
+  m_Layer: 9
+  m_Name: Fire_Position
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &1762876623335236
 GameObject:
   m_ObjectHideFlags: 0
@@ -36,10 +51,24 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1762876623335236}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 6, y: 0, z: 0}
+  m_LocalPosition: {x: -25.232275, y: 8.88, z: 0}
   m_LocalScale: {x: 4.1, y: 4.1, z: 4.1}
-  m_Children: []
+  m_Children:
+  - {fileID: 4948856106563126}
   m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4948856106563126
+Transform:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1459055068324088}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: -0.244, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4718585660060896}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &61790358351574170
@@ -82,19 +111,26 @@ MonoBehaviour:
   Yspeed: 2
   FacingRight: 1
   travelSpeed: 10
-  range: 100
+  range: 20
   damage: 10
   fire_position: {fileID: 0}
   double_fire_position_1: {fileID: 0}
   double_fire_position_2: {fileID: 0}
   whatTohit:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 1024
   bulletPrefab: {fileID: 0}
   chargeShotPrefab: {fileID: 0}
   DefaultShot: 1
   doubleShoot: 0
   chargeShoot: 0
+  points: 2
+  x_npc_speed: 5
+  y_npc_speed: 2
+  z_npc_move: 4
+  Target: {fileID: 0}
+  timer: 2
+  Fire_Pos: {fileID: 4948856106563126}
 --- !u!212 &212620502645042246
 SpriteRenderer:
   m_ObjectHideFlags: 1

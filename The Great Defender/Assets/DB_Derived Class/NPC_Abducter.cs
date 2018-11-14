@@ -7,7 +7,7 @@ using UnityEngine;
 
 public class NPC_Abducter : Base_Class
 {
-    public int points;
+    public int points =2;
     [SerializeField]
     protected float x_npc_speed = 5f;
     [SerializeField]
