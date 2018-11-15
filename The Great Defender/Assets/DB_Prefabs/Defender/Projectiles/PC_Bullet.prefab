@@ -51,7 +51,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0.7, y: 0}
@@ -79,6 +79,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 5
+  max_Speed: 4
   Yspeed: 2
   FacingRight: 1
   travelSpeed: 50
@@ -95,7 +96,7 @@ MonoBehaviour:
   DefaultShot: 1
   doubleShoot: 0
   chargeShoot: 0
-  movement_Speed: 20
+  TravelSpeed: 20
 --- !u!120 &120297194242235792
 LineRenderer:
   m_ObjectHideFlags: 1

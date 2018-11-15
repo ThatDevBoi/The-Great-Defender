@@ -26,18 +26,18 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!1 &1515435800984106
+--- !u!1 &1634039316162662
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 4469308317467722}
-  - component: {fileID: 20761505557349418}
-  - component: {fileID: 81978355648100712}
-  - component: {fileID: 114742451595473864}
-  m_Layer: 8
+  - component: {fileID: 4451004770145870}
+  - component: {fileID: 20207541240874598}
+  - component: {fileID: 81489375901863140}
+  - component: {fileID: 114446684661302876}
+  m_Layer: 0
   m_Name: Player Camera
   m_TagString: MainCamera
   m_Icon: {fileID: 0}
@@ -105,15 +105,15 @@ Transform:
   m_Father: {fileID: 4976617377110006}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!4 &4469308317467722
+--- !u!4 &4451004770145870
 Transform:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1515435800984106}
+  m_GameObject: {fileID: 1634039316162662}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -10}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 0, y: 0, z: -3.846154}
+  m_LocalScale: {x: 0.3846154, y: 0.3846154, z: 0.3846154}
   m_Children: []
   m_Father: {fileID: 4976617377110006}
   m_RootOrder: 0
@@ -151,26 +151,26 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1939276393088754}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.075, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 2.6, y: 2.6, z: 2.6}
   m_Children:
-  - {fileID: 4469308317467722}
+  - {fileID: 4451004770145870}
   - {fileID: 4441368071661776}
   - {fileID: 4575653265385072}
   - {fileID: 4603157293725284}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!20 &20761505557349418
+--- !u!20 &20207541240874598
 Camera:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1515435800984106}
+  m_GameObject: {fileID: 1634039316162662}
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 1
-  m_BackGroundColor: {r: 0.5849056, g: 0.56007475, b: 0.56007475, a: 0}
+  m_BackGroundColor: {r: 0, g: 0, b: 0, a: 0}
   m_projectionMatrixMode: 1
   m_SensorSize: {x: 36, y: 24}
   m_LensShift: {x: 0, y: 0}
@@ -226,13 +226,30 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.33, y: 0.31}
   m_EdgeRadius: 0
---- !u!81 &81978355648100712
+--- !u!81 &81489375901863140
 AudioListener:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1515435800984106}
+  m_GameObject: {fileID: 1634039316162662}
   m_Enabled: 1
+--- !u!114 &114446684661302876
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1634039316162662}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e4ffb1f99993337479243d0d23c8b094, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Player: {fileID: 0}
+  smoothTime: 0.3
+  yMaxEnable: 1
+  yMaxValue: 2.55
+  yMinEnable: 1
+  yMinValue: -2.55
 --- !u!114 &114518937361613638
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -245,6 +262,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 10
+  max_Speed: 12
   Yspeed: 10
   FacingRight: 1
   travelSpeed: 10
@@ -265,21 +283,6 @@ MonoBehaviour:
   chargeShoot: 1
   ButtonCooler: 0.5
   ButtonCount: 0
---- !u!114 &114742451595473864
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1515435800984106}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e4ffb1f99993337479243d0d23c8b094, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  yMaxEnable: 1
-  yMaxValue: 2.55
-  yMinEnable: 1
-  yMinValue: -2.55
 --- !u!212 &212322945450767572
 SpriteRenderer:
   m_ObjectHideFlags: 1

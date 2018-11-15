@@ -20,30 +20,48 @@ public class NPC_Abducter : Base_Class
     private float timer = 2f;
     [SerializeField]
     private Transform Fire_Pos;
+    // Abduction Logic
     [SerializeField]
     private bool abduction_choice = false;
+    [SerializeField]
+    private Transform human_Target;
+    [SerializeField]
+    private float mine_Dist = 2;
 
 
     protected override void Start()
     {
+        human_Target = GameObject.FindGameObjectWithTag("Human").GetComponent<Transform>();
         base.Start();       // Call the start function that belongs to the base class
         PC_BC.isTrigger = false;        // Makes sure the Abducters arent a trigger, If the Abducter isnt a trigger. then other gameObjects like this can kill eachother
-        mvelocity = new Vector2(Random.Range(-speed, speed), Random.Range(-speed, speed)); // On start move this gameObject randomly with a random speed
+        //mvelocity = new Vector2(Random.Range(-speed, speed), Random.Range(-speed, speed)); // On start move this gameObject randomly with a random speed
     }
 
     private void Update()
     {
+        // Functions
         DoMove();
         Movement_Restriction();
         Lazer_Beam();
         // Random Movement      // NPC in defender doesnt follow the player instead the abducter NPC move randomly and pick out a human to abduct 
         timer -= Time.deltaTime;
-        if(timer <= 0)
+        if (!abduction_choice)   // If boolean flag is false
         {
-            timer = 2;
-            mvelocity = new Vector2(Random.Range(-speed, speed), Random.Range(-speed, speed));
+            if (timer <= 0) // if boolean is false and timer = 0
+            {
+                timer = 2; // Reset the timer 
+                mvelocity = new Vector2(Random.Range(-speed, speed), Random.Range(-speed, speed));  // Move Randomly in the game
+            }
         }
-        
+        else if(abduction_choice)
+        {
+            if (Vector3.Distance(transform.position, human_Target.position) <= mine_Dist)
+            {
+                mvelocity = Vector2.up;
+                human_Target.transform.parent = gameObject.transform;
+            }
+        }
+           
         
     }
     // So the NPC can move around the scene
@@ -64,7 +82,12 @@ public class NPC_Abducter : Base_Class
 
         if(Hit.collider != null)
         {
+            abduction_choice = true;    // Makes boolean flag true when hitting a human
             Debug.Log("We Hit Some Shit");
+            if(abduction_choice)
+            {
+                mvelocity = Vector2.down;
+            }
         }
         #region Note
         // Dont Add A Prefab to find a Human. For One It'll just kill the human.

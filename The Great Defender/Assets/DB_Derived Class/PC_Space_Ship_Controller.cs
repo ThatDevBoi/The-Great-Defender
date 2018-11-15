@@ -95,13 +95,32 @@ public class PC_Space_Ship_Controller : Base_Class
     protected override void DoMove()
     {
         base.DoMove();
+
+        mvelocity = Clamped_Move();
     }
     #endregion
 
     #region Player Restricntions on Y axis
     protected override void Movement_Restriction()
     {
-        base.Movement_Restriction();
+        // PC Restriction needs to be different compared to the NPCs as the grabber NPC can leave the stage of screen from camera.
+        // This is used so humans when abducted can turn into a mutant without the player seeing this action
+
+        // When the GameObject moves up or down on the Y axis
+        if (transform.position.y <= -7f)                                                              // If the Transform component position is more than or equal to -7.5
+            transform.position = new Vector3(transform.position.x, -7f, transform.position.z);        // The new position for any GameObject will be restricted to -7.5 (Down on the Y axis)
+        else if (transform.position.y >= 7f)                                                           // However if the transform position is less than 7.5
+            transform.position = new Vector3(transform.position.x, 7f, transform.position.z);         // The new position of any GameObject is restricted to 7.5 (Up on Y axis)
+
+        // Screen Wrapping coordinates (X axis restriction)
+        if (transform.position.x >= 70f)     // if the transforms position is greater then 70f
+        {
+            transform.position = new Vector3(-70f, 0, 0); // Then wrap the object and place gameobject at -70 on the x 
+        }
+        else if (transform.position.x <= -70) // However if the transforms position is less than -70f
+        {
+            transform.position = new Vector3(70, 0, 0); // Place gameobject at 70 on the x
+        }
     }
     #endregion
 

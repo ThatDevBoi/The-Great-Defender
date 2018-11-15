@@ -17,6 +17,8 @@ public abstract class Base_Class : MonoBehaviour
     [SerializeField]
     protected float speed = 5f;           // Movement on the x axis
     [SerializeField]
+    protected float max_Speed = 4;      // Max value for any object referencing to move. Cannot go past this value
+    [SerializeField]
     protected float Yspeed = 2;             // Movement on the Y axis
     protected Vector3 mvelocity = Vector3.zero;       // A vector3 variable that will decide where the player moves. 
     [SerializeField]
@@ -139,17 +141,25 @@ public abstract class Base_Class : MonoBehaviour
     #endregion
 
     #region Fixed Movement
+    protected Vector3 Clamped_Move()
+    {
+        if(mvelocity.magnitude> max_Speed)  // if minimum speed is more than the max speed value
 
+        {
+            return mvelocity.normalized * max_Speed;    // Return the speed value
+        }
+        return mvelocity; // Return the Vector3 as mvelocity
+    }
     #endregion
 
     #region GameObject Restriction
     protected virtual void Movement_Restriction()
     {
         // When the GameObject moves up or down on the Y axis
-        if (transform.position.y <= -7.2f)                                                              // If the Transform component position is more than or equal to -7.5
-            transform.position = new Vector3(transform.position.x, -7.2f, transform.position.z);        // The new position for any GameObject will be restricted to -7.5 (Down on the Y axis)
-        else if(transform.position.y >= 7.2f)                                                           // However if the transform position is less than 7.5
-            transform.position = new Vector3(transform.position.x, 7.2f, transform.position.z);         // The new position of any GameObject is restricted to 7.5 (Up on Y axis)
+        if (transform.position.y <= -10f)                                                              // If the Transform component position is more than or equal to -7.5
+            transform.position = new Vector3(transform.position.x, -10f, transform.position.z);        // The new position for any GameObject will be restricted to -7.5 (Down on the Y axis)
+        else if(transform.position.y >= 10f)                                                           // However if the transform position is less than 7.5
+            transform.position = new Vector3(transform.position.x, 10f, transform.position.z);         // The new position of any GameObject is restricted to 7.5 (Up on Y axis)
 
         // Screen Wrapping coordinates (X axis restriction)
         if(transform.position.x >= 70f)     // if the transforms position is greater then 70f

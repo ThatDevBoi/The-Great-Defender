@@ -51,7 +51,7 @@ CircleCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0.0170573, y: 0.022770584}
@@ -68,7 +68,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 744e481d126569846830ee1e1bf795f6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  speed: 5
+  max_Speed: 4
+  Yspeed: 2
+  FacingRight: 1
   travelSpeed: 20
+  range: 100
+  damage: 10
+  fire_position: {fileID: 0}
+  double_fire_position_1: {fileID: 0}
+  double_fire_position_2: {fileID: 0}
+  whatTohit:
+    serializedVersion: 2
+    m_Bits: 0
+  bulletPrefab: {fileID: 0}
+  chargeShotPrefab: {fileID: 0}
+  DefaultShot: 1
+  doubleShoot: 0
+  chargeShoot: 0
+  TravelSpeed: 20
 --- !u!120 &120802293898628272
 LineRenderer:
   m_ObjectHideFlags: 1

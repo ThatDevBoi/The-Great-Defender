@@ -10,6 +10,7 @@ public class DB_Bullet_Move : Base_Class
     private void Update()
     {
         transform.Translate(Vector3.right * Time.deltaTime * travelSpeed);      // Moves this gameObject Right with time and a speed value
+        PC_BC.isTrigger = true;
     }
 
     protected override void ObjectHit(Base_Class other_objects)

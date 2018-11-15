@@ -51,7 +51,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1762876623335236}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -25.232275, y: 5.88, z: 0}
+  m_LocalPosition: {x: -25.1, y: 9.6, z: 0}
   m_LocalScale: {x: 4.1, y: 4.1, z: 4.1}
   m_Children:
   - {fileID: 4948856106563126}
@@ -108,6 +108,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 5
+  max_Speed: 4
   Yspeed: 2
   FacingRight: 1
   travelSpeed: 10
@@ -132,6 +133,8 @@ MonoBehaviour:
   timer: 2
   Fire_Pos: {fileID: 4948856106563126}
   abduction_choice: 0
+  human_prefab: {fileID: 0}
+  mine_Dist: 2
 --- !u!212 &212620502645042246
 SpriteRenderer:
   m_ObjectHideFlags: 1

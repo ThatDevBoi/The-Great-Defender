@@ -5,7 +5,9 @@ using UnityEngine;
 public class Camera_Restriction_Points : MonoBehaviour
 {
     Vector3 Velocity = Vector3.zero;        // Zeros out the velcoity 
+    [SerializeField]
     private Transform Player;               // Player Transform IDE Component reference
+    [SerializeField]
     private float smoothTime = .30f;        // How fast the Camera moves. Adds a drag effect
     [SerializeField]
     private bool yMaxEnable = false;        // Flag used for how much the player can move up on y axis
