@@ -258,19 +258,19 @@ public abstract class Base_Class : MonoBehaviour
     }
     #endregion
 
-    #region Collision Detection
-    protected virtual void ObjectHit(Base_Class other_objects)
-    {
-        Debug.LogFormat("{0} Hit By 1", name, other_objects);
-    }
-    #endregion
+    //#region Collision Detection
+    //protected virtual void ObjectHit(Base_Class other_objects)
+    //{
+    //    Debug.LogFormat("{0} Hit By 1", name, other_objects);
+    //}
+    //#endregion
 
-    #region OnTriggerEnter
-    public void OnTriggerEnter2D(Collider2D collision)
-    {
-        Base_Class m_otherObjects = collision.gameObject.GetComponent<Base_Class>();
-        Debug.Assert(m_otherObjects != null, "other Objects is not BaseClass Compatible");  // Appears in console
-        ObjectHit(m_otherObjects);      // Detects when an object hits the collider
-    }
-    #endregion
+    //#region OnTriggerEnter
+    //public void OnTriggerEnter2D(Collider2D collision)
+    //{
+    //    Base_Class m_otherObjects = collision.gameObject.GetComponent<Base_Class>();
+    //    Debug.Assert(m_otherObjects != null, "other Objects is not BaseClass Compatible");  // Appears in console
+    //    ObjectHit(m_otherObjects);      // Detects when an object hits the collider
+    //}
+    //#endregion
 }

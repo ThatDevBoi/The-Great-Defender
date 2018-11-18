@@ -39,7 +39,7 @@ GameObject:
   - component: {fileID: 61790358351574170}
   m_Layer: 9
   m_Name: NPC Grabber
-  m_TagString: Untagged
+  m_TagString: NPC
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -51,7 +51,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1762876623335236}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -25.1, y: 9.6, z: 0}
+  m_LocalPosition: {x: -23.51, y: 5.18, z: 0}
   m_LocalScale: {x: 4.1, y: 4.1, z: 4.1}
   m_Children:
   - {fileID: 4948856106563126}
@@ -65,7 +65,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1459055068324088}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.244, z: 0}
+  m_LocalPosition: {x: 0, y: -0.231, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4718585660060896}
@@ -80,21 +80,21 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.36, y: 0.34}
+    oldSize: {x: 0.47, y: 0.49}
     newSize: {x: 0.36, y: 0.34}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.36, y: 0.34}
+  m_Size: {x: 0.45, y: 0.46}
   m_EdgeRadius: 0
 --- !u!114 &114852734371455894
 MonoBehaviour:
@@ -107,7 +107,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a0059e9b7e4b77e4794437b550241004, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 5
+  speed: 2
   max_Speed: 4
   Yspeed: 2
   FacingRight: 1
@@ -126,15 +126,12 @@ MonoBehaviour:
   doubleShoot: 0
   chargeShoot: 0
   points: 2
-  x_npc_speed: 5
-  y_npc_speed: 2
-  z_npc_move: 4
-  Target: {fileID: 0}
   timer: 2
   Fire_Pos: {fileID: 4948856106563126}
   abduction_choice: 0
-  human_prefab: {fileID: 0}
+  human_Target: {fileID: 0}
   mine_Dist: 2
+  PC: {fileID: 1939276393088754, guid: 28d28e806a47a8947a231ed5a292f533, type: 2}
 --- !u!212 &212620502645042246
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -170,7 +167,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 74aea4206a5be2e4a9e9312411d90186, type: 3}
+  m_Sprite: {fileID: 21300000, guid: efa411cd7a3bbad419259f41dbc9800e, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

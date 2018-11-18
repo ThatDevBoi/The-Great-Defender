@@ -24,7 +24,7 @@ GameObject:
   - component: {fileID: 58927814626597182}
   m_Layer: 0
   m_Name: ChargeShot
-  m_TagString: Untagged
+  m_TagString: Bullet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -87,6 +87,8 @@ MonoBehaviour:
   doubleShoot: 0
   chargeShoot: 0
   TravelSpeed: 20
+  NPC: {fileID: 0}
+  Human: {fileID: 0}
 --- !u!120 &120802293898628272
 LineRenderer:
   m_ObjectHideFlags: 1

@@ -5,14 +5,17 @@ using UnityEngine;
 public class Human_NPC : Base_Class
 {
     public float HumanTimer = 5f;
+    public static float Gravity_Value = 1;
+    public GameObject NPC_Chaser;
 	// Use this for initialization
-	protected virtual void Start ()
+	void Start ()
     {
-        base.Start();
-        PC_RB.isKinematic = false;  // This Object needs to use physics
-        PC_RB.gravityScale = 0;     // Makes gravity = nothing 
         mvelocity = Vector3.left;   // Changes movement vector so it moves left on start
         mvelocity = new Vector2(Random.Range(-speed, speed), Random.Range(0, -0));
+        base.Start();
+        PC_RB.isKinematic = true;  // This Object needs to use physics
+        PC_RB.constraints = RigidbodyConstraints2D.FreezeRotation;
+        PC_BC.isTrigger = true;
     }
 	
 	// Update is called once per frame
@@ -20,27 +23,34 @@ public class Human_NPC : Base_Class
     {
 
         HumanTimer -= Time.deltaTime;       // Decline timer 1 second Per frame
-
-        if(HumanTimer <= 0)
-        {
-            HumanTimer = 5f;
-            mvelocity = new Vector2(Random.Range(-speed, speed), Random.Range(0, -0));      // Changes direction on the X axis randomly
-        }
         DoMove();
+
+        if(transform.position.y >= 8.0)
+        {
+            Destroy(gameObject);
+
+            GameObject Chaser_NPC = Instantiate(NPC_Chaser, transform.position, Quaternion.identity);
+        }
 	}
 
     protected override void DoMove()
     {
-        base.DoMove();
+        if (HumanTimer <= 0)
+        {
+            HumanTimer = 5f;
+            mvelocity = new Vector2(Random.Range(-speed, speed), Random.Range(0, -0));      // Changes direction on the X axis randomly
+        }
     }
 
-    protected override void ObjectHit(Base_Class other_objects)
+    public void OnTriggerEnter2D(Collider2D other)
     {
-        base.ObjectHit(other_objects);
-    }
-
-    private void OnTriggerEnter(Collider other)
-    {
-        Debug.Log("Collided");
+        if (other.gameObject.tag == "Bullet")
+        {
+            Destroy(gameObject);
+        }
+        if(other.gameObject.tag == "Player")
+        {
+            Destroy(gameObject);
+        }
     }
 }

@@ -132,20 +132,29 @@ public class PC_Space_Ship_Controller : Base_Class
     #endregion
 
     #region Collsion
-    protected override void ObjectHit(Base_Class other_objects)
+    //protected override void ObjectHit(Base_Class other_objects)
+    //{
+    //    base.ObjectHit(other_objects);
+
+    //    PC_BC.enabled = false;
+
+    //    if(PC_BC.enabled == false)
+    //    {
+    //        Destroy(gameObject);
+
+    //        // Respawn if i have lifes
+
+    //    // with no life gameoever scene appears
+    //    }
+
+    private void OnTriggerEnter2D(Collider2D other)
     {
-        base.ObjectHit(other_objects);
-
-        PC_BC.enabled = false;
-
-        if(PC_BC.enabled == false)
+        if (other.gameObject.tag == "NPC")
         {
-            Destroy(gameObject);
-
-            // Respawn if i have lifes
-
-        // with no life gameoever scene appears
+            Destroy(gameObject);        // Destroy the PC for hitting the NPC
         }
     }
-    #endregion
 }
+
+        
+    #endregion
