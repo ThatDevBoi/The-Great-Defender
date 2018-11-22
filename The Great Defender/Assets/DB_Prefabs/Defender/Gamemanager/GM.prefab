@@ -26,7 +26,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &4330168291741748
 Transform:
   m_ObjectHideFlags: 1
@@ -53,3 +53,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PC_Prefab: {fileID: 1939276393088754, guid: 28d28e806a47a8947a231ed5a292f533, type: 2}
   Abducter_Prefab: {fileID: 0}
+  UFO_Prefab: {fileID: 0}
+  Critter_prefab: {fileID: 1557094822556820, guid: 59be6b18faef5ad408578b07a08656a3,
+    type: 2}
+  spawnDelay: 0.3
+  UFO_spawn_Timer: 40
+  Critter_Time: 1

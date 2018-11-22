@@ -5,9 +5,12 @@ using UnityEngine;
 public class PC_Space_Ship_Controller : Base_Class
 {
     // Double Tap Input Variables 
-    public float ButtonCooler = .5f;    // Half a second before reset
+    public float ButtonCooler = 0.5f;    // Half a second before reset
     public int ButtonCount = 0;
+    public float swirlButtonCooler = 0.5f;
+    public int swirlButtonCount = 0;
 
+    public Transform Critterprefab;
 
     #region Start Function
     // Use this for initialization
@@ -20,13 +23,36 @@ public class PC_Space_Ship_Controller : Base_Class
 
     #region Update Function
     // Update is called once per frame
-    void Update ()
+    void FixedUpdate ()
     {
 
         #region Functions
         // Functions To Be Called 
         DoMove();
         Movement_Restriction();
+        #endregion
+
+        #region Swirl
+        if(Input.GetKeyDown(KeyCode.W))
+        {
+            if(swirlButtonCount > 0 && swirlButtonCount == 2)
+            {
+                Critterprefab = GameObject.FindGameObjectWithTag("Critter").GetComponent<Transform>();
+                transform.Find("Critter_NPC");
+                Critterprefab.transform.parent = null;
+            }
+            else
+            {
+                swirlButtonCooler = 0.5f;
+                swirlButtonCount += 1;
+            }
+        }
+
+        if (swirlButtonCooler > 0)
+            swirlButtonCooler -= 1 * Time.deltaTime;
+        else
+            swirlButtonCount = 0;
+
         #endregion
 
         #region Normal Shooting
@@ -70,7 +96,7 @@ public class PC_Space_Ship_Controller : Base_Class
         #region Charge Shot
         if(Input.GetButtonDown("Fire1"))       // if the payer presses the left mouse button
         {
-            if (GameManager.score == 6)     // if the Gamemanger static socre int is equal to 6 (Change Later to a more balanced score)
+            if (GameManager.score > 5)     // if the Gamemanger static socre int is equal to 6 (Change Later to a more balanced score)
             {
                 chargeShoot = true;     // Users can use the charge shot
                 GameManager.score = 0;  // reset the score so players cant reuse it 
@@ -107,10 +133,10 @@ public class PC_Space_Ship_Controller : Base_Class
         // This is used so humans when abducted can turn into a mutant without the player seeing this action
 
         // When the GameObject moves up or down on the Y axis
-        if (transform.position.y <= -7f)                                                              // If the Transform component position is more than or equal to -7.5
-            transform.position = new Vector3(transform.position.x, -7f, transform.position.z);        // The new position for any GameObject will be restricted to -7.5 (Down on the Y axis)
-        else if (transform.position.y >= 7f)                                                           // However if the transform position is less than 7.5
-            transform.position = new Vector3(transform.position.x, 7f, transform.position.z);         // The new position of any GameObject is restricted to 7.5 (Up on Y axis)
+        if (transform.position.y <= -8f)                                                              // If the Transform component position is more than or equal to -7.5
+            transform.position = new Vector3(transform.position.x, -8f, transform.position.z);        // The new position for any GameObject will be restricted to -7.5 (Down on the Y axis)
+        else if (transform.position.y >= 12.6f)                                                           // However if the transform position is less than 7.5
+            transform.position = new Vector3(transform.position.x, 12.6f, transform.position.z);         // The new position of any GameObject is restricted to 7.5 (Up on Y axis)
 
         // Screen Wrapping coordinates (X axis restriction)
         if (transform.position.x >= 70f)     // if the transforms position is greater then 70f
@@ -153,6 +179,12 @@ public class PC_Space_Ship_Controller : Base_Class
         {
             Destroy(gameObject);        // Destroy the PC for hitting the NPC
         }
+        if (other.gameObject.tag == "NPC_Chaser")
+        {
+            Destroy(gameObject);
+        }
+
+
     }
 }
 

@@ -24,7 +24,7 @@ GameObject:
   - component: {fileID: 114651164261354202}
   m_Layer: 0
   m_Name: NPC_Chaser
-  m_TagString: Untagged
+  m_TagString: NPC_Chaser
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -86,7 +86,9 @@ MonoBehaviour:
   DefaultShot: 1
   doubleShoot: 0
   chargeShoot: 0
-  PC: {fileID: 0}
+  turboPoints: 2
+  PC: {fileID: 4976617377110006, guid: 28d28e806a47a8947a231ed5a292f533, type: 2}
+  Critter_Prefab: {fileID: 0}
 --- !u!212 &212889603056149490
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -121,7 +123,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 2
   m_Sprite: {fileID: 21300004, guid: efa411cd7a3bbad419259f41dbc9800e, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0

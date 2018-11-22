@@ -4,13 +4,17 @@ using UnityEngine;
 
 public class NPC_Chaser : Base_Class
 {
+    public int turboPoints = 2;      // Points for Turbo Charge
     [SerializeField]
     private Transform PC;       // Reference to the player
+    [SerializeField]
+    private GameObject Critter_Prefab;
 
 	// Use this for initialization
     protected override void Start ()
     {
         base.Start();
+        PC_BC.isTrigger = true; // Makes Circle Collider Trigger true
         PC = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();      // Find Player
 	}
 	
@@ -34,8 +38,16 @@ public class NPC_Chaser : Base_Class
 
     // What needs to be done
 
-    // Make NPC Shoot a Bullet Randomly at the player when within range
     // Make the NPC die
     // Add Points
 
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.gameObject.tag == "Bullet")
+        {
+            Destroy(gameObject);
+            GameObject Crit = Instantiate(Critter_Prefab, transform.position, Quaternion.identity);
+            GameManager.score += turboPoints;        // Add points when the NPC dies
+        }
+    }
 }

@@ -125,13 +125,15 @@ MonoBehaviour:
   DefaultShot: 1
   doubleShoot: 0
   chargeShoot: 0
-  points: 2
+  turboShotpoints: 1
   timer: 2
   Fire_Pos: {fileID: 4948856106563126}
   abduction_choice: 0
   human_Target: {fileID: 0}
   mine_Dist: 2
-  PC: {fileID: 1939276393088754, guid: 28d28e806a47a8947a231ed5a292f533, type: 2}
+  bullet: {fileID: 1896836344412704, guid: 8ab5b85e71443b74fba07dede1fd2f61, type: 2}
+  firerate: 0
+  nextFire: 0
 --- !u!212 &212620502645042246
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -166,7 +168,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 2
   m_Sprite: {fileID: 21300000, guid: efa411cd7a3bbad419259f41dbc9800e, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0

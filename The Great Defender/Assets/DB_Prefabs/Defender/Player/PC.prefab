@@ -36,7 +36,7 @@ GameObject:
   - component: {fileID: 4451004770145870}
   - component: {fileID: 20207541240874598}
   - component: {fileID: 81489375901863140}
-  - component: {fileID: 114446684661302876}
+  - component: {fileID: 114372760170990318}
   m_Layer: 0
   m_Name: Player Camera
   m_TagString: MainCamera
@@ -112,8 +112,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1634039316162662}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -3.846154}
-  m_LocalScale: {x: 0.3846154, y: 0.3846154, z: 0.3846154}
+  m_LocalPosition: {x: 0, y: 0, z: -10}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4976617377110006}
   m_RootOrder: 0
@@ -150,8 +150,8 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1939276393088754}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -12.4, y: 2.1, z: 0}
   m_LocalScale: {x: 2.6, y: 2.6, z: 2.6}
   m_Children:
   - {fileID: 4451004770145870}
@@ -170,7 +170,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 1
-  m_BackGroundColor: {r: 0, g: 0, b: 0, a: 0}
+  m_BackGroundColor: {r: 0.09095763, g: 0.2032306, b: 0.26415092, a: 0}
   m_projectionMatrixMode: 1
   m_SensorSize: {x: 36, y: 24}
   m_LensShift: {x: 0, y: 0}
@@ -185,7 +185,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 5
+  orthographic size: 11
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -233,7 +233,7 @@ AudioListener:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1634039316162662}
   m_Enabled: 1
---- !u!114 &114446684661302876
+--- !u!114 &114372760170990318
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
@@ -245,11 +245,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Player: {fileID: 0}
-  smoothTime: 0.3
+  smoothTime: 0.5
   yMaxEnable: 1
-  yMaxValue: 2.55
+  yMaxValue: 2.27
   yMinEnable: 1
-  yMinValue: -2.55
+  yMinValue: 2.15
+  xMinEnable: 1
+  xMinValue: -80
+  xMaxEnable: 1
+  xMaxValue: 80
 --- !u!114 &114518937361613638
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -261,8 +265,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5e549c919476f00409add46332485c61, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 10
-  max_Speed: 12
+  speed: 2
+  max_Speed: 4
   Yspeed: 10
   FacingRight: 1
   travelSpeed: 10
@@ -273,7 +277,7 @@ MonoBehaviour:
   double_fire_position_2: {fileID: 0}
   whatTohit:
     serializedVersion: 2
-    m_Bits: 1536
+    m_Bits: 3584
   bulletPrefab: {fileID: 1078421195682886, guid: 6320117e4624c2144b37477fd8c7ee4e,
     type: 2}
   chargeShotPrefab: {fileID: 1487862622438026, guid: 6c54348770a9d14438bc6d20bfa637f9,
@@ -283,6 +287,9 @@ MonoBehaviour:
   chargeShoot: 1
   ButtonCooler: 0.5
   ButtonCount: 0
+  swirlButtonCooler: 0.5
+  swirlButtonCount: 0
+  Critterprefab: {fileID: 0}
 --- !u!212 &212322945450767572
 SpriteRenderer:
   m_ObjectHideFlags: 1

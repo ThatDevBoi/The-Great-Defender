@@ -5,6 +5,9 @@ TextureImporter:
     21300000: Defender SpriteSheet_0
     21300002: Defender SpriteSheet_1
     21300004: Defender SpriteSheet_2
+    21300006: Defender SpriteSheet_3
+    21300008: Defender SpriteSheet_4
+    21300010: Defender SpriteSheet_5
   externalObjects: {}
   serializedVersion: 7
   mipmaps:
@@ -128,7 +131,7 @@ TextureImporter:
         width: 47
         height: 49
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -148,7 +151,7 @@ TextureImporter:
         width: 17
         height: 40
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -168,13 +171,73 @@ TextureImporter:
         width: 38
         height: 35
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
       spriteID: fef4faa19c62774419ce0e99a46f6d31
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Defender SpriteSheet_3
+      rect:
+        serializedVersion: 2
+        x: 726
+        y: 791
+        width: 18
+        height: 18
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1991f7c4919466f4cb6821d796f1d9b7
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Defender SpriteSheet_4
+      rect:
+        serializedVersion: 2
+        x: 514
+        y: 983
+        width: 66
+        height: 20
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c65121443758e7243ae37c1d20fafc8f
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Defender SpriteSheet_5
+      rect:
+        serializedVersion: 2
+        x: 10
+        y: 773
+        width: 45
+        height: 53
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1adb480b872773b49ae313c737b23d42
       vertices: []
       indices: 
       edges: []

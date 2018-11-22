@@ -15,7 +15,7 @@ public abstract class Base_Class : MonoBehaviour
 
     #region Movement Variables PC
     [SerializeField]
-    protected float speed = 5f;           // Movement on the x axis
+    public float speed = 5f;           // Movement on the x axis
     [SerializeField]
     protected float max_Speed = 4;      // Max value for any object referencing to move. Cannot go past this value
     [SerializeField]
@@ -156,10 +156,10 @@ public abstract class Base_Class : MonoBehaviour
     protected virtual void Movement_Restriction()
     {
         // When the GameObject moves up or down on the Y axis
-        if (transform.position.y <= -10f)                                                              // If the Transform component position is more than or equal to -7.5
-            transform.position = new Vector3(transform.position.x, -10f, transform.position.z);        // The new position for any GameObject will be restricted to -7.5 (Down on the Y axis)
-        else if(transform.position.y >= 10f)                                                           // However if the transform position is less than 7.5
-            transform.position = new Vector3(transform.position.x, 10f, transform.position.z);         // The new position of any GameObject is restricted to 7.5 (Up on Y axis)
+        if (transform.position.y <= -8)                                                              // If the Transform component position is more than or equal to -7.5
+            transform.position = new Vector3(transform.position.x, -8, transform.position.z);        // The new position for any GameObject will be restricted to -7.5 (Down on the Y axis)
+        else if(transform.position.y >= 14f)                                                           // However if the transform position is less than 7.5
+            transform.position = new Vector3(transform.position.x, 14f, transform.position.z);         // The new position of any GameObject is restricted to 7.5 (Up on Y axis)
 
         // Screen Wrapping coordinates (X axis restriction)
         if(transform.position.x >= 70f)     // if the transforms position is greater then 70f

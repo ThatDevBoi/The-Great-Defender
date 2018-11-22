@@ -30,6 +30,7 @@ public class DB_Bullet_Move : Base_Class
         if(other.gameObject.tag == "NPC")
         {
             Destroy(gameObject);
+            
         }
         if(other.gameObject.tag == "Human")
         {
