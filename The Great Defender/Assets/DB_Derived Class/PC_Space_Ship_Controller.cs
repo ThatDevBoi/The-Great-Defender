@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PC_Space_Ship_Controller : Base_Class
 {
@@ -10,7 +11,8 @@ public class PC_Space_Ship_Controller : Base_Class
     public float swirlButtonCooler = 0.5f;
     public int swirlButtonCount = 0;
 
-    public Transform Critterprefab;
+    public Transform Critterprefab;     // Transform IDE Compoenent of critterPrefab
+    public Slider ChargeBar;            // Reference to the UI Slider
 
     #region Start Function
     // Use this for initialization
@@ -18,6 +20,11 @@ public class PC_Space_Ship_Controller : Base_Class
     {
         base.Start();
         PC_BC.isTrigger = true;
+        ChargeBar = GameObject.FindGameObjectWithTag("Turbo_Shot_Bar").GetComponent<Slider>();      // Find slider Charge Bar
+
+        DefaultShot = true;
+        doubleShoot = false;
+        chargeShoot = false;
     }
     #endregion
 
@@ -33,18 +40,18 @@ public class PC_Space_Ship_Controller : Base_Class
         #endregion
 
         #region Swirl
-        if(Input.GetKeyDown(KeyCode.W))
+        if(Input.GetKeyDown(KeyCode.W))     // if the W key is pressed down
         {
-            if(swirlButtonCount > 0 && swirlButtonCount == 2)
+            if(swirlButtonCount > 0 && swirlButtonCount == 2)   // if the input key is pressed 2 or more times
             {
-                Critterprefab = GameObject.FindGameObjectWithTag("Critter").GetComponent<Transform>();
-                transform.Find("Critter_NPC");
-                Critterprefab.transform.parent = null;
+                Critterprefab = GameObject.FindGameObjectWithTag("Critter").GetComponent<Transform>();  // Find the Critter GameObject Transform
+                transform.Find("Critter_NPC");      // Find the Critter in the heiary
+                Critterprefab.transform.parent = null;      // Unchild the Critter
             }
-            else
+            else// However if following hasnt been done
             {
-                swirlButtonCooler = 0.5f;
-                swirlButtonCount += 1;
+                swirlButtonCooler = 0.5f;   // Cooldown resets 
+                swirlButtonCount += 1;      // Adds to int
             }
         }
 
@@ -69,7 +76,7 @@ public class PC_Space_Ship_Controller : Base_Class
         #region Double Shoot
         if (Input.GetButtonDown("Jump"))
         {
-            if(ButtonCooler > 0 && ButtonCount == 3)
+            if(ButtonCooler > 0 && ButtonCount == 4)
             {
                 DefaultShot = false;
                 doubleShoot = true;
@@ -78,7 +85,7 @@ public class PC_Space_Ship_Controller : Base_Class
             else
             {
                 doubleShoot = false;
-                ButtonCooler = 0.5f;
+                ButtonCooler = 0.3f;
                 ButtonCount += 1;
             }
         }
@@ -96,23 +103,23 @@ public class PC_Space_Ship_Controller : Base_Class
         #region Charge Shot
         if(Input.GetButtonDown("Fire1"))       // if the payer presses the left mouse button
         {
-            if (GameManager.score > 5)     // if the Gamemanger static socre int is equal to 6 (Change Later to a more balanced score)
+            // Uses GameManager int score to charge Bar when enemies die
+            if (ChargeBar.value > 14)         // if the Slider Charge Bar Value is equal to 6 (Change Later to a more balanced score)
             {
-                chargeShoot = true;     // Users can use the charge shot
-                GameManager.score = 0;  // reset the score so players cant reuse it 
-                if (chargeShoot)        // when the boolean is true
+                chargeShoot = true;          // Users can use the charge shot
+                GameManager.score = 0;      // reset the score so players cant reuse it 
+                ChargeBar.value = 0;
+                if (chargeShoot)           // when the boolean is true
                 {
-                    base.ChargeShot();  // Call the Function in Bass Class
+                    base.ChargeShot();    // Call the Function in Base Class
                 }
             }
-
-            if(GameManager.score < 6)   // If the Score is less than 6
+            if(ChargeBar.value < 14)   // If the Score is less than 6
             {
-                chargeShoot = false;// Boolean flag is false
-                DefaultShot = true;// Normal way of shooting is enabled
+                chargeShoot = false;    // Boolean flag is false
+                DefaultShot = true;     // Normal way of shooting is enabled
             }
         }
-
         #endregion
     }
     #endregion
@@ -139,13 +146,13 @@ public class PC_Space_Ship_Controller : Base_Class
             transform.position = new Vector3(transform.position.x, 12.6f, transform.position.z);         // The new position of any GameObject is restricted to 7.5 (Up on Y axis)
 
         // Screen Wrapping coordinates (X axis restriction)
-        if (transform.position.x >= 70f)     // if the transforms position is greater then 70f
+        if (transform.position.x >= 50f)     // if the transforms position is greater then 70f
         {
-            transform.position = new Vector3(-70f, 0, 0); // Then wrap the object and place gameobject at -70 on the x 
+            transform.position = new Vector3(-50f, 0, 0); // Then wrap the object and place gameobject at -70 on the x 
         }
-        else if (transform.position.x <= -70) // However if the transforms position is less than -70f
+        else if (transform.position.x <= -50f) // However if the transforms position is less than -70f
         {
-            transform.position = new Vector3(70, 0, 0); // Place gameobject at 70 on the x
+            transform.position = new Vector3(50, 0, 0); // Place gameobject at 70 on the x
         }
     }
     #endregion
@@ -158,35 +165,21 @@ public class PC_Space_Ship_Controller : Base_Class
     #endregion
 
     #region Collsion
-    //protected override void ObjectHit(Base_Class other_objects)
-    //{
-    //    base.ObjectHit(other_objects);
-
-    //    PC_BC.enabled = false;
-
-    //    if(PC_BC.enabled == false)
-    //    {
-    //        Destroy(gameObject);
-
-    //        // Respawn if i have lifes
-
-    //    // with no life gameoever scene appears
-    //    }
-
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.gameObject.tag == "NPC")
+        if (other.gameObject.tag == "NPC_Abducter")
         {
-            Destroy(gameObject);        // Destroy the PC for hitting the NPC
+            Destroy(this.gameObject);        // Destroy the PC for hitting the NPC
         }
         if (other.gameObject.tag == "NPC_Chaser")
         {
-            Destroy(gameObject);
+            Destroy(this.gameObject);
+        }
+        if(other.gameObject.tag == "NPC_Bullet")
+        {
+            Destroy(this.gameObject);
         }
 
-
     }
-}
-
-        
     #endregion
+}

@@ -5,10 +5,17 @@ TagManager:
   serializedVersion: 2
   tags:
   - Human
-  - NPC
   - Bullet
   - NPC_Chaser
   - Critter
+  - NPC_Bullet
+  - Drop_Off_Zone
+  - Ground
+  - NPC_Abducter
+  - UFO
+  - Turbo_Shot_Bar
+  - Wave_Text
+  - Human_Hold_Place
   layers:
   - Default
   - TransparentFX

@@ -26,6 +26,21 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &1611144007112844
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4523075901834534}
+  m_Layer: 0
+  m_Name: Human_Child_Point
+  m_TagString: Human_Hold_Place
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &1634039316162662
 GameObject:
   m_ObjectHideFlags: 0
@@ -118,6 +133,19 @@ Transform:
   m_Father: {fileID: 4976617377110006}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4523075901834534
+Transform:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1611144007112844}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -0.08379121, y: -0.49, z: 0.014461101}
+  m_LocalScale: {x: 0.2747253, y: 0.2747253, z: 0.2747253}
+  m_Children: []
+  m_Father: {fileID: 4976617377110006}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4575653265385072
 Transform:
   m_ObjectHideFlags: 1
@@ -151,13 +179,14 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1939276393088754}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -12.4, y: 2.1, z: 0}
-  m_LocalScale: {x: 2.6, y: 2.6, z: 2.6}
+  m_LocalPosition: {x: 0, y: -5.694009, z: 0}
+  m_LocalScale: {x: 3.6399999, y: 3.6399999, z: 3.6399999}
   m_Children:
   - {fileID: 4451004770145870}
   - {fileID: 4441368071661776}
   - {fileID: 4575653265385072}
   - {fileID: 4603157293725284}
+  - {fileID: 4523075901834534}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -210,7 +239,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0.09, y: 0}
@@ -265,7 +294,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5e549c919476f00409add46332485c61, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 2
+  speed: 3
   max_Speed: 4
   Yspeed: 10
   FacingRight: 1
@@ -290,6 +319,7 @@ MonoBehaviour:
   swirlButtonCooler: 0.5
   swirlButtonCount: 0
   Critterprefab: {fileID: 0}
+  ChargeBar: {fileID: 0}
 --- !u!212 &212322945450767572
 SpriteRenderer:
   m_ObjectHideFlags: 1

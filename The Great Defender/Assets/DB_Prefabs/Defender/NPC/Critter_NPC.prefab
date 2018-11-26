@@ -36,8 +36,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1557094822556820}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.53, y: 0.129, z: 0}
-  m_LocalScale: {x: 0.78000003, y: 0.78000003, z: 0.78000003}
+  m_LocalPosition: {x: -0.099, y: -5.391, z: 0}
+  m_LocalScale: {x: 1.0530001, y: 1.0530001, z: 1.0530001}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -86,8 +86,12 @@ MonoBehaviour:
   DefaultShot: 1
   doubleShoot: 0
   chargeShoot: 0
-  deductSpeed: 2
+  ScoreBoardPoints: 50
+  FlickingTextMesh: {fileID: 1290910010734344, guid: ed0f42747c3f53f4d8dc5c4f31cf2c91,
+    type: 2}
+  deductSpeed: 0.5
   Player: {fileID: 4976617377110006, guid: 28d28e806a47a8947a231ed5a292f533, type: 2}
+  ChargeBar: {fileID: 0}
 --- !u!212 &212672665404633840
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -122,7 +126,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 2
+  m_SortingOrder: 3
   m_Sprite: {fileID: 21300010, guid: efa411cd7a3bbad419259f41dbc9800e, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0

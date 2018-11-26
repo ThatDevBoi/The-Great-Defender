@@ -1,11 +1,15 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.UI;
 public class NPC_UFO : Base_Class
 {
     [SerializeField]
     public int turboShotPoints = 1;
+    [SerializeField]
+    public int ScoreBoardPoints = 500;
+    [SerializeField]
+    private GameObject FlickingTextMesh;
     [SerializeField]
     private float Timer = .5f;
     [SerializeField]
@@ -16,17 +20,22 @@ public class NPC_UFO : Base_Class
     private float fireRate;
     [SerializeField]
     private GameObject bullet;
+    [SerializeField]
+    private Slider ChargeBar;
+
+
     // Use this for initialization
     protected override void Start ()
     {
         base.Start();   // Calls Base Class Start Function
         PC_BC.isTrigger = true;     // Collider attached to this gameObject is a trigger
         mvelocity = new Vector2(Random.Range(speed, speed), Random.Range(-speed, speed));   // On start computer decides a random position and movement speed
-        
-	}
+        ChargeBar = GameObject.FindGameObjectWithTag("Turbo_Shot_Bar").GetComponent<Slider>();  // Find Slider Component
+
+    }
 	
 	// Update is called once per frame
-	void Update ()
+	void FixedUpdate ()
     {
          //Functions
         DoMove();
@@ -43,15 +52,6 @@ public class NPC_UFO : Base_Class
         {
             Destroy(gameObject);        // Destroy this gameObject
         }
-	}
-
-    public void OnBecameVisible()
-    {
-        if (Time.time > nextFire)
-        {
-            Instantiate(bullet, transform.position, Quaternion.identity);       // Spawn Bullet within the gameObjects transform position
-            nextFire = Time.time + fireRate;
-        }
     }
 
     protected override void DoMove()
@@ -66,12 +66,26 @@ public class NPC_UFO : Base_Class
         // Movement Restrictions need refining
     }
 
+
+    public void OnBecameVisible()
+    {
+        if (Time.time > nextFire)
+        {
+            Instantiate(bullet, transform.position, Quaternion.identity);       // Spawn Bullet within the gameObjects transform position
+            nextFire = Time.time + fireRate;
+        }
+    }
+
     private void OnTriggerEnter2D(Collider2D other)
     {
         if(other.gameObject.tag == "Bullet")
         {
             Destroy(gameObject);        // Kills UFO
-            GameManager.score += turboShotPoints;       // Adds points
+            ChargeBar.value += GameManager.score;       // Add int value to charge bar value
+
+            GameObject TextMeshGO = Instantiate(FlickingTextMesh, transform.position, Quaternion.identity); // Spawn Text Mesh Object
+            TextMeshGO.GetComponent<TextMesh>().text = ScoreBoardPoints.ToString();   // Find the Text Mesh Component so the score can be shown 
+            Destroy(TextMeshGO, 1.25f); // Destroy when 1.25 seconds have passed
         }
     }
 }

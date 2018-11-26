@@ -52,44 +52,6 @@ public abstract class Base_Class : MonoBehaviour
     protected static int add_points_for_charge = 2;      // Should go in gameManager
     #endregion
 
-    #region Environment Renderer Class
-    public abstract class Environment_Renderer : MonoBehaviour
-    {
-        #region Line Renderer Variables
-        public Color c1 = Color.yellow;
-        public Color c2 = Color.red;
-        public int lengthOfLineRenderer = 16;
-        #endregion
-
-
-        protected virtual void Start()
-        {
-            // Line Renderer 
-            LineRenderer lineRenderer = gameObject.AddComponent<LineRenderer>();
-            lineRenderer.widthMultiplier = 0.2f;
-            lineRenderer.positionCount = lengthOfLineRenderer;
-
-            // A simple 2 color gradient with a fixed alpha of 1.0f.
-            float alpha = 1.0f;
-            Gradient gradient = new Gradient();
-            gradient.SetKeys(
-                new GradientColorKey[] { new GradientColorKey(c1, 0.0f), new GradientColorKey(c2, 1.0f) },
-                new GradientAlphaKey[] { new GradientAlphaKey(alpha, 0.0f), new GradientAlphaKey(alpha, 1.0f) }
-                );
-            lineRenderer.colorGradient = gradient;
-        }
-
-        protected virtual void Line_Renderer()
-        {
-            LineRenderer lineRenderer = GetComponent<LineRenderer>();
-            /*var t = Time.time;*/        // Makes the Line Renderer move in time
-            for (int i = 1; i < lengthOfLineRenderer; i++)
-            {
-                lineRenderer.SetPosition(i, new Vector3(i * 1f, Mathf.Sin(i), 0.0f));
-            }
-        }
-    }
-    #endregion
 
     #region Start Function
     // Use this for initialization
@@ -162,13 +124,13 @@ public abstract class Base_Class : MonoBehaviour
             transform.position = new Vector3(transform.position.x, 14f, transform.position.z);         // The new position of any GameObject is restricted to 7.5 (Up on Y axis)
 
         // Screen Wrapping coordinates (X axis restriction)
-        if(transform.position.x >= 70f)     // if the transforms position is greater then 70f
+        if(transform.position.x >= 50f)     // if the transforms position is greater then 70f
         {
-            transform.position = new Vector3(-70f, 0, 0); // Then wrap the object and place gameobject at -70 on the x 
+            transform.position = new Vector3(-50f, 0, 0); // Then wrap the object and place gameobject at -70 on the x 
         }
-        else if(transform.position.x <= -70) // However if the transforms position is less than -70f
+        else if(transform.position.x <= -50f) // However if the transforms position is less than -70f
         {
-            transform.position = new Vector3(70, 0, 0); // Place gameobject at 70 on the x
+            transform.position = new Vector3(50f, 0, 0); // Place gameobject at 70 on the x
         }
     }
     #endregion

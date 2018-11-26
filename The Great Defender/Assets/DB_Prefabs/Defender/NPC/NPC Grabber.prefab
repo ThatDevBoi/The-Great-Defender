@@ -35,11 +35,11 @@ GameObject:
   m_Component:
   - component: {fileID: 4718585660060896}
   - component: {fileID: 212620502645042246}
+  - component: {fileID: 60280067961234116}
   - component: {fileID: 114852734371455894}
-  - component: {fileID: 61790358351574170}
   m_Layer: 9
   m_Name: NPC Grabber
-  m_TagString: NPC
+  m_TagString: NPC_Abducter
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -51,7 +51,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1762876623335236}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -23.51, y: 5.18, z: 0}
+  m_LocalPosition: {x: 6.55, y: -1.61, z: 0}
   m_LocalScale: {x: 4.1, y: 4.1, z: 4.1}
   m_Children:
   - {fileID: 4948856106563126}
@@ -71,8 +71,8 @@ Transform:
   m_Father: {fileID: 4718585660060896}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!61 &61790358351574170
-BoxCollider2D:
+--- !u!60 &60280067961234116
+PolygonCollider2D:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
@@ -93,9 +93,53 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 0.45, y: 0.46}
-  m_EdgeRadius: 0
+  m_Points:
+    m_Paths:
+    - - {x: 0.061241012, y: -0.1972715}
+      - {x: 0.053262945, y: -0.16065714}
+      - {x: 0.046344385, y: -0.12848878}
+      - {x: 0.054880004, y: -0.06970161}
+      - {x: 0.14273667, y: -0.18443526}
+      - {x: 0.18256979, y: -0.18549873}
+      - {x: 0.21379681, y: -0.23056228}
+      - {x: 0.2374063, y: -0.17123339}
+      - {x: 0.096867956, y: -0.028352274}
+      - {x: 0.111106314, y: -0.012517732}
+      - {x: 0.1909056, y: -0.012787494}
+      - {x: 0.22625668, y: 0.026596349}
+      - {x: 0.22498015, y: 0.124960996}
+      - {x: 0.20979044, y: 0.13659681}
+      - {x: 0.19367242, y: 0.16200891}
+      - {x: 0.1765856, y: 0.19180636}
+      - {x: 0.13660128, y: 0.19337584}
+      - {x: 0.11780018, y: 0.24499999}
+      - {x: -0.10968255, y: 0.24585463}
+      - {x: -0.12689963, y: 0.19873787}
+      - {x: -0.16659923, y: 0.1895177}
+      - {x: -0.19579282, y: 0.14898632}
+      - {x: -0.21339184, y: 0.098997734}
+      - {x: -0.21206135, y: 0.02516857}
+      - {x: -0.1832648, y: -0.011844054}
+      - {x: -0.119514, y: -0.010841765}
+      - {x: -0.08717025, y: -0.032968637}
+      - {x: -0.22176556, y: -0.16342199}
+      - {x: -0.2229686, y: -0.20176539}
+      - {x: -0.20499997, y: -0.22093715}
+      - {x: -0.16606773, y: -0.21748567}
+      - {x: -0.18573715, y: -0.19227144}
+      - {x: -0.12313541, y: -0.17895222}
+      - {x: -0.10110483, y: -0.15467924}
+      - {x: -0.069078125, y: -0.11280002}
+      - {x: -0.049876004, y: -0.06543846}
+      - {x: -0.030327076, y: -0.16049165}
+      - {x: -0.05402193, y: -0.19383408}
+      - {x: -0.00909689, y: -0.22675794}
+      - {x: -0.022378318, y: -0.195396}
+      - {x: 0.002777053, y: -0.15961961}
+      - {x: 0.03629987, y: -0.19371998}
+      - {x: 0.013876427, y: -0.2348237}
+      - {x: 0.014565631, y: -0.23424102}
+      - {x: 0.057623796, y: -0.20770259}
 --- !u!114 &114852734371455894
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -126,6 +170,10 @@ MonoBehaviour:
   doubleShoot: 0
   chargeShoot: 0
   turboShotpoints: 1
+  ChargeBar: {fileID: 0}
+  ScoreBoardPoints: 100
+  FlickingTextMesh: {fileID: 1290910010734344, guid: ed0f42747c3f53f4d8dc5c4f31cf2c91,
+    type: 2}
   timer: 2
   Fire_Pos: {fileID: 4948856106563126}
   abduction_choice: 0

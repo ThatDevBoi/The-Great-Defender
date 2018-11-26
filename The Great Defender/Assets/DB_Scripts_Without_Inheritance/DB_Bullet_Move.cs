@@ -27,10 +27,21 @@ public class DB_Bullet_Move : Base_Class
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if(other.gameObject.tag == "NPC")
+        if(other.gameObject.tag == "NPC_Abducter")
         {
             Destroy(gameObject);
-            
+        }
+        if(other.gameObject.tag == "UFO")
+        {
+            Destroy(gameObject);
+        }
+        if(other.gameObject.tag == "Critter")
+        {
+            Destroy(gameObject);
+        }
+        if(other.gameObject.tag == "NPC_Chaser")
+        {
+            Destroy(gameObject);
         }
         if(other.gameObject.tag == "Human")
         {

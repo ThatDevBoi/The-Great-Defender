@@ -24,7 +24,7 @@ GameObject:
   - component: {fileID: 60630470419318066}
   m_Layer: 0
   m_Name: UFO
-  m_TagString: Untagged
+  m_TagString: UFO
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -36,8 +36,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1541149082629800}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -14, y: 2, z: 0}
-  m_LocalScale: {x: 2.2, y: 2.64, z: 2.2}
+  m_LocalPosition: {x: 1.7295955, y: -5.4874196, z: 0}
+  m_LocalScale: {x: 5.28, y: 6.3360004, z: 5.28}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -102,11 +102,15 @@ MonoBehaviour:
   doubleShoot: 0
   chargeShoot: 0
   turboShotPoints: 2
+  ScoreBoardPoints: 500
+  FlickingTextMesh: {fileID: 1290910010734344, guid: ed0f42747c3f53f4d8dc5c4f31cf2c91,
+    type: 2}
   Timer: 0.5
   LifeTimer: 20
   nextFire: 0
   fireRate: 0
   bullet: {fileID: 1896836344412704, guid: 8ab5b85e71443b74fba07dede1fd2f61, type: 2}
+  ChargeBar: {fileID: 0}
 --- !u!212 &212584231963944936
 SpriteRenderer:
   m_ObjectHideFlags: 1

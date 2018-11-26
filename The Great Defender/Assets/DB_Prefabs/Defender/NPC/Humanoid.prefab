@@ -21,6 +21,7 @@ GameObject:
   - component: {fileID: 4049730552701540}
   - component: {fileID: 212008909040266192}
   - component: {fileID: 61306779083098690}
+  - component: {fileID: 58167059405011512}
   - component: {fileID: 114873305760538120}
   m_Layer: 10
   m_Name: Humanoid
@@ -36,12 +37,27 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1558772662608996}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.0647793, y: -8, z: -0.93482757}
-  m_LocalScale: {x: 3.08, y: 3.08, z: 3.08}
+  m_LocalPosition: {x: 8.315179, y: -7.578714, z: -0.93482757}
+  m_LocalScale: {x: 4.928, y: 4.928, z: 4.928}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!58 &58167059405011512
+CircleCollider2D:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1558772662608996}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: -0.17}
+  serializedVersion: 2
+  m_Radius: 0.04
 --- !u!61 &61306779083098690
 BoxCollider2D:
   m_ObjectHideFlags: 1
@@ -51,7 +67,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -65,7 +81,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.21, y: 0.36}
+  m_Size: {x: 0.15, y: 0.45}
   m_EdgeRadius: 0
 --- !u!114 &114873305760538120
 MonoBehaviour:
@@ -96,8 +112,17 @@ MonoBehaviour:
   DefaultShot: 1
   doubleShoot: 0
   chargeShoot: 0
+  ScoreBoardPoints: 600
   HumanTimer: 5
   NPC_Chaser: {fileID: 1547724284621520, guid: 528f1d3060a7fd444b307d83393b4ee1, type: 2}
+  FlickingTextMesh: {fileID: 1290910010734344, guid: ed0f42747c3f53f4d8dc5c4f31cf2c91,
+    type: 2}
+  Grounded: 0
+  Ready_For_Drop: 0
+  PC: {fileID: 4976617377110006, guid: 28d28e806a47a8947a231ed5a292f533, type: 2}
+  HumanHolder: {fileID: 0}
+  max_Safe_Height: 5
+  fatal_Fall_Height: 10
 --- !u!212 &212008909040266192
 SpriteRenderer:
   m_ObjectHideFlags: 1
