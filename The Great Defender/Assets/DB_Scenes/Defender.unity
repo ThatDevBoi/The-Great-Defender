@@ -914,11 +914,11 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4718585660060896, guid: 1903732e93ab29849a180ad662ce3053, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 31.37
+      value: 14.82
       objectReference: {fileID: 0}
     - target: {fileID: 4718585660060896, guid: 1903732e93ab29849a180ad662ce3053, type: 2}
       propertyPath: m_LocalPosition.y
-      value: -1.13
+      value: 0.05
       objectReference: {fileID: 0}
     - target: {fileID: 4718585660060896, guid: 1903732e93ab29849a180ad662ce3053, type: 2}
       propertyPath: m_LocalPosition.z
@@ -944,6 +944,11 @@ Prefab:
       propertyPath: m_RootOrder
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 114852734371455894, guid: 1903732e93ab29849a180ad662ce3053,
+        type: 2}
+      propertyPath: ChargeBarSlider
+      value: 
+      objectReference: {fileID: 589245139}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1903732e93ab29849a180ad662ce3053, type: 2}
   m_IsPrefabAsset: 0
