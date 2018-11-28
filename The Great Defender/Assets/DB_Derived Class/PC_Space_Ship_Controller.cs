@@ -142,17 +142,17 @@ public class PC_Space_Ship_Controller : Base_Class
         // When the GameObject moves up or down on the Y axis
         if (transform.position.y <= -8f)                                                              // If the Transform component position is more than or equal to -7.5
             transform.position = new Vector3(transform.position.x, -8f, transform.position.z);        // The new position for any GameObject will be restricted to -7.5 (Down on the Y axis)
-        else if (transform.position.y >= 12.6f)                                                           // However if the transform position is less than 7.5
-            transform.position = new Vector3(transform.position.x, 12.6f, transform.position.z);         // The new position of any GameObject is restricted to 7.5 (Up on Y axis)
+        else if (transform.position.y >= 9f)                                                           // However if the transform position is less than 7.5
+            transform.position = new Vector3(transform.position.x, 9f, transform.position.z);         // The new position of any GameObject is restricted to 7.5 (Up on Y axis)
 
         // Screen Wrapping coordinates (X axis restriction)
         if (transform.position.x >= 50f)     // if the transforms position is greater then 70f
         {
-            transform.position = new Vector3(-50f, 0, 0); // Then wrap the object and place gameobject at -70 on the x 
+            transform.position = new Vector3(-50f, transform.position.y, transform.position.z); // Then wrap the object and place gameobject at -70 on the x 
         }
         else if (transform.position.x <= -50f) // However if the transforms position is less than -70f
         {
-            transform.position = new Vector3(50, 0, 0); // Place gameobject at 70 on the x
+            transform.position = new Vector3(50, transform.position.y, transform.position.z); // Place gameobject at 70 on the x
         }
     }
     #endregion

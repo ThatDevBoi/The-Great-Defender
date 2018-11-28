@@ -27,11 +27,18 @@ public class Camera_Restriction_Points : MonoBehaviour
     private float xMaxValue = 2.55f;            // values used for how much the player can move up on y axis (Used as coordinates)
     private void Awake()
     {
-        Player = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();          // Finding the player GameObject in the world
+       
     }
 
     private void FixedUpdate()
     {
+        Player = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();          // Finding the player GameObject in the world
+
+        if (Mathf.Abs(Player.transform.position.x )> 46)
+            gameObject.transform.parent = Player.transform;
+        else if (Mathf.Abs(Player.transform.position.x) < 46)
+            gameObject.transform.parent = null;
+
         Vector3 Playerpos = Player.position;
         // Vertical
         if (yMinEnable && yMaxEnable)           // If yMinEnabe and yMaxEnable are true
@@ -51,7 +58,5 @@ public class Camera_Restriction_Points : MonoBehaviour
 
         Playerpos.z = transform.position.z;     // Allign the camera and the Players z position
         transform.position = Vector3.SmoothDamp(transform.position, Playerpos, ref Velocity, smoothTime);   // Using Smooth damp we will gradually change the camera transform position to the Players position based on the cameras transform velocity and out smooth time
-
     }
-
 }

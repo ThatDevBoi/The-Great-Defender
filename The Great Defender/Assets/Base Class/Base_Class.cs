@@ -128,10 +128,6 @@ public abstract class Base_Class : MonoBehaviour
         {
             transform.position = new Vector3(-50f, 0, 0); // Then wrap the object and place gameobject at -70 on the x 
         }
-        else if(transform.position.x <= -50f) // However if the transforms position is less than -70f
-        {
-            transform.position = new Vector3(50f, 0, 0); // Place gameobject at 70 on the x
-        }
     }
     #endregion
     #endregion
