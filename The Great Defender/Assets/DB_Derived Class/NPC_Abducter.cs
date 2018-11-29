@@ -173,7 +173,7 @@ public class NPC_Abducter : Base_Class
     {
         if(other.gameObject.tag == "Bullet")    // if another gameObject is got the tag Bullet
         {
-            Destroy(gameObject);    GameManager.NPC_Abducter_Count--;   // Destroy the GameObject and subtract 1 from the Static count value in GM
+            Destroy(gameObject);    GameManager.s_GM.enemy_Count--;   // Destroy the GameObject and subtract 1 from the Static count value in GM
             ChargeBarSlider.value += GameManager.score;       // Add int value to charge bar value
 
             GameObject TextMeshGO = Instantiate(GO_FlickingTextMesh, transform.position, Quaternion.identity); // Spawn Text Mesh Object

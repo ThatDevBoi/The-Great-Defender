@@ -142,11 +142,6 @@ public abstract class Base_Class : MonoBehaviour
         {
             // Default shooting logic
             RaycastHit2D Hit = Physics2D.Raycast(firepos, direction, range, whatTohit);
-            // Collision Detection (For Now)
-            if (Hit.collider != null)
-            {
-                Debug.Log("We hit the fucker");
-            }
             Quaternion rot = (FacingRight) ? Quaternion.Euler(0, 0, 0) : Quaternion.Euler(0, 180, 0);      // Rot allows the Game to know if the player faces right the bullet wont need rotation however needs to be flipped 180 degrees if its the opposite
             GameObject BulletPre = Instantiate(bulletPrefab, fire_position.position, rot);     // Spawning the bulletPrefab at the fireposition and taking considertion of rot.
             Destroy(BulletPre, 5f);     // Destroy Cloned Prefabs within 5 Seconds
@@ -215,20 +210,4 @@ public abstract class Base_Class : MonoBehaviour
         transform.localScale = temp;
     }
     #endregion
-
-    //#region Collision Detection
-    //protected virtual void ObjectHit(Base_Class other_objects)
-    //{
-    //    Debug.LogFormat("{0} Hit By 1", name, other_objects);
-    //}
-    //#endregion
-
-    //#region OnTriggerEnter
-    //public void OnTriggerEnter2D(Collider2D collision)
-    //{
-    //    Base_Class m_otherObjects = collision.gameObject.GetComponent<Base_Class>();
-    //    Debug.Assert(m_otherObjects != null, "other Objects is not BaseClass Compatible");  // Appears in console
-    //    ObjectHit(m_otherObjects);      // Detects when an object hits the collider
-    //}
-    //#endregion
 }

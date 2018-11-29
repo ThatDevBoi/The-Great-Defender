@@ -10,7 +10,7 @@ public class GameManager : MonoBehaviour
 {
     public static int score = 1;    // Monitors score for turbo charge
     private int nextWave = 1;   // Holds value of the next wave to be spawned
-    public int Count = 20;
+    public int enemy_Count = 0;    // Used for how many NPCs will be spawned in a for loop         // MAKE THIS DECREASE WHEN AN NPC_ABDUCTER DIES
 
     // NPC Prefabs
     public GameObject PC_Prefab;    // Player Character Prefab Reference 
@@ -18,10 +18,11 @@ public class GameManager : MonoBehaviour
     public GameObject abducter_Prefab;  // Abducter Character Prefab Reference 
     public GameObject ufo_Prefab;   // Flying sorser Character Prefab Reference 
 
+    public GameObject spawning_Effect_Prefab;
+
     // Singleton GameManager
     public static GameManager s_GM;
 
-    public static int NPC_Abducter_Count = 0;
     public static int NPC_Human_Count;
 
     
@@ -54,13 +55,15 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
-        Debug.Log(NPC_Abducter_Count);
+        Debug.Log(enemy_Count);
+        Debug.Log(nextWave);
+        Debug.Log(EnemyisAlive());
         EnemyisAlive();
         if(Abducter_Monitor_Timer<= 0)
         {
-            if (NPC_Abducter_Count <= 0)
+            if (enemy_Count <= 0)
             {
-                nextWave++;
+                //nextWave++;
             }
         }
         WaveText.text = "Wave:" + nextWave.ToString();  // Display int on Text Componenet
@@ -101,7 +104,7 @@ public class GameManager : MonoBehaviour
         // Calculate how many Human Prefabs get spawned
         for(int i =0; i < 10; i++)
         {
-            GameObject human = Instantiate(s_GM.human_Prefab, HumanRandomScreenPosition, Quaternion.identity);  NPC_Human_Count++; // Spawns 10 Humans within the HumanRandomScreenPosition
+            GameObject human = Instantiate(s_GM.human_Prefab, HumanRandomScreenPosition, Quaternion.identity); // Spawns 10 Humans within the HumanRandomScreenPosition
         }
 
         // Spawn UI or turn it on
@@ -111,7 +114,7 @@ public class GameManager : MonoBehaviour
 
     public static void CreateNPCAbductor()
     {
-        Instantiate(s_GM.abducter_Prefab, RandomScreenPosition, Quaternion.identity); NPC_Abducter_Count++;    // Spawns the player prefab and adds a static int to monitor count of enemy
+        Instantiate(s_GM.abducter_Prefab, RandomScreenPosition, Quaternion.identity); s_GM.enemy_Count++;    // Spawns the player prefab and adds a static int to monitor count of enemy
     }
 
     public static void CreatePlayer()
@@ -145,14 +148,13 @@ public class GameManager : MonoBehaviour
         score += AddPoints;
     }
 
-
     IEnumerator SpawnWave()
     {
-        for(int i =0; i < Count; i++)      // Let Computer Calculate how many Enemies it will spawn
+        for(int i =0; i < 10; i++)      // Let Computer Calculate how many Enemies it will spawn
         {
             yield return new WaitForSeconds(1 / spawnDelay);    // Wait For Seconds and Divid 1 by spawnDelay
             CreateNPCAbductor();        // After Seconds have been over spawn NPC
-
+            NPC_Human_Count++;
             if (!EnemyisAlive())
             {
                 nextWave++;
