@@ -873,6 +873,12 @@ Prefab:
       propertyPath: inGame_UI
       value: 
       objectReference: {fileID: 193914322}
+    - target: {fileID: 114492617103288574, guid: 4ed129523f7f9dc46bb496946f08c8e0,
+        type: 2}
+      propertyPath: spawning_effect
+      value: 
+      objectReference: {fileID: 1157948789589430, guid: 073aa48d978556e44b5fc1f8ded5dca0,
+        type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4ed129523f7f9dc46bb496946f08c8e0, type: 2}
   m_IsPrefabAsset: 0

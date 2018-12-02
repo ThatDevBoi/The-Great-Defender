@@ -28,6 +28,8 @@ public class GameManager : MonoBehaviour
     public bool Startgame;
     public float RespawnTimer = 3f;
 
+    public float spawn_Effect_timer = 2f;
+
 
     public static int score = 1;    // Monitors score for turbo charge
     private int nextWave = 1;   // Holds value of the next wave to be spawned
@@ -39,6 +41,7 @@ public class GameManager : MonoBehaviour
     public GameObject human_Prefab; // Humanoid Character Prefab Reference 
     public GameObject abducter_Prefab;  // Abducter Character Prefab Reference 
     public GameObject ufo_Prefab;   // Flying sorser Character Prefab Reference 
+    public GameObject spawning_effect;  // References to particele effect used to spawn enemy
 
     // Singleton GameManager
     public static GameManager s_GM;
@@ -245,7 +248,7 @@ public class GameManager : MonoBehaviour
         // Create Player Function
         CreatePlayer();
         EnemyisAlive();
-        //StartCoroutine(SpawnWave());
+
         // Calculate how many Human Prefabs get spawned
         for(int i =0; i < 10; i++)
         {
@@ -256,11 +259,6 @@ public class GameManager : MonoBehaviour
     public void CreateNPCHuman()
     {
         GameObject human = Instantiate(s_GM.human_Prefab, HumanRandomScreenPosition, Quaternion.identity); NPC_Human_Count++; // Spawns 10 Humans within the HumanRandomScreenPosition
-    }
-
-    public static void CreateNPCAbductor()
-    {
-        Instantiate(s_GM.abducter_Prefab, RandomScreenPosition, Quaternion.identity); enemy_Count++;    // Spawns the player prefab and adds a static int to monitor count of enemy
     }
 
     public static void CreatePlayer()
@@ -305,8 +303,11 @@ public class GameManager : MonoBehaviour
         state = SpawnState.SPAWNING;
         for (int i = 0; i < Enemies; i++)      // Let Computer Calculate how many Enemies it will spawn
           {
+            GameObject GO_Spawn = Instantiate(s_GM.spawning_effect, RandomScreenPosition, Quaternion.identity);
+            Destroy(GO_Spawn, 3);
             yield return new WaitForSeconds(1 / spawnDelay);    // Wait For Seconds and Divid 1 by spawnDelay
-            CreateNPCAbductor();        // After Seconds have been over spawn NPC
+            Instantiate(s_GM.abducter_Prefab, GO_Spawn.transform.position, Quaternion.identity); enemy_Count++;
+           
             if (!EnemyisAlive())
             {
                 enemy_Count += enemy_Count + 5;
