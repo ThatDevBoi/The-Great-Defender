@@ -142,8 +142,8 @@ public class PC_Space_Ship_Controller : Base_Class
         // When the GameObject moves up or down on the Y axis
         if (transform.position.y <= -8f)                                                              // If the Transform component position is more than or equal to -7.5
             transform.position = new Vector3(transform.position.x, -8f, transform.position.z);        // The new position for any GameObject will be restricted to -7.5 (Down on the Y axis)
-        else if (transform.position.y >= 8.4f)                                                           // However if the transform position is less than 7.5
-            transform.position = new Vector3(transform.position.x, 8.4f, transform.position.z);         // The new position of any GameObject is restricted to 7.5 (Up on Y axis)
+        else if (transform.position.y >= 7f)                                                           // However if the transform position is less than 7.5
+            transform.position = new Vector3(transform.position.x, 7f, transform.position.z);         // The new position of any GameObject is restricted to 7.5 (Up on Y axis)
 
         // Screen Wrapping coordinates (X axis restriction)
         if (transform.position.x >= 50f)     // if the transforms position is greater then 70f
@@ -167,17 +167,30 @@ public class PC_Space_Ship_Controller : Base_Class
     #region Collsion
     private void OnTriggerEnter2D(Collider2D other)
     {
+        if(other.gameObject.tag == "UFO")
+        {
+            Destroy(gameObject);
+            GameManager.Player_Lives--;
+            GameManager.s_GM.Player_Dead = true;
+        }
+
         if (other.gameObject.tag == "NPC_Abducter")
         {
-            Destroy(this.gameObject);        // Destroy the PC for hitting the NPC
+            Destroy(gameObject);        // Destroy the PC for hitting the NPC
+            GameManager.Player_Lives--;
+            GameManager.s_GM.Player_Dead = true;
         }
         if (other.gameObject.tag == "NPC_Chaser")
         {
-            Destroy(this.gameObject);
+            Destroy(gameObject);
+            GameManager.Player_Lives--;
+            GameManager.s_GM.Player_Dead = true;
         }
         if(other.gameObject.tag == "NPC_Bullet")
         {
-            Destroy(this.gameObject);
+            Destroy(gameObject);
+            GameManager.Player_Lives--;
+            GameManager.s_GM.Player_Dead = true;
         }
 
     }

@@ -22,7 +22,7 @@ public class Human_NPC : Base_Class
         base.Start();
         PC_BC.isTrigger = true;
         PC_RB.isKinematic = true;
-        mvelocity = new Vector2(Random.Range(-speed, speed), Random.Range(0, -0));
+        mvelocity = new Vector2(Random.Range(-speed, speed), Random.Range(0, -0));  // On start we move randomly
 
         PC = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
         HumanHolder = GameObject.FindGameObjectWithTag("Human_Hold_Place").GetComponent<Transform>();
@@ -33,12 +33,13 @@ public class Human_NPC : Base_Class
     {
         // Functions
         DoMove();
+        Movement_Restriction();
         HumanTimer -= Time.deltaTime;       // Decline timer 1 second Per frame
 
         // At this point on the Y axis the Human turns into a mutant NPC
-        if(transform.position.y >= 12)
+        if(transform.position.y >= 9f)
         {
-            Destroy(gameObject); GameManager.NPC_Human_Count--; // Destroy but decline static int
+            Destroy(gameObject); GameManager.s_GM.NPC_Human_Count--; // Destroy but decline static int
 
             GameObject Chaser_NPC = Instantiate(NPC_Chaser, transform.position, Quaternion.identity);
         }
@@ -87,19 +88,19 @@ public class Human_NPC : Base_Class
 
     protected override void DoMove()
     {
-        transform.position += mvelocity * Time.deltaTime;
-        if (HumanTimer <= 0)
-        {
-            HumanTimer = 5f;
-            mvelocity = new Vector2(Random.Range(-speed, speed), Random.Range(0, -0));      // Changes direction on the X axis randomly
-        }
+           transform.position += mvelocity * Time.deltaTime;         
+    }
+
+    protected override void Movement_Restriction()
+    {
+
     }
 
     public void OnTriggerEnter2D(Collider2D other)
     {
         if (other.gameObject.tag == "Bullet")
         {
-            Destroy(gameObject);    GameManager.NPC_Human_Count--;
+            Destroy(gameObject);    GameManager.s_GM.NPC_Human_Count--;
         }
 
         if(other.gameObject.tag == "NPC_Abducter")       // NPC Needs to turn Grounded off if not the Human wont be able to be picked up
@@ -110,6 +111,7 @@ public class Human_NPC : Base_Class
         if(other.gameObject.tag == "Ground")
         {
             Grounded = true;
+            DoMove();
         }
         if(other.gameObject.tag == "Player" && Ready_For_Drop)
         {
@@ -135,6 +137,8 @@ public class Human_NPC : Base_Class
             GameObject TextMeshGO = Instantiate(FlickingTextMesh, transform.position, Quaternion.identity); // Spawn Text Mesh Object
             TextMeshGO.GetComponent<TextMesh>().text = ScoreBoardPoints.ToString();   // Find the Text Mesh Component so the score can be shown 
             Destroy(TextMeshGO, 1.25f); // Destroy when 1.25 seconds have passed
+
+            GameManager.s_GM.SendMessage("Leader_Board_Score", ScoreBoardPoints);
         }
     }
 

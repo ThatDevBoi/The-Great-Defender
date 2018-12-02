@@ -51,11 +51,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2bf6c295cf537a441b238c97140ada09, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Enemies: 15
+  spawnDelay: 0.4
+  waveWait: 2
+  time_between_waves: 5
+  waveCountdown: 0
+  state: 2
+  Player_Dead: 0
+  RespawnTimer: 3
   PC_Prefab: {fileID: 1939276393088754, guid: 28d28e806a47a8947a231ed5a292f533, type: 2}
-  Abducter_Prefab: {fileID: 0}
-  UFO_Prefab: {fileID: 0}
-  Critter_prefab: {fileID: 1557094822556820, guid: 59be6b18faef5ad408578b07a08656a3,
+  human_Prefab: {fileID: 1558772662608996, guid: 45043375841cd3b4daa3335de3ea69c1,
     type: 2}
-  spawnDelay: 0.3
+  abducter_Prefab: {fileID: 1762876623335236, guid: 1903732e93ab29849a180ad662ce3053,
+    type: 2}
+  ufo_Prefab: {fileID: 1541149082629800, guid: 5b052dba65d0ff04fa3a55479c531402, type: 2}
+  Abducter_Monitor_Timer: 1
   UFO_spawn_Timer: 40
-  Critter_Time: 1
+  WaveText: {fileID: 0}
+  Life_01: {fileID: 0}
+  Life_02: {fileID: 0}
+  Life_03: {fileID: 0}

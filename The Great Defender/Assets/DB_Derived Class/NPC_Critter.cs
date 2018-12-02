@@ -8,7 +8,7 @@ public class NPC_Critter : Base_Class
     private int ScoreBoardPoints = 50;
     [SerializeField]
     private GameObject FlickingTextMesh;
-    public float deductSpeed = 2;
+    public float deductSpeed = 0.5f;
     public Transform Player;
     private PC_Space_Ship_Controller PC_script;
     [SerializeField]
@@ -29,6 +29,9 @@ public class NPC_Critter : Base_Class
         // Functions
         DoMove();
         Movement_Restriction();
+
+        if (PC_BC.isTrigger == false)
+            Destroy(gameObject);
     }
 
     protected override void DoMove()
@@ -52,6 +55,8 @@ public class NPC_Critter : Base_Class
         if(other.gameObject.tag == "Bullet")
         {
             Destroy(gameObject);
+
+            GameManager.s_GM.SendMessage("Leader_Board_Score", ScoreBoardPoints);
 
             GameObject TextMeshGO = Instantiate(FlickingTextMesh, transform.position, Quaternion.identity); // Spawn Text Mesh Object
             TextMeshGO.GetComponent<TextMesh>().text = ScoreBoardPoints.ToString();   // Find the Text Mesh Component so the score can be shown 

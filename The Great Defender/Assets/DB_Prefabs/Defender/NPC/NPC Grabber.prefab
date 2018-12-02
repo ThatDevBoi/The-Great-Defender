@@ -20,8 +20,8 @@ GameObject:
   m_Component:
   - component: {fileID: 4948856106563126}
   m_Layer: 9
-  m_Name: Fire_Position
-  m_TagString: Untagged
+  m_Name: NPC_Fire_Position
+  m_TagString: NPC_Fire_Position
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -68,7 +68,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1762876623335236}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 14.82, y: 0.05, z: 0}
+  m_LocalPosition: {x: -7.5, y: 4.82, z: 0}
   m_LocalScale: {x: 4.1, y: 4.1, z: 4.1}
   m_Children:
   - {fileID: 4948856106563126}
@@ -117,7 +117,7 @@ MeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RenderingLayerMask: 4294967295
   m_Materials:
-  - {fileID: 2100000, guid: 3d72e68a1d6bff842bfc34a513ac69fe, type: 2}
+  - {fileID: 2100000, guid: 915a758ea03e4074cbd44ea23a298050, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -227,6 +227,7 @@ MonoBehaviour:
   speed: 2
   max_Speed: 4
   Yspeed: 2
+  mvelocity: {x: 0, y: 0, z: 0}
   FacingRight: 1
   travelSpeed: 10
   range: 20

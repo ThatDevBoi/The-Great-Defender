@@ -32,6 +32,11 @@ public class NPC_Chaser : Base_Class
         // Functions
         DoMove();
         Movement_Restriction();
+
+        if(PC_BC.isTrigger == false)
+        {
+            Destroy(gameObject);
+        }
     }
 
     protected override void DoMove()
@@ -51,6 +56,7 @@ public class NPC_Chaser : Base_Class
             Destroy(gameObject);
             GameObject Crit = Instantiate(Critter_Prefab, transform.position, Quaternion.identity);
             ChargeBar.value += GameManager.score;       // Add int value to charge bar value
+            GameManager.s_GM.SendMessage("Leader_Board_Score", ScoreBoardPoints);
 
             GameObject TextMeshGO = Instantiate(FlickingTextMesh, transform.position, Quaternion.identity); // Spawn Text Mesh Object
             TextMeshGO.GetComponent<TextMesh>().text = ScoreBoardPoints.ToString();   // Find the Text Mesh Component so the score can be shown 

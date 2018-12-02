@@ -34,9 +34,9 @@ public class Camera_Restriction_Points : MonoBehaviour
     {
         Player = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();          // Finding the player GameObject in the world
 
-        if (Mathf.Abs(Player.transform.position.x )> 46)    // If the absaltue value on the Players Transform componenet on the X axis is greater than 46.0
+        if (Mathf.Abs(Player.transform.position.x )> 49)    // If the absaltue value on the Players Transform componenet on the X axis is greater than 46.0
             gameObject.transform.parent = Player.transform;     // Child the gameObject to the Players Trasnform
-        else if (Mathf.Abs(Player.transform.position.x) < 46)   // However if the absaltue value on the Players Transform componenet on the X axis is less than 46.0
+        else if (Mathf.Abs(Player.transform.position.x) < 49)   // However if the absaltue value on the Players Transform componenet on the X axis is less than 46.0
             gameObject.transform.parent = null;     // This gameObject doesnt have a parent. And if it has a parent it deteches from the parent.
 
         Vector3 Playerpos = Player.position;

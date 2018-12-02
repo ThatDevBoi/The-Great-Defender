@@ -178,7 +178,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1939276393088754}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.719789, y: 0.2, z: 0}
+  m_LocalPosition: {x: -4.0785255, y: 2.0185928, z: 0}
   m_LocalScale: {x: 2.5479999, y: 2.5479999, z: 2.5479999}
   m_Children:
   - {fileID: 4441368071661776}
@@ -270,6 +270,7 @@ MonoBehaviour:
   speed: 3
   max_Speed: 4
   Yspeed: 10
+  mvelocity: {x: 0, y: 0, z: 0}
   FacingRight: 1
   travelSpeed: 10
   range: 10
@@ -282,7 +283,7 @@ MonoBehaviour:
     m_Bits: 3584
   bulletPrefab: {fileID: 1078421195682886, guid: 6320117e4624c2144b37477fd8c7ee4e,
     type: 2}
-  chargeShotPrefab: {fileID: 1487862622438026, guid: 6c54348770a9d14438bc6d20bfa637f9,
+  chargeShotPrefab: {fileID: 1295352018736008, guid: b16aad8481c57ee48a74ecbe1cdfc051,
     type: 2}
   DefaultShot: 1
   doubleShoot: 0

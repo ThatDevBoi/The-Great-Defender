@@ -82,6 +82,7 @@ public class NPC_UFO : Base_Class
         {
             Destroy(gameObject);        // Kills UFO
             ChargeBar.value += GameManager.score;       // Add int value to charge bar value
+            GameManager.s_GM.SendMessage("Leader_Board_Score", ScoreBoardPoints);
 
             GameObject TextMeshGO = Instantiate(FlickingTextMesh, transform.position, Quaternion.identity); // Spawn Text Mesh Object
             TextMeshGO.GetComponent<TextMesh>().text = ScoreBoardPoints.ToString();   // Find the Text Mesh Component so the score can be shown 
