@@ -165,6 +165,12 @@ public class NPC_Abducter : Base_Class
             else if (transform.position.y >= 7f)                                                           // however if the gameObject transform is less than 7 on the y (Up)
                 transform.position = new Vector3(transform.position.x, 7f, transform.position.z);         // Restricted to 7 (up) on the Y
         }
+
+        // Screen Wrapping coordinates (X axis restriction)
+        if (transform.position.x >= 50f)     // if the transforms position is greater then 70f
+        {
+            transform.position = new Vector3(-50f, transform.position.y, 0); // Then wrap the object and place gameobject at -70 on the x 
+        }
     }
     // When the gameObject is rendered ons screen
     public void OnBecameVisible()

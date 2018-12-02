@@ -20,7 +20,6 @@ public class PC_Space_Ship_Controller : Base_Class
     {
         base.Start();
         PC_BC.isTrigger = true;
-        ChargeBar = GameObject.FindGameObjectWithTag("Turbo_Shot_Bar").GetComponent<Slider>();      // Find slider Charge Bar
 
         DefaultShot = true;
         doubleShoot = false;
@@ -32,6 +31,8 @@ public class PC_Space_Ship_Controller : Base_Class
     // Update is called once per frame
     void FixedUpdate ()
     {
+
+        ChargeBar = GameObject.FindGameObjectWithTag("Turbo_Shot_Bar").GetComponent<Slider>();      // Find slider Charge Bar
 
         #region Functions
         // Functions To Be Called 

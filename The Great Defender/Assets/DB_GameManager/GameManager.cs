@@ -57,7 +57,6 @@ public class GameManager : MonoBehaviour
     public GameObject Life_01;
     public GameObject Life_02;
     public GameObject Life_03;
-    public GameObject Player;
     public GameObject StartMenu;
     public GameObject GameOver;
     public GameObject inGame_UI;
@@ -79,7 +78,6 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
-        GameOver = GameObject.FindGameObjectWithTag("Gameover");
         inGame_UI.SetActive(false);
         GameOver.SetActive(false);
 
@@ -103,13 +101,6 @@ public class GameManager : MonoBehaviour
 
     void Update()
     {
-        
-        WaveText = GameObject.FindGameObjectWithTag("Wave_Text").GetComponent<Text>();     // Find the Text GameObject
-        score_Text = GameObject.FindGameObjectWithTag("Score_Text").GetComponent<Text>();
-        Player = GameObject.FindGameObjectWithTag("Player");
-        Startgame = GameObject.FindGameObjectWithTag("StartMenu");
-        inGame_UI = GameObject.FindGameObjectWithTag("inGame_UI");
-
         Debug.Log(enemy_Count);
         Debug.Log(MonitorScore);
         Debug.Log(nextWave);
@@ -165,8 +156,6 @@ public class GameManager : MonoBehaviour
         {
             GameOver.SetActive(true);
             Player_Dead = true;
-            Player.SetActive(false);
-           
         }
 
 
@@ -270,7 +259,7 @@ public class GameManager : MonoBehaviour
     {
         get
             {
-            float yscreenpos_Fixed = 7.2f;     // y restriction value
+            float yscreenpos_Fixed = 5f;     // y restriction value
             float xscreenpos_Fixed = 50f;      // x screen wrap values
             return new Vector3(Random.Range(-xscreenpos_Fixed, xscreenpos_Fixed), Random.Range(-yscreenpos_Fixed, yscreenpos_Fixed), 0.0f);     // Retrun the values as a new Vector3 within a random position on the negetive and positive float positions
         }

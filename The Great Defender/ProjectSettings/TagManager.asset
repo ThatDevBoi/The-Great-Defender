@@ -17,13 +17,6 @@ TagManager:
   - Wave_Text
   - Human_Hold_Place
   - NPC_Fire_Position
-  - Score_Text
-  - StartMenu
-  - inGame_UI
-  - Life_01
-  - Life_02
-  - Life_03
-  - Gameover
   layers:
   - Default
   - TransparentFX

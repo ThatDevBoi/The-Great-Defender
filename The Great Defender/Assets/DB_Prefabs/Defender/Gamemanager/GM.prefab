@@ -58,16 +58,28 @@ MonoBehaviour:
   waveCountdown: 0
   state: 2
   Player_Dead: 0
+  Startgame: 0
   RespawnTimer: 3
+  spawn_Effect_timer: 2
+  Score_Board: 0
   PC_Prefab: {fileID: 1939276393088754, guid: 28d28e806a47a8947a231ed5a292f533, type: 2}
   human_Prefab: {fileID: 1558772662608996, guid: 45043375841cd3b4daa3335de3ea69c1,
     type: 2}
   abducter_Prefab: {fileID: 1762876623335236, guid: 1903732e93ab29849a180ad662ce3053,
     type: 2}
   ufo_Prefab: {fileID: 1541149082629800, guid: 5b052dba65d0ff04fa3a55479c531402, type: 2}
+  spawning_effect: {fileID: 1157948789589430, guid: 073aa48d978556e44b5fc1f8ded5dca0,
+    type: 2}
+  NPC_Human_Count: 0
   Abducter_Monitor_Timer: 1
   UFO_spawn_Timer: 40
   WaveText: {fileID: 0}
+  score_Text: {fileID: 0}
   Life_01: {fileID: 0}
   Life_02: {fileID: 0}
   Life_03: {fileID: 0}
+  Player: {fileID: 1939276393088754, guid: 28d28e806a47a8947a231ed5a292f533, type: 2}
+  StartMenu: {fileID: 0}
+  GameOver: {fileID: 0}
+  inGame_UI: {fileID: 0}
+  Respawn_Human_Timer: 100

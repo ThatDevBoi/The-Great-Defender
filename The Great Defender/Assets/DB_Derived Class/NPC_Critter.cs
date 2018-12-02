@@ -19,8 +19,7 @@ public class NPC_Critter : Base_Class
     {
         base.Start();
         PC_BC.isTrigger = true;
-        Player = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
-        PC_script = GameObject.FindGameObjectWithTag("Player").GetComponent<PC_Space_Ship_Controller>();        // Finding the Player Derived Script
+        
 	}
 	
 	// Update is called once per frame
@@ -30,13 +29,16 @@ public class NPC_Critter : Base_Class
         DoMove();
         Movement_Restriction();
 
-        if (PC_BC.isTrigger == false)
-            Destroy(gameObject);
+        Player = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
+        PC_script = GameObject.FindGameObjectWithTag("Player").GetComponent<PC_Space_Ship_Controller>();        // Finding the Player Derived Script
+
     }
 
     protected override void DoMove()
     {
-        mvelocity = transform.position = Vector3.MoveTowards(transform.position, Player.position, speed * Time.deltaTime);
+        Player = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();      // Find Player
+        transform.position += mvelocity * Time.deltaTime;
+        transform.position = Vector3.MoveTowards(transform.position, Player.position, speed * Time.deltaTime);
     }
 
     protected override void Movement_Restriction()

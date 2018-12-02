@@ -24,8 +24,7 @@ public class Human_NPC : Base_Class
         PC_RB.isKinematic = true;
         mvelocity = new Vector2(Random.Range(-speed, speed), Random.Range(0, -0));  // On start we move randomly
 
-        PC = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
-        HumanHolder = GameObject.FindGameObjectWithTag("Human_Hold_Place").GetComponent<Transform>();
+        
     }
 
     // Update is called once per frame
@@ -36,8 +35,12 @@ public class Human_NPC : Base_Class
         Movement_Restriction();
         HumanTimer -= Time.deltaTime;       // Decline timer 1 second Per frame
 
+        // Needs to be updated for it'll lose reference when PC dies
+        PC = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>(); 
+        HumanHolder = GameObject.FindGameObjectWithTag("Human_Hold_Place").GetComponent<Transform>();
+
         // At this point on the Y axis the Human turns into a mutant NPC
-        if(transform.position.y >= 9f)
+        if (transform.position.y >= 9f)
         {
             Destroy(gameObject); GameManager.s_GM.NPC_Human_Count--; // Destroy but decline static int
 

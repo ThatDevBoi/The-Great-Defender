@@ -33,15 +33,14 @@ public class NPC_Chaser : Base_Class
         DoMove();
         Movement_Restriction();
 
-        if(PC_BC.isTrigger == false)
-        {
-            Destroy(gameObject);
-        }
     }
 
     protected override void DoMove()
     {
-        mvelocity = transform.position = Vector3.MoveTowards(transform.position, PC.position, speed * Time.deltaTime);
+
+        PC = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();      // Find Player
+        transform.position += mvelocity * Time.deltaTime;
+        transform.position = Vector3.MoveTowards(transform.position, PC.position, speed * Time.deltaTime);
     }
 
     protected override void Movement_Restriction()

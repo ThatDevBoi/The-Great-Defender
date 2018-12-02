@@ -120,7 +120,7 @@ MonoBehaviour:
     type: 2}
   Grounded: 0
   Ready_For_Drop: 0
-  PC: {fileID: 4976617377110006, guid: 28d28e806a47a8947a231ed5a292f533, type: 2}
+  PC: {fileID: 0}
   HumanHolder: {fileID: 0}
   max_Safe_Height: 5
   fatal_Fall_Height: 10
