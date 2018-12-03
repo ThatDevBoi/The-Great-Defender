@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class Human_NPC : Base_Class
 {
-    public int ScoreBoardPoints = 600;
-    public float HumanTimer = 5f;
+    public int ScoreBoardPoints = 600;      // value that is displayed as a score, referenced to the GameManager shown via UI Text
+    public float HumanTimer = 5f;       // Delete
     public GameObject NPC_Chaser;
     public GameObject FlickingTextMesh;
     public bool Grounded = false, Ready_For_Drop = false;
@@ -43,8 +43,7 @@ public class Human_NPC : Base_Class
         if (transform.position.y >= 9f)
         {
             Destroy(gameObject); GameManager.s_GM.NPC_Human_Count--; // Destroy but decline static int
-
-            GameObject Chaser_NPC = Instantiate(NPC_Chaser, transform.position, Quaternion.identity);
+            GameObject Chaser_NPC = Instantiate(NPC_Chaser, transform.position, Quaternion.identity);   // Spawn Chaser NPC
         }
 
         if (!Grounded)   // in the air
@@ -96,7 +95,7 @@ public class Human_NPC : Base_Class
 
     protected override void Movement_Restriction()
     {
-
+        return;
     }
 
     public void OnTriggerEnter2D(Collider2D other)
@@ -114,7 +113,7 @@ public class Human_NPC : Base_Class
         if(other.gameObject.tag == "Ground")
         {
             Grounded = true;
-            DoMove();
+            DoMove();   // Delete
         }
         if(other.gameObject.tag == "Player" && Ready_For_Drop)
         {
@@ -141,7 +140,7 @@ public class Human_NPC : Base_Class
             TextMeshGO.GetComponent<TextMesh>().text = ScoreBoardPoints.ToString();   // Find the Text Mesh Component so the score can be shown 
             Destroy(TextMeshGO, 1.25f); // Destroy when 1.25 seconds have passed
 
-            GameManager.s_GM.SendMessage("Leader_Board_Score", ScoreBoardPoints);
+            GameManager.s_GM.SendMessage("Leader_Board_Score", ScoreBoardPoints);       // Sends message to GameManager void to add points to ui text
         }
     }
 
