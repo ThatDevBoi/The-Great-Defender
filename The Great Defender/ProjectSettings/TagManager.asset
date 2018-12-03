@@ -17,6 +17,13 @@ TagManager:
   - Wave_Text
   - Human_Hold_Place
   - NPC_Fire_Position
+  - Gameover
+  - inGame_UI
+  - StartMenu
+  - Life_02
+  - Life_03
+  - Life_01
+  - Score_Text
   layers:
   - Default
   - TransparentFX
@@ -31,7 +38,7 @@ TagManager:
   - Humanoid
   - Critter
   - MiniMap
-  - 
+  - Environment
   - 
   - 
   - 

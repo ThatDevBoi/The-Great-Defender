@@ -31,7 +31,7 @@ public class GameManager : MonoBehaviour
     public float spawn_Effect_timer = 2f;
 
 
-    public static int score = 1;    // Monitors score for turbo charge
+    public int score = 1;    // Monitors score for turbo charge
     private int nextWave = 1;   // Holds value of the next wave to be spawned
     public int Score_Board = 0;
     private int MonitorScore = 0;
@@ -101,12 +101,7 @@ public class GameManager : MonoBehaviour
 
     void Update()
     {
-        Debug.Log(enemy_Count);
-        Debug.Log(MonitorScore);
-        Debug.Log(nextWave);
-        Debug.Log(EnemyisAlive());
-
-        // Lifes
+        //Player Lifes
         if(Player_Dead)
         {
             if (Player_Lives == 2)

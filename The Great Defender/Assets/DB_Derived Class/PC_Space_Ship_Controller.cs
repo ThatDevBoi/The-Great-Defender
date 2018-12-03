@@ -85,6 +85,7 @@ public class PC_Space_Ship_Controller : Base_Class
             }
             else
             {
+                DefaultShot = true;
                 doubleShoot = false;
                 ButtonCooler = 0.3f;
                 ButtonCount += 1;
@@ -105,17 +106,16 @@ public class PC_Space_Ship_Controller : Base_Class
         if(Input.GetButtonDown("Fire1"))       // if the payer presses the left mouse button
         {
             // Uses GameManager int score to charge Bar when enemies die
-            if (ChargeBar.value > 14)         // if the Slider Charge Bar Value is equal to 6 (Change Later to a more balanced score)
+            if (ChargeBar.value > 29)         // if the Slider Charge Bar Value is equal to 29 (Change Later to a more balanced score)
             {
                 chargeShoot = true;          // Users can use the charge shot
-                GameManager.score = 0;      // reset the score so players cant reuse it 
                 ChargeBar.value = 0;
                 if (chargeShoot)           // when the boolean is true
                 {
                     base.ChargeShot();    // Call the Function in Base Class
                 }
             }
-            if(ChargeBar.value < 14)   // If the Score is less than 6
+            if(ChargeBar.value < 29)   // If the Score is less than 29
             {
                 chargeShoot = false;    // Boolean flag is false
                 DefaultShot = true;     // Normal way of shooting is enabled

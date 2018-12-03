@@ -81,7 +81,7 @@ public class NPC_UFO : Base_Class
         if(other.gameObject.tag == "Bullet")
         {
             Destroy(gameObject);        // Kills UFO
-            ChargeBar.value += GameManager.score;       // Add int value to charge bar value
+            ChargeBar.value += GameManager.s_GM.score;       // Add int value to charge bar value
             GameManager.s_GM.SendMessage("Leader_Board_Score", ScoreBoardPoints);
 
             GameObject TextMeshGO = Instantiate(FlickingTextMesh, transform.position, Quaternion.identity); // Spawn Text Mesh Object

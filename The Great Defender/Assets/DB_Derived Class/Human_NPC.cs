@@ -22,6 +22,7 @@ public class Human_NPC : Base_Class
         base.Start();
         PC_BC.isTrigger = true;
         PC_RB.isKinematic = true;
+        PC_RB.constraints = RigidbodyConstraints2D.FreezeRotation;
         mvelocity = new Vector2(Random.Range(-speed, speed), Random.Range(0, -0));  // On start we move randomly
 
         

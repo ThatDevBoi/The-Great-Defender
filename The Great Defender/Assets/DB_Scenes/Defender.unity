@@ -293,7 +293,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 313491528}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Environment
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -325,7 +325,7 @@ GameObject:
   m_Component:
   - component: {fileID: 384670797}
   - component: {fileID: 384670796}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Tester Envioronment (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -547,11 +547,6 @@ Prefab:
       propertyPath: m_Pivot.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 114367084631504108, guid: 30bd56ff1cb161840bb45895916353ea,
-        type: 2}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
-      value: 
-      objectReference: {fileID: 1266303129}
     - target: {fileID: 114709342218287314, guid: 30bd56ff1cb161840bb45895916353ea,
         type: 2}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
@@ -562,38 +557,55 @@ Prefab:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1266303129}
+    - target: {fileID: 114367084631504108, guid: 30bd56ff1cb161840bb45895916353ea,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 1266303129}
     - target: {fileID: 224045814514080294, guid: 30bd56ff1cb161840bb45895916353ea,
         type: 2}
       propertyPath: m_AnchorMax.x
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1596315830680442, guid: 30bd56ff1cb161840bb45895916353ea, type: 2}
-      propertyPath: m_TagString
-      value: Untagged
+    - target: {fileID: 114268220304628090, guid: 30bd56ff1cb161840bb45895916353ea,
+        type: 2}
+      propertyPath: m_MaxValue
+      value: 30
       objectReference: {fileID: 0}
-    - target: {fileID: 1579961636311420, guid: 30bd56ff1cb161840bb45895916353ea, type: 2}
-      propertyPath: m_TagString
-      value: Untagged
+    - target: {fileID: 114268220304628090, guid: 30bd56ff1cb161840bb45895916353ea,
+        type: 2}
+      propertyPath: m_WholeNumbers
+      value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 1069447388006976, guid: 30bd56ff1cb161840bb45895916353ea, type: 2}
-      propertyPath: m_TagString
-      value: Untagged
+    - target: {fileID: 224045814514080294, guid: 30bd56ff1cb161840bb45895916353ea,
+        type: 2}
+      propertyPath: m_AnchorMax.y
+      value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1466150189695940, guid: 30bd56ff1cb161840bb45895916353ea, type: 2}
-      propertyPath: m_TagString
-      value: Untagged
+    - target: {fileID: 114268220304628090, guid: 30bd56ff1cb161840bb45895916353ea,
+        type: 2}
+      propertyPath: m_Value
+      value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1736557477339638, guid: 30bd56ff1cb161840bb45895916353ea, type: 2}
-      propertyPath: m_TagString
-      value: Untagged
+    - target: {fileID: 114115389983307590, guid: 30bd56ff1cb161840bb45895916353ea,
+        type: 2}
+      propertyPath: m_Color.r
+      value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 1193261803884662, guid: 30bd56ff1cb161840bb45895916353ea, type: 2}
-      propertyPath: m_TagString
-      value: Untagged
+    - target: {fileID: 114115389983307590, guid: 30bd56ff1cb161840bb45895916353ea,
+        type: 2}
+      propertyPath: m_Color.g
+      value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 1768212392662248, guid: 30bd56ff1cb161840bb45895916353ea, type: 2}
-      propertyPath: m_TagString
-      value: Untagged
+    - target: {fileID: 114115389983307590, guid: 30bd56ff1cb161840bb45895916353ea,
+        type: 2}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114115389983307590, guid: 30bd56ff1cb161840bb45895916353ea,
+        type: 2}
+      propertyPath: m_Color.a
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 30bd56ff1cb161840bb45895916353ea, type: 2}
@@ -627,7 +639,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1234371648}
   - component: {fileID: 1234371647}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Tester Envioronment
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -708,7 +720,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1356229360}
   - component: {fileID: 1356229359}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Tester Envioronment (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -819,6 +831,20 @@ Prefab:
       propertyPath: m_RootOrder
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 20940724283422262, guid: 396625f067041e041ae62d46c9687dbf,
+        type: 2}
+      propertyPath: m_CullingMask.m_Bits
+      value: 12288
+      objectReference: {fileID: 0}
+    - target: {fileID: 20865206924759028, guid: 396625f067041e041ae62d46c9687dbf,
+        type: 2}
+      propertyPath: m_CullingMask.m_Bits
+      value: 12087
+      objectReference: {fileID: 0}
+    - target: {fileID: 1509118294663816, guid: 396625f067041e041ae62d46c9687dbf, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 396625f067041e041ae62d46c9687dbf, type: 2}
   m_IsPrefabAsset: 0
@@ -907,6 +933,16 @@ Prefab:
       propertyPath: inGame_UI
       value: 
       objectReference: {fileID: 193914322}
+    - target: {fileID: 114492617103288574, guid: 4ed129523f7f9dc46bb496946f08c8e0,
+        type: 2}
+      propertyPath: spawnDelay
+      value: 0.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 114492617103288574, guid: 4ed129523f7f9dc46bb496946f08c8e0,
+        type: 2}
+      propertyPath: Respawn_Human_Timer
+      value: 200
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4ed129523f7f9dc46bb496946f08c8e0, type: 2}
   m_IsPrefabAsset: 0

@@ -12,8 +12,11 @@ public class DB_Bullet_Move : Base_Class
         Movement_Restriction();
         transform.Translate(Vector3.right * Time.deltaTime * travelSpeed);      // Moves this gameObject Right with time and a speed value
         PC_BC.isTrigger = false;
+    }
 
-        Destroy(gameObject, 3f);
+    void OnBecameInvisible()
+    {
+        Destroy(gameObject);
     }
 
     protected override void Movement_Restriction()

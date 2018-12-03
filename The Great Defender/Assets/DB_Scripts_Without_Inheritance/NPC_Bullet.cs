@@ -6,7 +6,6 @@ public class NPC_Bullet : MonoBehaviour
 {
     [SerializeField]
     private float moveSpeed = 7f;
-    [SerializeField]
     private Rigidbody2D rb;
     [SerializeField]
     private Transform PC;

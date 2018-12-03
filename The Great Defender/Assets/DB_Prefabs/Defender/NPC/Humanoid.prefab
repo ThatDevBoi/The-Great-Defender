@@ -123,7 +123,7 @@ MonoBehaviour:
   PC: {fileID: 0}
   HumanHolder: {fileID: 0}
   max_Safe_Height: 5
-  fatal_Fall_Height: 10
+  fatal_Fall_Height: 8
 --- !u!212 &212008909040266192
 SpriteRenderer:
   m_ObjectHideFlags: 1
