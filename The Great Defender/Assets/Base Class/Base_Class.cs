@@ -72,12 +72,13 @@ public abstract class Base_Class : MonoBehaviour
     // Update is called once per frame
     void Update ()
     {
+    // Functions
         DoMove();
         Movement_Restriction();
     }
     #endregion
-
     #region All Movement Functions
+    
     #region Do Movement
     protected virtual void DoMove()
     {
