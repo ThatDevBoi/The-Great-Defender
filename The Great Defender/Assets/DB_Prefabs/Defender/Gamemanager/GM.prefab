@@ -52,7 +52,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Enemies: 15
-  spawnDelay: 0.4
+  spawnDelay: 0.8
   waveWait: 2
   time_between_waves: 5
   waveCountdown: 0
@@ -61,6 +61,7 @@ MonoBehaviour:
   Startgame: 0
   RespawnTimer: 3
   spawn_Effect_timer: 2
+  score: 1
   Score_Board: 0
   PC_Prefab: {fileID: 1939276393088754, guid: 28d28e806a47a8947a231ed5a292f533, type: 2}
   human_Prefab: {fileID: 1558772662608996, guid: 45043375841cd3b4daa3335de3ea69c1,
@@ -78,8 +79,9 @@ MonoBehaviour:
   Life_01: {fileID: 0}
   Life_02: {fileID: 0}
   Life_03: {fileID: 0}
-  Player: {fileID: 1939276393088754, guid: 28d28e806a47a8947a231ed5a292f533, type: 2}
   StartMenu: {fileID: 0}
   GameOver: {fileID: 0}
   inGame_UI: {fileID: 0}
-  Respawn_Human_Timer: 100
+  Charge_Shot_Slider: {fileID: 0}
+  PC_health_HUD: {fileID: 0}
+  Respawn_Human_Timer: 200

@@ -8,6 +8,9 @@ using UnityEngine.UI;
 
 public class NPC_Abducter : Base_Class
 {
+    [SerializeField]
+    private AudioSource NPC_as;
+
     [SerializeField]    // removed
     private int int_turboShotpoints = 1;   // Points gained when gameObject Dies used for turbo shot
     public int int_ScoreBoardPoints = 100;
@@ -57,6 +60,8 @@ public class NPC_Abducter : Base_Class
         //Movement_Restriction();
         Lazer_Beam();
 
+
+
         fl_timer -= Time.deltaTime;    //Tick the timer float down
         // For now this is used for when the NPC abducter is at the top of the screen the abduction choice is false so it can move freely once more
         if (gameObject.transform.position.y > 10) // This y value is the same as the base class restrictions. If its not declared then the NPC will just stay at 14.0y and never move freely again
@@ -73,6 +78,7 @@ public class NPC_Abducter : Base_Class
         {
             // Booleans of if the npc chaser is abducting a gameObject is now true
             bool_abduction_choice = false;
+            NPC_as.volume = 0;
             if (fl_timer <= 0) // if boolean is false and timer = 0
             {
                 fl_timer = 2; // Reset the timer 
@@ -84,6 +90,7 @@ public class NPC_Abducter : Base_Class
             bool_abduction_choice = true;
             if (Vector3.Distance(transform.position, trans_human_Target.position) <= fl_mine_Dist)   // and if the NPC is within range of the Human
             {
+                NPC_as.volume = 1;
                 // Childs the Human_Target GameObject to this gameObject
                 trans_human_Target.transform.parent = gameObject.transform;
                 // Mvelocity now moves gameObject up
@@ -136,6 +143,7 @@ public class NPC_Abducter : Base_Class
             Debug.Log("We Hit Some Shit");
             if(bool_abduction_choice)
             {
+                NPC_as.Play();
                 // Find the Transform Component of the Human hit with the ray
                 trans_human_Target = Hit.collider.gameObject.GetComponent<Transform>();
                 // gameObject goes down so abduction Logic shown in FixedUpdate can be exacuted

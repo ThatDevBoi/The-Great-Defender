@@ -60,6 +60,8 @@ public class GameManager : MonoBehaviour
     public GameObject StartMenu;
     public GameObject GameOver;
     public GameObject inGame_UI;
+    public GameObject Charge_Shot_Slider;
+    public GameObject PC_health_HUD;
 
     public float Respawn_Human_Timer = 30f;
 
@@ -101,6 +103,7 @@ public class GameManager : MonoBehaviour
 
     void Update()
     {
+
         //Player Lifes
         if(Player_Dead)
         {
@@ -150,6 +153,9 @@ public class GameManager : MonoBehaviour
         if (Player_Lives == -1 || NPC_Human_Count <= 0)
         {
             GameOver.SetActive(true);
+            inGame_UI.SetActive(false);
+            Charge_Shot_Slider.SetActive(false);
+            PC_health_HUD.SetActive(false);
             Player_Dead = true;
         }
 
@@ -211,6 +217,8 @@ public class GameManager : MonoBehaviour
     public void StartGame()
     {
         inGame_UI.SetActive(true);
+        Charge_Shot_Slider.SetActive(true);
+        PC_health_HUD.SetActive(true);
         Time.timeScale = 1.0f;
     }
 
@@ -247,7 +255,7 @@ public class GameManager : MonoBehaviour
 
     public static void CreatePlayer()
     {
-        Instantiate(s_GM.PC_Prefab, Vector3.zero, Quaternion.identity);     // Spawns the player prefab
+       GameObject pc =  Instantiate(s_GM.PC_Prefab, Vector3.zero, Quaternion.identity);     // Spawns the player prefab
     }
 
    public static Vector3  RandomScreenPosition

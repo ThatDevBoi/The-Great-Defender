@@ -37,6 +37,8 @@ GameObject:
   - component: {fileID: 212620502645042246}
   - component: {fileID: 60280067961234116}
   - component: {fileID: 114852734371455894}
+  - component: {fileID: 82118113607004452}
+  - component: {fileID: 50353483019174016}
   m_Layer: 9
   m_Name: NPC Grabber
   m_TagString: NPC_Abducter
@@ -68,7 +70,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1762876623335236}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -21.21704, y: -0.901839, z: 0}
+  m_LocalPosition: {x: 41.03, y: 0.67, z: 0}
   m_LocalScale: {x: 4.1, y: 4.1, z: 4.1}
   m_Children:
   - {fileID: 4948856106563126}
@@ -144,6 +146,26 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1780353539379806}
   m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!50 &50353483019174016
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1762876623335236}
+  m_BodyType: 1
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!60 &60280067961234116
 PolygonCollider2D:
   m_ObjectHideFlags: 1
@@ -153,7 +175,7 @@ PolygonCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -213,6 +235,101 @@ PolygonCollider2D:
       - {x: 0.013876427, y: -0.2348237}
       - {x: 0.014565631, y: -0.23424102}
       - {x: 0.057623796, y: -0.20770259}
+--- !u!82 &82118113607004452
+AudioSource:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1762876623335236}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: ba08c41831b2b1a4bb906c7b6466642f, type: 3}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!114 &114852734371455894
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -224,10 +341,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a0059e9b7e4b77e4794437b550241004, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 2
-  max_Speed: 4
+  speed: 1
+  max_Speed: 2
   Yspeed: 2
-  mvelocity: {x: 0, y: 0, z: 0}
+  mvelocity: {x: 0.6735744, y: 1.1047101, z: 0}
   FacingRight: 1
   travelSpeed: 10
   range: 20
@@ -243,17 +360,18 @@ MonoBehaviour:
   DefaultShot: 1
   doubleShoot: 0
   chargeShoot: 0
+  NPC_as: {fileID: 82118113607004452}
   int_turboShotpoints: 1
   int_ScoreBoardPoints: 100
   GO_FlickingTextMesh: {fileID: 1290910010734344, guid: ed0f42747c3f53f4d8dc5c4f31cf2c91,
     type: 2}
   GO_bullet: {fileID: 1896836344412704, guid: 8ab5b85e71443b74fba07dede1fd2f61, type: 2}
   ChargeBarSlider: {fileID: 0}
-  fl_timer: 2
+  fl_timer: 1.0600009
   fl_AbductTimer: 2
   fl_mine_Dist: 2
   fl_firerate: 0
-  fl_nextFire: 0
+  fl_nextFire: 0.02
   trans_Fire_Pos: {fileID: 4948856106563126}
   trans_human_Target: {fileID: 0}
   bool_abduction_choice: 0
