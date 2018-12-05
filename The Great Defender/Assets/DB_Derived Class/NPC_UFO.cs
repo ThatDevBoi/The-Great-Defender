@@ -62,8 +62,6 @@ public class NPC_UFO : Base_Class
     protected override void Movement_Restriction()
     {
         base.Movement_Restriction();
-
-        // Movement Restrictions need refining
     }
 
 

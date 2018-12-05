@@ -81,6 +81,7 @@ MonoBehaviour:
   speed: 5
   max_Speed: 4
   Yspeed: 2
+  mvelocity: {x: 0, y: 0, z: 0}
   FacingRight: 1
   travelSpeed: 50
   range: 100

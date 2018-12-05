@@ -20,6 +20,16 @@ public class NPC_Bullet : MonoBehaviour
         rb.velocity = new Vector2(moveDirection.x, moveDirection.y);
 	}
 
+    private void Update()
+    {
+        if (GameManager.s_GM.Player_Dead)
+        {
+            Destroy(gameObject);
+        }
+        else
+            return;
+    }
+
     public void OnBecameInvisible()
     {
         Destroy(gameObject);

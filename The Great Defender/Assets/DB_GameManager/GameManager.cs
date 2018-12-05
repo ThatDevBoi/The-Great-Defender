@@ -13,6 +13,7 @@ public class GameManager : MonoBehaviour
     // Wave Spawner Logic 
     public static int enemy_Count;    // Used for how many NPCs will be spawned in a for loop         // MAKE THIS DECREASE WHEN AN NPC_ABDUCTER DIES
     public int Enemies = 15;
+    private int increase_Enemies = 5;
     public float spawnDelay;    // How long it takes to spawn Abducters
     //public float startWait;
     public float waveWait;
@@ -27,8 +28,6 @@ public class GameManager : MonoBehaviour
     public bool Player_Dead = false;
     public bool Startgame;
     public float RespawnTimer = 3f;
-
-    public float spawn_Effect_timer = 2f;
 
 
     public int score = 1;    // Monitors score for turbo charge
@@ -51,6 +50,7 @@ public class GameManager : MonoBehaviour
     
     public float Abducter_Monitor_Timer = 1;    // Used to monitor how many NPC abdcuters are left
     public float UFO_spawn_Timer = 40;  // Timer that when = 0 destroys the current Active UFO
+    public float UFOtimer = 2;
     // UI
     public Text WaveText;   // Text UI reference Componenet
     public Text score_Text;
@@ -188,12 +188,13 @@ public class GameManager : MonoBehaviour
         WaveText.text = "Wave:" + nextWave.ToString();  // Display int on Text Componenet
         score_Text.text = "Score:"  + Score_Board.ToString();
 
-        UFO_spawn_Timer -= Time.deltaTime;  // Decrease Float Value
+        UFO_spawn_Timer -= Time.deltaTime;
+
         if(UFO_spawn_Timer <= 0)
         {
-            UFO_spawn_Timer = 40;
-            Instantiate(ufo_Prefab, RandomScreenPosition, Quaternion.identity);
+            StartCoroutine(SpawnUFO());
         }
+
     }
 
     public void RestartScene(string nameofscene)
@@ -230,6 +231,7 @@ public class GameManager : MonoBehaviour
             Abducter_Monitor_Timer = 1f;
         if(GameObject.FindGameObjectWithTag("NPC_Abducter") == null)
         {
+            Enemies += increase_Enemies;
             return false;   // Return bool false if no enemies are found
         }
         return true;        // Enemies are found and are still active in the scene
@@ -302,14 +304,22 @@ public class GameManager : MonoBehaviour
            
             if (!EnemyisAlive())
             {
-                enemy_Count += enemy_Count + 5;
                 nextWave++;
             }
                 yield return new WaitForSeconds(waveWait);
         }
             state = SpawnState.WAITING;
             yield break;
+    }
+
+    IEnumerator SpawnUFO()
+    {
+        UFO_spawn_Timer = 40;
+        GameObject UFO_Spawn_pos = Instantiate(s_GM.spawning_effect, RandomScreenPosition, Quaternion.identity);
+        Destroy(UFO_Spawn_pos, 2);
+        yield return new WaitForSeconds(1);
+        Instantiate(s_GM.ufo_Prefab, UFO_Spawn_pos.transform.position, Quaternion.identity);
         
-        
+        yield break;
     }
 }

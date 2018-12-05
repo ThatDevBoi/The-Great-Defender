@@ -77,6 +77,7 @@ public abstract class Base_Class : MonoBehaviour
         Movement_Restriction();
     }
     #endregion
+
     #region All Movement Functions
     
     #region Do Movement
@@ -120,13 +121,17 @@ public abstract class Base_Class : MonoBehaviour
         // When the GameObject moves up or down on the Y axis
         if (transform.position.y <= -8)                                                              // If the Transform component position is more than or equal to -7.5
             transform.position = new Vector3(transform.position.x, -8, transform.position.z);        // The new position for any GameObject will be restricted to -7.5 (Down on the Y axis)
-        else if(transform.position.y >= 7f)                                                           // However if the transform position is less than 7.5
-            transform.position = new Vector3(transform.position.x, 7f, transform.position.z);         // The new position of any GameObject is restricted to 7.5 (Up on Y axis)
+        else if(transform.position.y >= 8.5f)                                                           // However if the transform position is less than 7.5
+            transform.position = new Vector3(transform.position.x, 8.5f, transform.position.z);         // The new position of any GameObject is restricted to 7.5 (Up on Y axis)
 
         // Screen Wrapping coordinates (X axis restriction)
-        if(transform.position.x >= 50f)     // if the transforms position is greater then 70f
+        if (transform.position.x >= 50f)     // if the transforms position is greater then 50
         {
-            transform.position = new Vector3(-50f, transform.position.y, 0); // Then wrap the object and place gameobject at -70 on the x 
+            transform.position = new Vector3(-50f, transform.position.y, transform.position.z); // Then wrap the object and place gameobject at -50 on the x 
+        }
+        else if (transform.position.x <= -50f) // However if the transforms position is less than -50
+        {
+            transform.position = new Vector3(50, transform.position.y, transform.position.z); // Place gameobject at 50 on the x
         }
     }
     #endregion

@@ -11,6 +11,8 @@ public class PC_Space_Ship_Controller : Base_Class
     public float swirlButtonCooler = 0.5f;
     public int swirlButtonCount = 0;
 
+    public GameObject explosion_Effect;
+
     public Transform Critterprefab;     // Transform IDE Compoenent of critterPrefab
     public Slider ChargeBar;            // Reference to the UI Slider
 
@@ -24,6 +26,8 @@ public class PC_Space_Ship_Controller : Base_Class
         DefaultShot = true;
         doubleShoot = false;
         chargeShoot = false;
+
+        
     }
     #endregion
 
@@ -79,13 +83,11 @@ public class PC_Space_Ship_Controller : Base_Class
         {
             if(ButtonCooler > 0 && ButtonCount == 4)
             {
-                DefaultShot = false;
                 doubleShoot = true;
                 base.Double_Lazer_Beam();
             }
             else
             {
-                DefaultShot = true;
                 doubleShoot = false;
                 ButtonCooler = 0.3f;
                 ButtonCount += 1;
@@ -143,8 +145,8 @@ public class PC_Space_Ship_Controller : Base_Class
         // When the GameObject moves up or down on the Y axis
         if (transform.position.y <= -8f)                                                              // If the Transform component position is more than or equal to -7.5
             transform.position = new Vector3(transform.position.x, -8f, transform.position.z);        // The new position for any GameObject will be restricted to -7.5 (Down on the Y axis)
-        else if (transform.position.y >= 7f)                                                           // However if the transform position is less than 7.5
-            transform.position = new Vector3(transform.position.x, 7f, transform.position.z);         // The new position of any GameObject is restricted to 7.5 (Up on Y axis)
+        else if (transform.position.y >= 8.5f)                                                           // However if the transform position is less than 7.5
+            transform.position = new Vector3(transform.position.x, 8.5f, transform.position.z);         // The new position of any GameObject is restricted to 7.5 (Up on Y axis)
 
         // Screen Wrapping coordinates (X axis restriction)
         if (transform.position.x >= 50f)     // if the transforms position is greater then 70f
@@ -173,6 +175,8 @@ public class PC_Space_Ship_Controller : Base_Class
             Destroy(gameObject);
             GameManager.Player_Lives--;
             GameManager.s_GM.Player_Dead = true;
+            GameObject explosion = Instantiate(explosion_Effect, transform.position, Quaternion.identity);
+            Destroy(explosion, 2f);
         }
 
         if (other.gameObject.tag == "NPC_Abducter")
@@ -180,18 +184,24 @@ public class PC_Space_Ship_Controller : Base_Class
             Destroy(gameObject);        // Destroy the PC for hitting the NPC
             GameManager.Player_Lives--;
             GameManager.s_GM.Player_Dead = true;
+            GameObject explosion = Instantiate(explosion_Effect, transform.position, Quaternion.identity);
+            Destroy(explosion, 2f);
         }
         if (other.gameObject.tag == "NPC_Chaser")
         {
             Destroy(gameObject);
             GameManager.Player_Lives--;
             GameManager.s_GM.Player_Dead = true;
+            GameObject explosion = Instantiate(explosion_Effect, transform.position, Quaternion.identity);
+            Destroy(explosion, 2f);
         }
         if(other.gameObject.tag == "NPC_Bullet")
         {
             Destroy(gameObject);
             GameManager.Player_Lives--;
             GameManager.s_GM.Player_Dead = true;
+            GameObject explosion = Instantiate(explosion_Effect, transform.position, Quaternion.identity);
+            Destroy(explosion, 2f);
         }
 
     }

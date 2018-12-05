@@ -38,7 +38,6 @@ GameObject:
   - component: {fileID: 60280067961234116}
   - component: {fileID: 114852734371455894}
   - component: {fileID: 82118113607004452}
-  - component: {fileID: 50353483019174016}
   m_Layer: 9
   m_Name: NPC Grabber
   m_TagString: NPC_Abducter
@@ -146,26 +145,6 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1780353539379806}
   m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
---- !u!50 &50353483019174016
-Rigidbody2D:
-  serializedVersion: 4
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1762876623335236}
-  m_BodyType: 1
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDrag: 0
-  m_AngularDrag: 0.05
-  m_GravityScale: 1
-  m_Material: {fileID: 0}
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
-  m_Constraints: 0
 --- !u!60 &60280067961234116
 PolygonCollider2D:
   m_ObjectHideFlags: 1
@@ -246,7 +225,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: ba08c41831b2b1a4bb906c7b6466642f, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0.5
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -366,12 +345,11 @@ MonoBehaviour:
   GO_FlickingTextMesh: {fileID: 1290910010734344, guid: ed0f42747c3f53f4d8dc5c4f31cf2c91,
     type: 2}
   GO_bullet: {fileID: 1896836344412704, guid: 8ab5b85e71443b74fba07dede1fd2f61, type: 2}
+  Human_prefab: {fileID: 0}
   ChargeBarSlider: {fileID: 0}
   fl_timer: 1.0600009
   fl_AbductTimer: 2
   fl_mine_Dist: 2
-  fl_firerate: 0
-  fl_nextFire: 0.02
   trans_Fire_Pos: {fileID: 4948856106563126}
   trans_human_Target: {fileID: 0}
   bool_abduction_choice: 0

@@ -11,7 +11,6 @@ public class Human_NPC : Base_Class
     public bool Grounded = false, Ready_For_Drop = false;
     public Transform PC;
     public Transform HumanHolder;
-
     // Falling Logic
     private float falling_Start_height;
     public float max_Safe_Height = 5;
@@ -35,6 +34,8 @@ public class Human_NPC : Base_Class
         DoMove();
         Movement_Restriction();
         HumanTimer -= Time.deltaTime;       // Decline timer 1 second Per frame
+
+        
 
         // Needs to be updated for it'll lose reference when PC dies
         PC = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>(); 
@@ -114,9 +115,8 @@ public class Human_NPC : Base_Class
         if(other.gameObject.tag == "Ground")
         {
             Grounded = true;
-            DoMove();   // Delete
         }
-        if(other.gameObject.tag == "Player" && Ready_For_Drop)
+        if(other.gameObject.tag == "Player" && Ready_For_Drop && gameObject.transform.parent == null)
         {
             transform.position = HumanHolder.transform.position;
             gameObject.transform.parent = PC.transform;
