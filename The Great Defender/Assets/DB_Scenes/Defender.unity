@@ -279,20 +279,6 @@ Prefab:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
       objectReference: {fileID: 1266303129}
-    - target: {fileID: 1963813919474286, guid: 30bd56ff1cb161840bb45895916353ea, type: 2}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 114210952702265908, guid: 30bd56ff1cb161840bb45895916353ea,
-        type: 2}
-      propertyPath: m_Text
-      value: 'Destroy the invading Aliens and save the dangered humans from being
-        taken and turned into windless mutants
-
-        Press Space bar to shoot w,a,s,d or arrow keys left,right,up,down to move.
-        When power shot bar is fall press Right mouse button to shoot turbo charge
-        shot. Triple tap w to remove critter from your ship'
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 30bd56ff1cb161840bb45895916353ea, type: 2}
   m_IsPrefabAsset: 0

@@ -60,6 +60,17 @@ public class NPC_Abducter : Base_Class
         ChargeBarSlider = GameObject.FindGameObjectWithTag("Turbo_Shot_Bar").GetComponent<Slider>();  // Find Slider Component
         fl_shootRay_time -= Time.deltaTime;
 
+
+        if(GameManager.s_GM.Player_Dead == true)
+        {
+            speed = 0;
+            max_Speed = 0;
+        }
+        else if(GameManager.s_GM.Player_Dead == false)
+        {
+            speed = 1;
+            max_Speed = 2;
+        }
         if (bool_abduction_choice)
         {
             fl_Abductionsound_timer -= Time.deltaTime;
@@ -73,10 +84,6 @@ public class NPC_Abducter : Base_Class
         if (trans_human_Target == null) // If the Abducotr no longer has a reference or never did
             bool_abduction_choice = false;  // Abduction is false
 
-        if(gameObject.transform.position.x == 0)
-        {
-            mvelocity = new Vector2(Random.Range(-speed, speed), Random.Range(-speed, speed));  // Move Randomly in the game
-        }
         fl_timer -= Time.deltaTime;    //Tick the timer float down
         // For now this is used for when the NPC abducter is at the top of the screen the abduction choice is false so it can move freely once more
         if (gameObject.transform.position.y > 10) // This y value is the same as the base class restrictions. If its not declared then the NPC will just stay at 14.0y and never move freely again
