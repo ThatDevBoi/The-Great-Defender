@@ -54,6 +54,9 @@ public abstract class Base_Class : MonoBehaviour
         IDE_PC_BC = gameObject.GetComponent<Collider2D>();           // Adds a BoxCollider to monitor Collision
         IDE_PC_BC.isTrigger = false;         // Makes the box collider attached to gameObject a trigger
         IDE_trans_fire_position = GameObject.Find("Fire_Position").GetComponent<Transform>();       // Finds GameObject childed to player called Fire_Position. Needs its Transform
+        bl_DefaultShot = true;
+        bl_doubleShoot = false;
+        bl_chargeShoot = false;
     }
     #endregion
 

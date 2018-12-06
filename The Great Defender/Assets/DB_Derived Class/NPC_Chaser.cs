@@ -37,10 +37,19 @@ public class NPC_Chaser : Base_Class
 
     protected override void DoMove()
     {
-
-        PC = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();      // Find Player
+        if (PC == null && GameManager.s_GM.bl_Player_Dead == false)
+            PC = GameObject.Find("PC(Clone)").GetComponent<Transform>();
         transform.position += mvelocity * Time.deltaTime;
-        transform.position = Vector3.MoveTowards(transform.position, PC.position, fl_movement_speed * Time.deltaTime);
+        if(PC != null)
+        {
+            transform.position = Vector3.MoveTowards(transform.position, PC.position, fl_movement_speed * Time.deltaTime);
+        }
+        
+        if(PC != null)
+        {
+            Debug.Log("Chaser Has PC Transform");
+            return;
+        }
     }
 
     protected override void Movement_Restriction()

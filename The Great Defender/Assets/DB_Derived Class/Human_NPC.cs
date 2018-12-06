@@ -41,10 +41,24 @@ public class Human_NPC : Base_Class
         // Functions
         DoMove();
         Movement_Restriction();
+        if(IDE_trans_PC == null && GameManager.s_GM.bl_Player_Dead == false)
+        {
+            Debug.Log("Human Doesnt Have PC Transform");
+            IDE_trans_PC = GameObject.Find("PC(Clone)").GetComponent<Transform>();
+        }
 
-        // Needs to be updated for it'll lose reference when PC dies
-        IDE_trans_PC = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>(); 
-        IDE_trans_HumanHolder = GameObject.FindGameObjectWithTag("Human_Hold_Place").GetComponent<Transform>();
+        if (IDE_trans_PC != null)
+            Debug.Log("We Have The PC Transform For The Humans");
+        if(IDE_trans_HumanHolder == null && GameManager.s_GM.bl_Player_Dead == false)
+        {
+            Debug.Log("Human Doesnt Have its Player Characters Holding Position");
+            IDE_trans_HumanHolder = GameObject.Find("Human_Child_Point").GetComponent<Transform>();
+        }
+
+        if (IDE_trans_HumanHolder != null)
+            Debug.Log("Humna has its PC child point");
+
+        
         // At this point on the Y axis the Human turns into a mutant NPC
         if (transform.position.y >= 9f)
         {
@@ -83,9 +97,12 @@ public class Human_NPC : Base_Class
             gameObject.transform.parent = null;
         }
 
-        if (fl_Ready_For_Drop && gameObject.transform.parent == IDE_trans_PC.transform)  // When the Human NPC is ready to be dropped back to the ground and the Human is a child to the PC
+        if(IDE_trans_PC != null && GameManager.s_GM.bl_Player_Dead == false)
         {
-            fl_falling_Start_height = transform.position.y;    // Whenever the NPC human became a child it resets the height of falling so NPC doesnt die when dropped off
+            if (fl_Ready_For_Drop && gameObject.transform.parent == IDE_trans_PC.transform && GameManager.s_GM.bl_Player_Dead == false)  // When the Human NPC is ready to be dropped back to the ground and the Human is a child to the PC
+            {
+                fl_falling_Start_height = transform.position.y;    // Whenever the NPC human became a child it resets the height of falling so NPC doesnt die when dropped off
+            }
         }
     }
 

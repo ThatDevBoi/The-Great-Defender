@@ -36,9 +36,19 @@ public class NPC_Critter : Base_Class
 
     protected override void DoMove()
     {
-        Player = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();      // Find Player
+        if (Player == null && GameManager.s_GM.bl_Player_Dead == false)
+            Player = GameObject.Find("PC(Clone)").GetComponent<Transform>();
         transform.position += mvelocity * Time.deltaTime;
-        transform.position = Vector3.MoveTowards(transform.position, Player.position, fl_movement_speed * Time.deltaTime);
+        if (Player != null)
+        {
+            transform.position = Vector3.MoveTowards(transform.position, Player.position, fl_movement_speed * Time.deltaTime);
+        }
+
+        if (Player != null)
+        {
+            Debug.Log("Chaser Has PC Transform");
+            return;
+        }
     }
 
     protected override void Movement_Restriction()

@@ -211,7 +211,7 @@ MonoBehaviour:
   IDE_trans_fire_position: {fileID: 0}
   IDE_trans_double_fire_position_1: {fileID: 0}
   IDE_trans_double_fire_position_2: {fileID: 0}
-  fl_movement_speed: 5
+  fl_movement_speed: 3
   fl_max_movement_Speed: 4
   fl_movement_Yspeed: 2
   fl_range: 100

@@ -24,13 +24,9 @@ public class PC_Space_Ship_Controller : Base_Class
         base.Start();
         IDE_PC_BC.isTrigger = true;
 
-        bl_DefaultShot = true;
-        bl_doubleShoot = false;
-        bl_chargeShoot = false;
         // Find the other shooting points
         IDE_trans_double_fire_position_1 = GameObject.Find("Fire_Position_Double_Shot_Left_Wing").GetComponent<Transform>();
         IDE_trans_double_fire_position_2 = GameObject.Find("Fire_Position_Double_Shot_Right_Wing").GetComponent<Transform>();
-
     }
     #endregion
 
@@ -44,20 +40,33 @@ public class PC_Space_Ship_Controller : Base_Class
         Movement_Restriction();
         #endregion
 
-        IDE_ChargeBar_Slider = GameObject.FindGameObjectWithTag("Turbo_Shot_Bar").GetComponent<Slider>();      // Find slider Charge Bar Slider isnt active on start needs to be uodated
+
+        if(IDE_ChargeBar_Slider == null && GameManager.s_GM.bl_Player_Dead == false && Time.time == 1.0)
+        {
+            Debug.Log("Finding The Slider For PC");
+            IDE_ChargeBar_Slider = GameObject.Find("ChargeShotSlider").GetComponent<Slider>();
+        }
+
+        if (IDE_ChargeBar_Slider != null)
+            Debug.Log("We Have The Slider Transform For The Humans");
 
         // allows player to remove the critter NPC from their ship
         #region Swirl
-        if(Input.GetKeyDown(KeyCode.W))     // if the W key is pressed down
+        if (Input.GetKeyDown(KeyCode.W))     // if the W key is pressed down
         {
-            if(int_swirlButtonCount > 0 && int_swirlButtonCount == 2)   // if the input key is pressed 2 or more times
-            {
-                IDE_trans_Critterprefab = GameObject.FindGameObjectWithTag("Critter").GetComponent<Transform>();  // Find the Critter GameObject Transform
-                transform.Find("Critter_NPC");      // Find the Critter in the heiary
-                IDE_trans_Critterprefab.transform.parent = null;      // Unchild the Critter
-            }
+                if(IDE_trans_Critterprefab != null)
+                {
+                    if (int_swirlButtonCount > 0 && int_swirlButtonCount == 2)   // if the input key is pressed 2 or more times
+                    {
+                    IDE_trans_Critterprefab = GameObject.FindGameObjectWithTag("Critter").GetComponent<Transform>();  // Find the Critter GameObject Transform
+                    transform.Find("Critter_NPC");      // Find the Critter in the heiary
+                    IDE_trans_Critterprefab.transform.parent = null;      // Unchild the Critter
+                    }  
+                }
             else// However if following hasnt been done
             {
+
+                IDE_trans_Critterprefab = null;
                 fl_swirlButtonCooler = 0.5f;   // Cooldown resets 
                 int_swirlButtonCount += 1;      // Adds to int
             }
@@ -109,23 +118,28 @@ public class PC_Space_Ship_Controller : Base_Class
         #region Charge Shot
         if(Input.GetButtonDown("Fire1"))       // if the payer presses the left mouse button
         {
-            // Uses GameManager int score to charge Bar when enemies die
-            if (IDE_ChargeBar_Slider.value > 29)         // if the Slider Charge Bar Value is equal to 29 (Change Later to a more balanced score)
+            if(IDE_ChargeBar_Slider == null)
             {
-                bl_chargeShoot = true;          // Users can use the charge shot
-                IDE_ChargeBar_Slider.value = 0;
-                if (bl_chargeShoot)           // when the boolean is true
+                IDE_ChargeBar_Slider = GameObject.Find("ChargeShotSlider").GetComponent<Slider>();
+                // Uses GameManager int score to charge Bar when enemies die
+                if (IDE_ChargeBar_Slider != null && IDE_ChargeBar_Slider.value > 29)         // if the Slider Charge Bar Value is equal to 29 (Change Later to a more balanced score)
                 {
-                    base.ChargeShot();    // Call the Function in Base Class
+                    bl_chargeShoot = true;          // Users can use the charge shot
+                    IDE_ChargeBar_Slider.value = 0;
+                    if (bl_chargeShoot)           // when the boolean is true
+                    {
+                        base.ChargeShot();    // Call the Function in Base Class
+                    }
+                }
+                if (IDE_ChargeBar_Slider.value < 29)   // If the Score is less than 29
+                {
+                    bl_chargeShoot = false;    // Boolean flag is false
+                    bl_DefaultShot = true;     // Normal way of shooting is enabled
                 }
             }
-            if(IDE_ChargeBar_Slider.value < 29)   // If the Score is less than 29
-            {
-                bl_chargeShoot = false;    // Boolean flag is false
-                bl_DefaultShot = true;     // Normal way of shooting is enabled
-            }
+            #endregion
         }
-        #endregion
+
     }
     #endregion
 

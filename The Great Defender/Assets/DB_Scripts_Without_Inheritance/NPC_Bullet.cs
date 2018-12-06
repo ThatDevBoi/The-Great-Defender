@@ -19,14 +19,28 @@ public class NPC_Bullet : MonoBehaviour
 	void Start ()
     {
         rb = GetComponent<Rigidbody2D>();     // Find the Rigidbody2D
-        PC = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();      // Find the Players Transform
-        moveDirection = (PC.transform.position - transform.position).normalized * fl_moveSpeed;
+
+        if(PC == null && GameManager.s_GM.bl_Player_Dead == false)
+        {
+            PC = GameObject.Find("PC(Clone)").GetComponent<Transform>();      // Find the Players Transform 
+        }
+
+        if(PC != null && GameManager.s_GM.bl_Player_Dead == false)
+        {
+            moveDirection = (PC.transform.position - transform.position).normalized * fl_moveSpeed;
+        }
         rb.velocity = new Vector2(moveDirection.x, moveDirection.y);
-	}
+    }
 
     private void Update()
     {
-        if (GameManager.s_GM.bl_Player_Dead)
+
+        if (PC == null && GameManager.s_GM.bl_Player_Dead == true)
+        {
+            Debug.Log("NPC Bullet Script__We Dont Have The Players Transform");
+        }
+
+        if (GameManager.s_GM.bl_Player_Dead == true)
         {
             Destroy(gameObject);
         }
@@ -38,8 +52,6 @@ public class NPC_Bullet : MonoBehaviour
     {
         Destroy(gameObject);
     }
-
-
 
     private void OnTriggerEnter2D(Collider2D other)
     {

@@ -15,6 +15,7 @@ public class NPC_Abducter : Base_Class
                                               // This GameObject can find another Humans Transform
     [SerializeField]
     private AudioSource NPC_as;     // Audio source reference used for abduction sound so player is notified
+    [SerializeField]
     private Slider ChargeBarSlider; // Slider that monitors the Players Turbo Shot. GameObject needs this so int value makes the slider increase value
 
     // ints
@@ -46,6 +47,7 @@ public class NPC_Abducter : Base_Class
         IDE_PC_SR = GetComponent<SpriteRenderer>();     // Find Sprite Renderer on this gameObject   
         IDE_PC_BC = gameObject.GetComponent<Collider2D>();      // Find any Collider2D component attached to this gameObject
         IDE_PC_BC.isTrigger = true;        // Makes sure the Abducters arent a trigger, If the Abducter isnt a trigger. then other gameObjects like this can kill eachother
+        ChargeBarSlider = GameObject.Find("ChargeShotSlider").GetComponent<Slider>();
     }
 
     public void FixedUpdate()
@@ -54,11 +56,12 @@ public class NPC_Abducter : Base_Class
         DoMove();
         Movement_Restriction();
         Lazer_Beam();
-        ChargeBarSlider = GameObject.FindGameObjectWithTag("Turbo_Shot_Bar").GetComponent<Slider>();  // Find Slider Component
         fl_shootRay_time -= Time.deltaTime;
 
+        if (GameManager.int_Player_Lives == -1)
+            ChargeBarSlider = null;
 
-        if(GameManager.s_GM.bl_Player_Dead == true)        // If the boolean inside the GameManager notifying the Player is dead is true
+        if (GameManager.s_GM.bl_Player_Dead == true)        // If the boolean inside the GameManager notifying the Player is dead is true
         {
             // Dont Allow for movement
             fl_movement_speed = 0;      
@@ -207,6 +210,11 @@ public class NPC_Abducter : Base_Class
     // When im about to die
     void OnDestroy()
     {
+        if (trans_human_Target == null)
+        {
+            Debug.Log("We Have No Human");
+            return;
+        }
         // Resetting the Human NPC 
         trans_human_Target.transform.parent = null;       // Let the human NPC detech from the parent when parent dies
         Human_prefab.layer = 10;
