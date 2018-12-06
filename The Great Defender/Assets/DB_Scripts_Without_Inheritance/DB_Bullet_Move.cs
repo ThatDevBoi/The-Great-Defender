@@ -5,13 +5,13 @@ using UnityEngine;
 public class DB_Bullet_Move : Base_Class
 {
     [SerializeField]
-    private float TravelSpeed = 20f;     // How fast is this bullet going to travel at
+    private float fl_TravelSpeed = 40f;     // How fast is this bullet going to travel at
 
     private void Update()
     {
         Movement_Restriction();
-        transform.Translate(Vector3.right * Time.deltaTime * travelSpeed);      // Moves this gameObject Right with time and a speed value
-        PC_BC.isTrigger = false;
+        transform.Translate(Vector3.right * Time.deltaTime * fl_TravelSpeed);      // Moves this gameObject Right with time and a speed value
+        IDE_PC_BC.isTrigger = false;
     }
 
     void OnBecameInvisible()

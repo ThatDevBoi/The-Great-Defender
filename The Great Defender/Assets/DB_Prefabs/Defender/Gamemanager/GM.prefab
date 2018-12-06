@@ -51,37 +51,41 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2bf6c295cf537a441b238c97140ada09, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Enemies: 15
-  spawnDelay: 0.8
-  waveWait: 2
-  time_between_waves: 5
-  waveCountdown: 0
-  state: 2
-  Player_Dead: 0
-  Startgame: 0
-  RespawnTimer: 3
-  score: 1
-  Score_Board: 0
-  PC_Prefab: {fileID: 1939276393088754, guid: 28d28e806a47a8947a231ed5a292f533, type: 2}
-  human_Prefab: {fileID: 1558772662608996, guid: 45043375841cd3b4daa3335de3ea69c1,
+  int_Enemies: 5
+  int_turbo_Shot_score_monitor: 1
+  int_Score_Board: 0
+  int_NPC_Human_Count: 0
+  fl_spawnDelay: 0.8
+  fl_waveWait: 1
+  fl_time_between_waves: 5
+  fl_waveCountdown: 0
+  fl_PC_RespawnTimer: 3
+  fl_Monitor_NPC_abductor_Alive: 1
+  fl_UFO_spawn_Timer: 40
+  fl_Respawn_Human_Timer: 400
+  bl_Player_Dead: 0
+  GO_PC_Prefab: {fileID: 1939276393088754, guid: 28d28e806a47a8947a231ed5a292f533,
     type: 2}
-  abducter_Prefab: {fileID: 1762876623335236, guid: 1903732e93ab29849a180ad662ce3053,
+  GO_human_Prefab: {fileID: 1558772662608996, guid: 45043375841cd3b4daa3335de3ea69c1,
     type: 2}
-  ufo_Prefab: {fileID: 1541149082629800, guid: 5b052dba65d0ff04fa3a55479c531402, type: 2}
-  spawning_effect: {fileID: 1193072323164770, guid: ea394c88be7caf54cbf72c013640a490,
+  GO_abducter_Prefab: {fileID: 1762876623335236, guid: 1903732e93ab29849a180ad662ce3053,
     type: 2}
-  NPC_Human_Count: 0
-  Abducter_Monitor_Timer: 1
-  UFO_spawn_Timer: 40
-  UFOtimer: 2
-  WaveText: {fileID: 0}
-  score_Text: {fileID: 0}
-  Life_01: {fileID: 0}
-  Life_02: {fileID: 0}
-  Life_03: {fileID: 0}
-  StartMenu: {fileID: 0}
-  GameOver: {fileID: 0}
-  inGame_UI: {fileID: 0}
-  Charge_Shot_Slider: {fileID: 0}
-  PC_health_HUD: {fileID: 0}
-  Respawn_Human_Timer: 200
+  GO_ufo_Prefab: {fileID: 1541149082629800, guid: 5b052dba65d0ff04fa3a55479c531402,
+    type: 2}
+  GO_spawning_effect: {fileID: 1193072323164770, guid: ea394c88be7caf54cbf72c013640a490,
+    type: 2}
+  GO_Life_01: {fileID: 0}
+  GO_Life_02: {fileID: 0}
+  GO_Life_03: {fileID: 0}
+  GO_StartMenu: {fileID: 1768212392662248, guid: 30bd56ff1cb161840bb45895916353ea,
+    type: 2}
+  GO_GameOver: {fileID: 1193261803884662, guid: 30bd56ff1cb161840bb45895916353ea,
+    type: 2}
+  GO_inGame_UI: {fileID: 1008137051382962, guid: 30bd56ff1cb161840bb45895916353ea,
+    type: 2}
+  GO_Charge_Shot_Slider: {fileID: 1441024678848004, guid: 30bd56ff1cb161840bb45895916353ea,
+    type: 2}
+  GO_PC_health_HUD: {fileID: 1450170508915290, guid: 30bd56ff1cb161840bb45895916353ea,
+    type: 2}
+  UI_WaveText: {fileID: 0}
+  UI_score_Text: {fileID: 0}

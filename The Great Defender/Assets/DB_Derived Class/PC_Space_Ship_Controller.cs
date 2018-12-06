@@ -5,29 +5,32 @@ using UnityEngine.UI;
 
 public class PC_Space_Ship_Controller : Base_Class
 {
-    // Double Tap Input Variables 
-    public float ButtonCooler = 0.5f;    // Half a second before reset
-    public int ButtonCount = 0;
-    public float swirlButtonCooler = 0.5f;
-    public int swirlButtonCount = 0;
-
-    public GameObject explosion_Effect;
-
-    public Transform Critterprefab;     // Transform IDE Compoenent of critterPrefab
-    public Slider ChargeBar;            // Reference to the UI Slider
+    // IDE
+    public Transform IDE_trans_Critterprefab;     // Transform IDE Compoenent of critterPrefab
+    public Slider IDE_ChargeBar_Slider;            // Reference to the UI Slider
+    // Ints
+    public int int_ButtonCount = 0;
+    public int int_swirlButtonCount = 0;
+    // Floats
+    public float fl_ButtonCooler = 0.5f;    // Half a second before reset
+    public float fl_swirlButtonCooler = 0.5f;  // When the input is being pressed players have half a second so its not spammed
+    // GameObjects
+    public GameObject GO_explosion_Effect;
 
     #region Start Function
     // Use this for initialization
     protected override void Start ()
     {
         base.Start();
-        PC_BC.isTrigger = true;
+        IDE_PC_BC.isTrigger = true;
 
-        DefaultShot = true;
-        doubleShoot = false;
-        chargeShoot = false;
+        bl_DefaultShot = true;
+        bl_doubleShoot = false;
+        bl_chargeShoot = false;
+        // Find the other shooting points
+        IDE_trans_double_fire_position_1 = GameObject.Find("Fire_Position_Double_Shot_Left_Wing").GetComponent<Transform>();
+        IDE_trans_double_fire_position_2 = GameObject.Find("Fire_Position_Double_Shot_Right_Wing").GetComponent<Transform>();
 
-        
     }
     #endregion
 
@@ -35,35 +38,35 @@ public class PC_Space_Ship_Controller : Base_Class
     // Update is called once per frame
     void FixedUpdate ()
     {
-
-        ChargeBar = GameObject.FindGameObjectWithTag("Turbo_Shot_Bar").GetComponent<Slider>();      // Find slider Charge Bar
-
         #region Functions
         // Functions To Be Called 
         DoMove();
         Movement_Restriction();
         #endregion
 
+        IDE_ChargeBar_Slider = GameObject.FindGameObjectWithTag("Turbo_Shot_Bar").GetComponent<Slider>();      // Find slider Charge Bar Slider isnt active on start needs to be uodated
+
+        // allows player to remove the critter NPC from their ship
         #region Swirl
         if(Input.GetKeyDown(KeyCode.W))     // if the W key is pressed down
         {
-            if(swirlButtonCount > 0 && swirlButtonCount == 2)   // if the input key is pressed 2 or more times
+            if(int_swirlButtonCount > 0 && int_swirlButtonCount == 2)   // if the input key is pressed 2 or more times
             {
-                Critterprefab = GameObject.FindGameObjectWithTag("Critter").GetComponent<Transform>();  // Find the Critter GameObject Transform
+                IDE_trans_Critterprefab = GameObject.FindGameObjectWithTag("Critter").GetComponent<Transform>();  // Find the Critter GameObject Transform
                 transform.Find("Critter_NPC");      // Find the Critter in the heiary
-                Critterprefab.transform.parent = null;      // Unchild the Critter
+                IDE_trans_Critterprefab.transform.parent = null;      // Unchild the Critter
             }
             else// However if following hasnt been done
             {
-                swirlButtonCooler = 0.5f;   // Cooldown resets 
-                swirlButtonCount += 1;      // Adds to int
+                fl_swirlButtonCooler = 0.5f;   // Cooldown resets 
+                int_swirlButtonCount += 1;      // Adds to int
             }
         }
 
-        if (swirlButtonCooler > 0)
-            swirlButtonCooler -= 1 * Time.deltaTime;
+        if (fl_swirlButtonCooler > 0)
+            fl_swirlButtonCooler -= 1 * Time.deltaTime;
         else
-            swirlButtonCount = 0;
+            int_swirlButtonCount = 0;
 
         #endregion
 
@@ -73,34 +76,33 @@ public class PC_Space_Ship_Controller : Base_Class
         if (Input.GetButtonDown("Jump"))        // If user presses space
         {
             base.Lazer_Beam();      // Call Function in base Class
-            DefaultShot = true;     // Set boolean flag to true
+            bl_DefaultShot = true;     // Set boolean flag to true
         }
         #endregion
 
-        // Add fire rate to double so it cannot be spammed
         #region Double Shoot
         if (Input.GetButtonDown("Jump"))
         {
-            if(ButtonCooler > 0 && ButtonCount == 4)
+            if(fl_ButtonCooler > 0 && int_ButtonCount == 4)
             {
-                doubleShoot = true;
+                bl_doubleShoot = true;
                 base.Double_Lazer_Beam();
             }
             else
             {
-                doubleShoot = false;
-                ButtonCooler = 0.3f;
-                ButtonCount += 1;
+                bl_doubleShoot = false;
+                fl_ButtonCooler = 0.3f;
+                int_ButtonCount += 1;
             }
         }
 
-        if (ButtonCooler > 0)
+        if (fl_ButtonCooler > 0)
         {
-            ButtonCooler -= 1 * Time.deltaTime;
+            fl_ButtonCooler -= 1 * Time.deltaTime;
         }
         else
         {
-            ButtonCount = 0;
+            int_ButtonCount = 0;
         }
         #endregion
 
@@ -108,19 +110,19 @@ public class PC_Space_Ship_Controller : Base_Class
         if(Input.GetButtonDown("Fire1"))       // if the payer presses the left mouse button
         {
             // Uses GameManager int score to charge Bar when enemies die
-            if (ChargeBar.value > 29)         // if the Slider Charge Bar Value is equal to 29 (Change Later to a more balanced score)
+            if (IDE_ChargeBar_Slider.value > 29)         // if the Slider Charge Bar Value is equal to 29 (Change Later to a more balanced score)
             {
-                chargeShoot = true;          // Users can use the charge shot
-                ChargeBar.value = 0;
-                if (chargeShoot)           // when the boolean is true
+                bl_chargeShoot = true;          // Users can use the charge shot
+                IDE_ChargeBar_Slider.value = 0;
+                if (bl_chargeShoot)           // when the boolean is true
                 {
                     base.ChargeShot();    // Call the Function in Base Class
                 }
             }
-            if(ChargeBar.value < 29)   // If the Score is less than 29
+            if(IDE_ChargeBar_Slider.value < 29)   // If the Score is less than 29
             {
-                chargeShoot = false;    // Boolean flag is false
-                DefaultShot = true;     // Normal way of shooting is enabled
+                bl_chargeShoot = false;    // Boolean flag is false
+                bl_DefaultShot = true;     // Normal way of shooting is enabled
             }
         }
         #endregion
@@ -173,34 +175,34 @@ public class PC_Space_Ship_Controller : Base_Class
         if(other.gameObject.tag == "UFO")
         {
             Destroy(gameObject);
-            GameManager.Player_Lives--;
-            GameManager.s_GM.Player_Dead = true;
-            GameObject explosion = Instantiate(explosion_Effect, transform.position, Quaternion.identity);
+            GameManager.int_Player_Lives--;
+            GameManager.s_GM.bl_Player_Dead = true;
+            GameObject explosion = Instantiate(GO_explosion_Effect, transform.position, Quaternion.identity);
             Destroy(explosion, 2f);
         }
 
         if (other.gameObject.tag == "NPC_Abducter")
         {
             Destroy(gameObject);        // Destroy the PC for hitting the NPC
-            GameManager.Player_Lives--;
-            GameManager.s_GM.Player_Dead = true;
-            GameObject explosion = Instantiate(explosion_Effect, transform.position, Quaternion.identity);
+            GameManager.int_Player_Lives--;
+            GameManager.s_GM.bl_Player_Dead = true;
+            GameObject explosion = Instantiate(GO_explosion_Effect, transform.position, Quaternion.identity);
             Destroy(explosion, 2f);
         }
         if (other.gameObject.tag == "NPC_Chaser")
         {
             Destroy(gameObject);
-            GameManager.Player_Lives--;
-            GameManager.s_GM.Player_Dead = true;
-            GameObject explosion = Instantiate(explosion_Effect, transform.position, Quaternion.identity);
+            GameManager.int_Player_Lives--;
+            GameManager.s_GM.bl_Player_Dead = true;
+            GameObject explosion = Instantiate(GO_explosion_Effect, transform.position, Quaternion.identity);
             Destroy(explosion, 2f);
         }
         if(other.gameObject.tag == "NPC_Bullet")
         {
             Destroy(gameObject);
-            GameManager.Player_Lives--;
-            GameManager.s_GM.Player_Dead = true;
-            GameObject explosion = Instantiate(explosion_Effect, transform.position, Quaternion.identity);
+            GameManager.int_Player_Lives--;
+            GameManager.s_GM.bl_Player_Dead = true;
+            GameObject explosion = Instantiate(GO_explosion_Effect, transform.position, Quaternion.identity);
             Destroy(explosion, 2f);
         }
 

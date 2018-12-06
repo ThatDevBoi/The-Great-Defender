@@ -9,61 +9,54 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
+    // Ints
+    public int int_Enemies = 5;        // How many Enemies will spawn depends on this value (Enemy Wave Logic)
+    private int int_increase_Enemies = 5;   // Value to use so after a wave this int increases the current Enemies int (Enemy Wave Logic)
+    public int int_turbo_Shot_score_monitor = 1;    // Monitors score for turbo charge use to reference in other classes and add when enemy dies
+    private int int_nextWave = 1;   // Holds value of the next wave to be spawned Displayed to UI (Enemy Wave Logic)
+    public int int_Score_Board = 0;     // int displayed to UI Text to display the score recived from killing NPCs
+    public int int_NPC_Human_Count;     // Monitors how many Human NPCs are in the scene    Keep public its being decreased in human NPC class when the NPC dies
+    public static int int_Player_Lives = 3;     // Used to monitor how many times to player has died. Also decreasing it will make Life Images SetActive false
+    public static int int_enemy_Count;    // Used for how many NPCs will be spawned in a for loop  (Enemy Wave Logic)        // MAKE THIS DECREASE WHEN AN NPC_ABDUCTER DIES
 
-    // Wave Spawner Logic 
-    public static int enemy_Count;    // Used for how many NPCs will be spawned in a for loop         // MAKE THIS DECREASE WHEN AN NPC_ABDUCTER DIES
-    public int Enemies = 15;
-    private int increase_Enemies = 5;
-    public float spawnDelay;    // How long it takes to spawn Abducters
-    //public float startWait;
-    public float waveWait;
-    public float time_between_waves = 5f;
-    public float waveCountdown;
-    public enum SpawnState { SPAWNING, WAITING, COUNTING };
-    public SpawnState state = SpawnState.COUNTING;
+    // Floats
+    public float fl_spawnDelay;    // How long it takes to spawn Abducters (Enemy Wave Logic)
+    public float fl_waveWait;  // (Enemy Wave Logic)
+    public float fl_time_between_waves = 5f;       // (Enemy Wave Logic)
+    public float fl_waveCountdown;     // (Enemy Wave Logic)
 
+    public float fl_PC_RespawnTimer = 3f;  // When the player dies this value decreases so PC doesnt spawn back instanlty
+    public float fl_Monitor_NPC_abductor_Alive = 1;    // Used to monitor how many NPC abdcuters are left
+    public float fl_UFO_spawn_Timer = 40;  // Timer that when = 0 destroys the current Active UFO
+    public float fl_Respawn_Human_Timer = 400f;        // Every 400 seconds a new human spawns so the game can continue
 
-    public static int Player_Lives = 3;
+    // Bools
+    public bool bl_Player_Dead = false;        // Bool to define is the player alive or dead
 
-    public bool Player_Dead = false;
-    public bool Startgame;
-    public float RespawnTimer = 3f;
+    // GameObjects
+    public GameObject GO_PC_Prefab;    // Player Character Prefab Reference 
+    public GameObject GO_human_Prefab; // Humanoid Character Prefab Reference 
+    public GameObject GO_abducter_Prefab;  // Abducter Character Prefab Reference 
+    public GameObject GO_ufo_Prefab;   // Flying sorser Character Prefab Reference 
+    public GameObject GO_spawning_effect;  // References to particele effect used to spawn enemy
+    // 3 GameObjects list of lifes on the UI Canvas
+    public GameObject GO_Life_01;  // (used on UI)
+    public GameObject GO_Life_02;  // (used on UI)
+    public GameObject GO_Life_03;  // (used on UI)
+    public GameObject GO_StartMenu;    // Reference to the StartMenu GameObject on UI Canvast (used on UI)
+    public GameObject GO_GameOver; // Reference to the GameOver GameObject on UI Canvas (used on UI)
+    public GameObject GO_inGame_UI;    //Reference to the inGame GameObject on UI Canvas (used on UI)
+    public GameObject GO_Charge_Shot_Slider;   // Reference to the Charge Shot GameObject on UI Canvas (used on UI)
+    public GameObject GO_PC_health_HUD;    // Reference to the Health HUD GameObject on UI Canvas (used on UI)
 
+    // other
+    private enum SpawnState { SPAWNING, WAITING, COUNTING };     // different states for the wave spawner to be in so there are delays and flags (Enemy Wave Logic)
+    private SpawnState state = SpawnState.COUNTING;      // Spawnstate always starts countind so enemies dont spawn straight away (Enemy Wave Logic)
+    public static GameManager s_GM;     // Singleton GameManager
 
-    public int score = 1;    // Monitors score for turbo charge
-    private int nextWave = 1;   // Holds value of the next wave to be spawned
-    public int Score_Board = 0;
-    private int MonitorScore = 0;
-
-    // NPC Prefabs
-    public GameObject PC_Prefab;    // Player Character Prefab Reference 
-    public GameObject human_Prefab; // Humanoid Character Prefab Reference 
-    public GameObject abducter_Prefab;  // Abducter Character Prefab Reference 
-    public GameObject ufo_Prefab;   // Flying sorser Character Prefab Reference 
-    public GameObject spawning_effect;  // References to particele effect used to spawn enemy
-
-    // Singleton GameManager
-    public static GameManager s_GM;
-
-    public int NPC_Human_Count;
-
-    
-    public float Abducter_Monitor_Timer = 1;    // Used to monitor how many NPC abdcuters are left
-    public float UFO_spawn_Timer = 40;  // Timer that when = 0 destroys the current Active UFO
-    public float UFOtimer = 2;
     // UI
-    public Text WaveText;   // Text UI reference Componenet
-    public Text score_Text;
-    public GameObject Life_01;
-    public GameObject Life_02;
-    public GameObject Life_03;
-    public GameObject StartMenu;
-    public GameObject GameOver;
-    public GameObject inGame_UI;
-    public GameObject Charge_Shot_Slider;
-    public GameObject PC_health_HUD;
-
-    public float Respawn_Human_Timer = 30f;
+    public Text UI_WaveText;   // Text UI reference Componenet which will display the current wave
+    public Text UI_score_Text;  // Text Ui reference component which will display the players score 
 
     private void Awake()
     {
@@ -80,17 +73,17 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
-        inGame_UI.SetActive(false);
-        GameOver.SetActive(false);
+        GO_inGame_UI.SetActive(false);
+        GO_GameOver.SetActive(false);
 
-        Player_Lives = 3;
+        int_Player_Lives = 3;
 
-        if (Player_Lives <= 3)
+        if (int_Player_Lives <= 3)
         {
             // Turn on Lifes
-            Life_01.SetActive(true);
-            Life_02.SetActive(true);
-            Life_03.SetActive(true);
+            GO_Life_01.SetActive(true);
+            GO_Life_02.SetActive(true);
+            GO_Life_03.SetActive(true);
         }
 
         Time.timeScale = 0.0f;
@@ -98,72 +91,72 @@ public class GameManager : MonoBehaviour
 
         InitialiseGame();
 
-        waveCountdown = time_between_waves;
+        fl_waveCountdown = fl_time_between_waves;
     }
 
     void Update()
     {
 
         //Player Lifes
-        if(Player_Dead)
+        if(bl_Player_Dead)
         {
-            if (Player_Lives == 2)
+            if (int_Player_Lives == 2)
             {
-                Life_03.SetActive(false);
-                RespawnTimer -= Time.deltaTime;
-                if(RespawnTimer <= 0)
+                GO_Life_03.SetActive(false);
+                fl_PC_RespawnTimer -= Time.deltaTime;
+                if(fl_PC_RespawnTimer <= 0)
                 {
-                    RespawnTimer = 3;
+                    fl_PC_RespawnTimer = 3;
                     CreatePlayer();
-                    Player_Dead = false;
+                    bl_Player_Dead = false;
                 }
             } 
         }
 
-        if(Player_Dead)
+        if(bl_Player_Dead)
         {
-            if (Player_Lives == 1)
+            if (int_Player_Lives == 1)
             {
-                Life_02.SetActive(false);
-                RespawnTimer -= Time.deltaTime;
-                if (RespawnTimer <= 0)
+                GO_Life_02.SetActive(false);
+                fl_PC_RespawnTimer -= Time.deltaTime;
+                if (fl_PC_RespawnTimer <= 0)
                 {
-                    RespawnTimer = 3;
+                    fl_PC_RespawnTimer = 3;
                     CreatePlayer();
-                    Player_Dead = false;
+                    bl_Player_Dead = false;
                 }
             }
         }
 
-        if (Player_Dead)
+        if (bl_Player_Dead)
         {
-            if (Player_Lives == 0)
+            if (int_Player_Lives == 0)
             {
-                Life_01.SetActive(false);
-                RespawnTimer -= Time.deltaTime;
-                if (RespawnTimer <= 0)
+                GO_Life_01.SetActive(false);
+                fl_PC_RespawnTimer -= Time.deltaTime;
+                if (fl_PC_RespawnTimer <= 0)
                 {
-                    RespawnTimer = 3;
+                    fl_PC_RespawnTimer = 3;
                     CreatePlayer();
-                    Player_Dead = false;
+                    bl_Player_Dead = false;
                 }
             }
         }
 
-        if (Player_Lives == -1 || NPC_Human_Count <= 0)
+        if (int_Player_Lives == -1 || int_NPC_Human_Count <= 0)
         {
-            GameOver.SetActive(true);
-            inGame_UI.SetActive(false);
-            Charge_Shot_Slider.SetActive(false);
-            PC_health_HUD.SetActive(false);
-            Player_Dead = true;
+            GO_GameOver.SetActive(true);
+            GO_inGame_UI.SetActive(false);
+            GO_Charge_Shot_Slider.SetActive(false);
+            GO_PC_health_HUD.SetActive(false);
+            bl_Player_Dead = true;
         }
 
 
-        Respawn_Human_Timer -= Time.deltaTime;
-        if(Respawn_Human_Timer <= 0)
+        fl_Respawn_Human_Timer -= Time.deltaTime;
+        if(fl_Respawn_Human_Timer <= 0)
         {
-            Respawn_Human_Timer = 30f;
+            fl_Respawn_Human_Timer = 30f;
             CreateNPCHuman();
         }
 
@@ -176,8 +169,8 @@ public class GameManager : MonoBehaviour
             else
                 return;
         }
-        waveCountdown -= Time.deltaTime;
-        if(waveCountdown <= 0)
+        fl_waveCountdown -= Time.deltaTime;
+        if(fl_waveCountdown <= 0)
         {
             if(state != SpawnState.SPAWNING)
             {
@@ -185,12 +178,12 @@ public class GameManager : MonoBehaviour
             }
         }
 
-        WaveText.text = "Wave:" + nextWave.ToString();  // Display int on Text Componenet
-        score_Text.text = "Score:"  + Score_Board.ToString();
+        UI_WaveText.text = "Wave:" + int_nextWave.ToString();  // Display int on Text Componenet
+        UI_score_Text.text = "Score:"  + int_Score_Board.ToString();
 
-        UFO_spawn_Timer -= Time.deltaTime;
+        fl_UFO_spawn_Timer -= Time.deltaTime;
 
-        if(UFO_spawn_Timer <= 0)
+        if(fl_UFO_spawn_Timer <= 0)
         {
             StartCoroutine(SpawnUFO());
         }
@@ -211,27 +204,27 @@ public class GameManager : MonoBehaviour
     {
         Debug.Log("Wave Completed");
         state = SpawnState.COUNTING;
-        waveCountdown = time_between_waves;
-        nextWave++;
+        fl_waveCountdown = fl_time_between_waves;
+        int_nextWave++;
     }
 
     public void StartGame()
     {
-        inGame_UI.SetActive(true);
-        Charge_Shot_Slider.SetActive(true);
-        PC_health_HUD.SetActive(true);
+        GO_inGame_UI.SetActive(true);
+        GO_Charge_Shot_Slider.SetActive(true);
+        GO_PC_health_HUD.SetActive(true);
         Time.timeScale = 1.0f;
     }
 
     bool EnemyisAlive()
     {
-        s_GM.Abducter_Monitor_Timer -= Time.deltaTime;  // Decreases float value
+        s_GM.fl_Monitor_NPC_abductor_Alive -= Time.deltaTime;  // Decreases float value
         // If the Timer is more than or equal to 0 start to search for the GameObject
-        if (Abducter_Monitor_Timer <= 0)
-            Abducter_Monitor_Timer = 1f;
+        if (fl_Monitor_NPC_abductor_Alive <= 0)
+            fl_Monitor_NPC_abductor_Alive = 1f;
         if(GameObject.FindGameObjectWithTag("NPC_Abducter") == null)
         {
-            Enemies += increase_Enemies;
+            int_Enemies += int_increase_Enemies;
             return false;   // Return bool false if no enemies are found
         }
         return true;        // Enemies are found and are still active in the scene
@@ -252,12 +245,12 @@ public class GameManager : MonoBehaviour
 
     public void CreateNPCHuman()
     {
-        GameObject human = Instantiate(s_GM.human_Prefab, HumanRandomScreenPosition, Quaternion.identity); NPC_Human_Count++; // Spawns 10 Humans within the HumanRandomScreenPosition
+        GameObject human = Instantiate(s_GM.GO_human_Prefab, HumanRandomScreenPosition, Quaternion.identity); int_NPC_Human_Count++; // Spawns 10 Humans within the HumanRandomScreenPosition
     }
 
     public static void CreatePlayer()
     {
-       GameObject pc =  Instantiate(s_GM.PC_Prefab, Vector3.zero, Quaternion.identity);     // Spawns the player prefab
+       GameObject pc =  Instantiate(s_GM.GO_PC_Prefab, Vector3.zero, Quaternion.identity);     // Spawns the player prefab
     }
 
    public static Vector3  RandomScreenPosition
@@ -283,30 +276,29 @@ public class GameManager : MonoBehaviour
     // Add Points Reciver
     void ScorePoints(int AddPoints)
     {
-        score += AddPoints;
+        int_turbo_Shot_score_monitor += AddPoints;
     }
 
     void Leader_Board_Score(int AddPoints)
     {
-        Score_Board += AddPoints;
-        MonitorScore += AddPoints;
+        int_Score_Board += AddPoints;
     }
 
     IEnumerator SpawnWave()
     {  
         state = SpawnState.SPAWNING;
-        for (int i = 0; i < Enemies; i++)      // Let Computer Calculate how many Enemies it will spawn
+        for (int i = 0; i < int_Enemies; i++)      // Let Computer Calculate how many Enemies it will spawn
           {
-            GameObject GO_Spawn = Instantiate(s_GM.spawning_effect, RandomScreenPosition, Quaternion.identity);
+            GameObject GO_Spawn = Instantiate(s_GM.GO_spawning_effect, RandomScreenPosition, Quaternion.identity);
             Destroy(GO_Spawn, 3);
-            yield return new WaitForSeconds(1 / spawnDelay);    // Wait For Seconds and Divid 1 by spawnDelay
-            Instantiate(s_GM.abducter_Prefab, GO_Spawn.transform.position, Quaternion.identity); enemy_Count++;
+            yield return new WaitForSeconds(1 / fl_spawnDelay);    // Wait For Seconds and Divid 1 by spawnDelay
+            Instantiate(s_GM.GO_abducter_Prefab, GO_Spawn.transform.position, Quaternion.identity); int_enemy_Count++;
            
             if (!EnemyisAlive())
             {
-                nextWave++;
+                int_nextWave++;
             }
-                yield return new WaitForSeconds(waveWait);
+                yield return new WaitForSeconds(fl_waveWait);
         }
             state = SpawnState.WAITING;
             yield break;
@@ -314,11 +306,11 @@ public class GameManager : MonoBehaviour
 
     IEnumerator SpawnUFO()
     {
-        UFO_spawn_Timer = 40;
-        GameObject UFO_Spawn_pos = Instantiate(s_GM.spawning_effect, RandomScreenPosition, Quaternion.identity);
+        fl_UFO_spawn_Timer = 40;
+        GameObject UFO_Spawn_pos = Instantiate(s_GM.GO_spawning_effect, RandomScreenPosition, Quaternion.identity);
         Destroy(UFO_Spawn_pos, 2);
         yield return new WaitForSeconds(1);
-        Instantiate(s_GM.ufo_Prefab, UFO_Spawn_pos.transform.position, Quaternion.identity);
+        Instantiate(s_GM.GO_ufo_Prefab, UFO_Spawn_pos.transform.position, Quaternion.identity);
         
         yield break;
     }

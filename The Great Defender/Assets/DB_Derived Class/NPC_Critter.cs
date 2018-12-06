@@ -18,7 +18,7 @@ public class NPC_Critter : Base_Class
     protected virtual void Start ()
     {
         base.Start();
-        PC_BC.isTrigger = true;
+        IDE_PC_BC.isTrigger = true;
         
 	}
 	
@@ -38,7 +38,7 @@ public class NPC_Critter : Base_Class
     {
         Player = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();      // Find Player
         transform.position += mvelocity * Time.deltaTime;
-        transform.position = Vector3.MoveTowards(transform.position, Player.position, speed * Time.deltaTime);
+        transform.position = Vector3.MoveTowards(transform.position, Player.position, fl_movement_speed * Time.deltaTime);
     }
 
     protected override void Movement_Restriction()
@@ -51,7 +51,7 @@ public class NPC_Critter : Base_Class
         if(other.gameObject.tag == "Player")
         {
             gameObject.transform.parent = Player.transform;
-            PC_script.GetComponent<PC_Space_Ship_Controller>().speed -= deductSpeed;        // decreases players orgianl when it is a child
+            PC_script.GetComponent<PC_Space_Ship_Controller>().fl_movement_speed -= deductSpeed;        // decreases players orgianl when it is a child
         }
 
         if(other.gameObject.tag == "Bullet")
@@ -70,7 +70,7 @@ public class NPC_Critter : Base_Class
     {
         if (other.gameObject.tag == "Player")
         {
-            PC_script.GetComponent<PC_Space_Ship_Controller>().speed += deductSpeed;        // adds players orgianl speed back when the NPC is no longer a child
+            PC_script.GetComponent<PC_Space_Ship_Controller>().fl_movement_speed += deductSpeed;        // adds players orgianl speed back when the NPC is no longer a child
         }
     }
 }

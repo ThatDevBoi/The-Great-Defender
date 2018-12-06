@@ -7,64 +7,53 @@ using UnityEngine;
 
 public abstract class Base_Class : MonoBehaviour
 {
-    #region IDE Components
-    protected Rigidbody2D PC_RB;          // Reference to a Physics component Rigidbody2D
-    protected Collider2D PC_BC;        // Reference to a Collision Component BoxCollider2D
-    protected SpriteRenderer PC_SR;       // Used for debugging the gameObject wont work without this component
-    #endregion
+    #region Variables
+    // IDE Components
+    protected Rigidbody2D IDE_PC_RB;          // Reference to a Physics component Rigidbody2D
+    protected Collider2D IDE_PC_BC;        // Reference to a Collision Component BoxCollider2D
+    protected SpriteRenderer IDE_PC_SR;       // Used for debugging the gameObject wont work without this component
+    [SerializeField]
+    protected LayerMask IDE_layerMask_whatTohit;  // LayerMask to define what a raycast can hit (Used For Shooting Logic)
+    [SerializeField]
+    protected Transform IDE_trans_fire_position; // The origin of the raycast Where a ray is going to shoot from (Shooting IDE Component)
+    [SerializeField]
+    protected Transform IDE_trans_double_fire_position_1, IDE_trans_double_fire_position_2;   // Used for when the player decides to shoot a different way. (Double taps input) (Shooting IDE Components)
 
-    #region Movement Variables PC
-    [SerializeField]
-    public float speed = 5f;           // Movement on the x axis
-    [SerializeField]
-    protected float max_Speed = 4;      // Max value for any object referencing to move. Cannot go past this value
-    [SerializeField]
-    protected float Yspeed = 2;             // Movement on the Y axis
-    public Vector3 mvelocity = Vector3.zero;       // A vector3 variable that will decide where the player moves. 
-    [SerializeField]
-    protected bool FacingRight = true;      // Player always spawns facing Right
-    #endregion
 
-    #region Shooting Variables
+    // floats
     [SerializeField]
-    protected float travelSpeed = 10;  // How fast the ray will be moving
+    public float fl_movement_speed = 5f;           // Movement on the x axis (Moving Variable)
     [SerializeField]
-    protected float range = 100;       // How far the raycast will travel before it cant go any further
+    protected float fl_max_movement_Speed = 4;      // Max value for any object referencing to move. Cannot go past this value (Moving Variable)
     [SerializeField]
-    protected float damage = 10;       // How bad it will hurt any NPC or Humanoid
+    protected float fl_movement_Yspeed = 2;             // Movement on the Y axis (Moving Variable)
     [SerializeField]
-    protected Transform fire_position; // The origin of the raycast Where a ray is going to shoot from
-    [SerializeField]
-    protected Transform double_fire_position_1, double_fire_position_2 ;   // Used for when the player decides to shoot a different way. (Double taps input)
-    [SerializeField]
-    protected LayerMask whatTohit;
-    [SerializeField]
-    protected GameObject bulletPrefab,chargeShotPrefab;
-    [SerializeField]
-    protected bool DefaultShot = true;
-    [SerializeField]
-    protected bool doubleShoot = false;     // Used to shoot 2 raycasts at once instead of the default 1
-    [SerializeField]
-    protected bool chargeShoot = false;      // Used to fire a larger ray that covers more area
-    #endregion
+    protected float fl_range = 100;       // How far the raycast will travel before it cant go any further (Shooting Variable)
 
-    #region NPC Variables
-    protected static int add_points_for_charge = 2;      // Should go in gameManager
+    // bools
+    protected bool bl_FacingRight = true;      // Player always spawns facing Right (Used instead of switching sprites just flip the current sprite) (Movement Bool)
+    protected bool bl_DefaultShot = true;      // Regular shooting just tapping space bar (Shooting Bool)
+    protected bool bl_doubleShoot = false;     // Used to shoot 2 GameObjects at once instead of the just 1 GameObject (Shooting Bool)
+    protected bool bl_chargeShoot = false;      // Used to fire a larger ray that covers more area (Shooting Bool)
+    // GameObjects
+    [SerializeField]
+    protected GameObject GO_bulletPrefab, GO_chargeShotPrefab;     // The 2 types of GameObjects that the PC can use to shoot with (Shooting GameObjects)
+
+    // Vectors
+    protected Vector3 mvelocity = Vector3.zero;       // A vector3 variable that will decide where the player moves. (Movement Variable)
     #endregion
 
     #region Start Function
     // Use this for initialization
     protected virtual void Start ()
     {
-        PC_RB = gameObject.AddComponent<Rigidbody2D>();     // Adding a rigidbody2D component to the gameObject
-        PC_RB.isKinematic = true;           // Makes the rigidbody limited with graphics. turns off gravity and mass
-        PC_SR = GetComponent<SpriteRenderer>();     // Find the sprite renderer on this gameObject
+        IDE_PC_RB = gameObject.AddComponent<Rigidbody2D>();     // Adding a rigidbody2D component to the gameObject
+        IDE_PC_RB.isKinematic = true;           // Makes the rigidbody limited with graphics. turns off gravity and mass
+        IDE_PC_SR = GetComponent<SpriteRenderer>();     // Find the sprite renderer on this gameObject
         //Debug.Assert(PC_SR != null, "Sprite Renderer Missing!");        // Calls an error when there is no sprite renderer
-        PC_BC = gameObject.GetComponent<Collider2D>();           // Adds a BoxCollider to monitor Collision
-        PC_BC.isTrigger = false;         // Makes the box collider attached to gameObject a trigger
-        fire_position = GameObject.Find("Fire_Position").GetComponent<Transform>();       // Finds GameObject childed to player called Fire_Position. Needs its Transform
-        double_fire_position_1 = GameObject.Find("Fire_Position_Double_Shot_Left_Wing").GetComponent<Transform>();
-        double_fire_position_2 = GameObject.Find("Fire_Position_Double_Shot_Right_Wing").GetComponent<Transform>();
+        IDE_PC_BC = gameObject.GetComponent<Collider2D>();           // Adds a BoxCollider to monitor Collision
+        IDE_PC_BC.isTrigger = false;         // Makes the box collider attached to gameObject a trigger
+        IDE_trans_fire_position = GameObject.Find("Fire_Position").GetComponent<Transform>();       // Finds GameObject childed to player called Fire_Position. Needs its Transform
     }
     #endregion
 
@@ -84,21 +73,21 @@ public abstract class Base_Class : MonoBehaviour
     protected virtual void DoMove()
     {
         // Moves on the X axis
-        float Thrust = Input.GetAxis("Horizontal") * speed * Time.deltaTime;        // Making the thrust variable control the x axis which will move with the speed variable and move with time
+        float Thrust = Input.GetAxis("Horizontal") * fl_movement_speed * Time.deltaTime;        // Making the thrust variable control the x axis which will move with the speed variable and move with time
         transform.position += mvelocity * Time.deltaTime;       // The transform and position of the gameObject will equal to the Vector3 Variable using fixed time
         mvelocity += Quaternion.Euler(0, 0, transform.rotation.z) * transform.right * Thrust;       // Moves the PC gameObject along the x axis right and left
         //Debug.Log(Thrust);        // Shows the Thrust float value *Delete Later*
-        if(Thrust > 0f && !FacingRight)     // When float value thrust is greater than 0 and were not facing right Flip the PC
+        if(Thrust > 0f && !bl_FacingRight)     // When float value thrust is greater than 0 and were not facing right Flip the PC
         {
             Flip();     // Calls the flip function to - sclae by 1
         }
-        else if (Thrust < 0f && FacingRight)        // However if the Thrust is less than 0 and facing right is true
+        else if (Thrust < 0f && bl_FacingRight)        // However if the Thrust is less than 0 and facing right is true
         {
             Flip();     // Flip Function - 1 scale
         }
 
         // Moves on the Y axis
-        float elevate = Input.GetAxis("Vertical") * Yspeed * Time.deltaTime;        // Make Variable control the Y axis using speed with time to move
+        float elevate = Input.GetAxis("Vertical") * fl_movement_Yspeed * Time.deltaTime;        // Make Variable control the Y axis using speed with time to move
         mvelocity += Quaternion.Euler(0, 0, 0) * transform.up * elevate;            // Moves the PC gameObject up on the y axis
     }
     #endregion
@@ -106,10 +95,10 @@ public abstract class Base_Class : MonoBehaviour
     #region Fixed Movement
     protected virtual Vector3 Clamped_Move()
     {
-        if(mvelocity.magnitude > max_Speed)  // if minimum speed is more than the max speed value
+        if(mvelocity.magnitude > fl_max_movement_Speed)  // if minimum speed is more than the max speed value
 
         {
-            return mvelocity.normalized * max_Speed;    // Return the speed value
+            return mvelocity.normalized * fl_max_movement_Speed;    // Return the speed value
         }
         return mvelocity; // Return the Vector3 as mvelocity
     }
@@ -140,15 +129,15 @@ public abstract class Base_Class : MonoBehaviour
     #region Fire Bullet Raycast Function
     protected virtual void Lazer_Beam()
     {
-        Vector2 firepos = new Vector2(fire_position.position.x, fire_position.position.y);       // Vector2 that holds the fire position positions we can use to shoot from
-        Vector2 direction = (FacingRight) ? Vector2.right : Vector2.left;       // The direction we can shoot the raycasts depending where the player is facing
+        Vector2 firepos = new Vector2(IDE_trans_fire_position.position.x, IDE_trans_fire_position.position.y);       // Vector2 that holds the fire position positions we can use to shoot from
+        Vector2 direction = (bl_FacingRight) ? Vector2.right : Vector2.left;       // The direction we can shoot the raycasts depending where the player is facing
         #region Default Shooting Logic
-        if (DefaultShot)
+        if (bl_DefaultShot)
         {
             // Default shooting logic
-            RaycastHit2D Hit = Physics2D.Raycast(firepos, direction, range, whatTohit);
-            Quaternion rot = (FacingRight) ? Quaternion.Euler(0, 0, 0) : Quaternion.Euler(0, 180, 0);      // Rot allows the Game to know if the player faces right the bullet wont need rotation however needs to be flipped 180 degrees if its the opposite
-            GameObject BulletPre = Instantiate(bulletPrefab, fire_position.position, rot);     // Spawning the bulletPrefab at the fireposition and taking considertion of rot.
+            RaycastHit2D Hit = Physics2D.Raycast(firepos, direction, fl_range, IDE_layerMask_whatTohit);
+            Quaternion rot = (bl_FacingRight) ? Quaternion.Euler(0, 0, 0) : Quaternion.Euler(0, 180, 0);      // Rot allows the Game to know if the player faces right the bullet wont need rotation however needs to be flipped 180 degrees if its the opposite
+            GameObject BulletPre = Instantiate(GO_bulletPrefab, IDE_trans_fire_position.position, rot);     // Spawning the bulletPrefab at the fireposition and taking considertion of rot.
             Destroy(BulletPre, 5f);     // Destroy Cloned Prefabs within 5 Seconds
 
         }
@@ -157,50 +146,37 @@ public abstract class Base_Class : MonoBehaviour
     protected virtual void Double_Lazer_Beam()
     {
         #region Double Shoot Logic
-        Vector2 direction = (FacingRight) ? Vector2.right : Vector2.left;       // The direction we can shoot the raycasts depending where the player is facing
+        Vector2 direction = (bl_FacingRight) ? Vector2.right : Vector2.left;       // The direction we can shoot the raycasts depending where the player is facing
         // Double Shooting Logic
-        if (doubleShoot)
+        if (bl_doubleShoot)
         {
-            DefaultShot = false;
-            Vector2 doublefireLeft = new Vector2(double_fire_position_1.position.x, double_fire_position_1.position.y);     // Making a vector2 for the fire point positions for double fire x and y axis
-            RaycastHit2D DoubleHitLeft = Physics2D.Raycast(doublefireLeft, direction, range, whatTohit);
-            Quaternion rot = (FacingRight) ? Quaternion.Euler(0, 0, 0) : Quaternion.Euler(0, 180, 0);      // Rot allows the Game to know if the player faces right the bullet wont need rotation however needs to be flipped 180 degrees if its the opposite
-            GameObject _BulletPre = Instantiate(bulletPrefab, double_fire_position_1.position, rot);     // 
+            bl_DefaultShot = false;
+            Vector2 doublefireLeft = new Vector2(IDE_trans_double_fire_position_1.position.x, IDE_trans_double_fire_position_1.position.y);     // Making a vector2 for the fire point positions for double fire x and y axis
+            RaycastHit2D DoubleHitLeft = Physics2D.Raycast(doublefireLeft, direction, fl_range, IDE_layerMask_whatTohit);
+            Quaternion rot = (bl_FacingRight) ? Quaternion.Euler(0, 0, 0) : Quaternion.Euler(0, 180, 0);      // Rot allows the Game to know if the player faces right the bullet wont need rotation however needs to be flipped 180 degrees if its the opposite
+            GameObject _BulletPre = Instantiate(GO_bulletPrefab, IDE_trans_double_fire_position_1.position, rot);     // 
             Destroy(_BulletPre, 2f);    // Destrosy prefab clone within 2 seconds
-            //Debug.DrawRay(doublefireLeft, direction * range, Color.yellow, 1f);
 
-            if (DoubleHitLeft.collider != null)     // If the ray hits a collider
-            {
-                Debug.Log("We hit the fucker with 2 BULLETS!!!!! REEEEEEE");        // Message that shows in the console
-            }
-
-            Vector2 doublefireRight = new Vector3(double_fire_position_2.position.x, double_fire_position_2.position.y);        // Making a vector2 for the fire point positions for double fire x and y axis
-            RaycastHit2D DoubleHitRight = Physics2D.Raycast(doublefireRight, direction, range, whatTohit);      // A raycast that has a fire origin and what direction it can go facing left and right. Also how far the ray can go and making sure the object being hit is a object that can be hit on the layer mask
-            GameObject BulletPre_ = Instantiate(bulletPrefab, double_fire_position_2.position, rot);     // Make a bullet to clone from the prefabs and where it'll spawn
-            Destroy(BulletPre_, 2f);        // Destrosy prefab clone within 2 seconds
-            //Debug.DrawRay(doublefireRight, direction * range, Color.yellow, 1f);
+            Vector2 doublefireRight = new Vector3(IDE_trans_double_fire_position_2.position.x, IDE_trans_double_fire_position_2.position.y);        // Making a vector2 for the fire point positions for double fire x and y axis
+            RaycastHit2D DoubleHitRight = Physics2D.Raycast(doublefireRight, direction, fl_range, IDE_layerMask_whatTohit);      // A raycast that has a fire origin and what direction it can go facing left and right. Also how far the ray can go and making sure the object being hit is a object that can be hit on the layer mask
+            GameObject BulletPre_ = Instantiate(GO_bulletPrefab, IDE_trans_double_fire_position_2.position, rot);     // Make a bullet to clone from the prefabs and where it'll spawn
+            Destroy(BulletPre_, 2f);        // Destroy prefab clone within 2 seconds
         }
         #endregion
     }
     protected virtual void ChargeShot()
     {
         #region Charge Shot Logic
-        Vector2 direction = (FacingRight) ? Vector2.right : Vector2.left;       // The direction we can shoot the raycasts depending where the player is facing
-        if (chargeShoot)
+        Vector2 direction = (bl_FacingRight) ? Vector2.right : Vector2.left;       // The direction we can shoot the raycasts depending where the player is facing
+        if (bl_chargeShoot)
         {
-            DefaultShot = false;
-            Vector2 _Charge_shot = new Vector2(double_fire_position_1.position.x, double_fire_position_1.position.y);     // Making a vector2 for the fire point positions for double fire x and y axis
-            RaycastHit2D DoubleHitLeft = Physics2D.Raycast(fire_position.position, direction, range, whatTohit);
+            bl_DefaultShot = false;
+            Vector2 _Charge_shot = new Vector2(IDE_trans_double_fire_position_1.position.x, IDE_trans_double_fire_position_1.position.y);     // Making a vector2 for the fire point positions for double fire x and y axis
+            RaycastHit2D DoubleHitLeft = Physics2D.Raycast(IDE_trans_fire_position.position, direction, fl_range, IDE_layerMask_whatTohit);
 
-            Quaternion rot = (FacingRight) ? Quaternion.Euler(0, 0, 0) : Quaternion.Euler(0, 180, 0);      // Rot allows the Game to know if the player faces right the bullet wont need rotation however needs to be flipped 180 degrees if its the opposite
-            GameObject _BulletPre = Instantiate(chargeShotPrefab, fire_position.position, rot);     // 
+            Quaternion rot = (bl_FacingRight) ? Quaternion.Euler(0, 0, 0) : Quaternion.Euler(0, 180, 0);      // Rot allows the Game to know if the player faces right the bullet wont need rotation however needs to be flipped 180 degrees if its the opposite
+            GameObject _BulletPre = Instantiate(GO_chargeShotPrefab, IDE_trans_fire_position.position, rot);     // 
             Destroy(_BulletPre, 2f);    // Destrosy prefab clone within 2 seconds
-            //Debug.DrawRay(doublefireLeft, direction * range, Color.yellow, 1f);
-
-            if (DoubleHitLeft.collider != null)     // If the ray hits a collider
-            {
-                Debug.Log("He's been Game Ended");        // Message that shows in the console
-            }
         }
         #endregion
     }
@@ -209,10 +185,10 @@ public abstract class Base_Class : MonoBehaviour
     #region Flipping 
     protected virtual void Flip()
     {
-        FacingRight = !FacingRight;
-        Vector3 temp = transform.localScale;
-        temp.x *= -1;
-        transform.localScale = temp;
+        bl_FacingRight = !bl_FacingRight; 
+        Vector3 temp = transform.localScale;    // new Vector3 variable that equals the transform scale which is relevant to the parent gameObject
+        temp.x *= -1;   // Revert temps scale on the x axis by -1 flips left
+        transform.localScale = temp;    // Make sure that the transform of the parents scale equals temp Vector Value
     }
     #endregion
 }

@@ -205,25 +205,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8f08467e9c6fd4c40bb06b86399d7a3c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 2
-  max_Speed: 2
-  Yspeed: 2
-  mvelocity: {x: 0, y: 0, z: 0}
-  FacingRight: 1
-  travelSpeed: 10
-  range: 100
-  damage: 10
-  fire_position: {fileID: 0}
-  double_fire_position_1: {fileID: 0}
-  double_fire_position_2: {fileID: 0}
-  whatTohit:
+  IDE_layerMask_whatTohit:
     serializedVersion: 2
-    m_Bits: 0
-  bulletPrefab: {fileID: 0}
-  chargeShotPrefab: {fileID: 0}
-  DefaultShot: 1
-  doubleShoot: 0
-  chargeShoot: 0
+    m_Bits: 256
+  IDE_trans_fire_position: {fileID: 0}
+  IDE_trans_double_fire_position_1: {fileID: 0}
+  IDE_trans_double_fire_position_2: {fileID: 0}
+  fl_movement_speed: 5
+  fl_max_movement_Speed: 4
+  fl_movement_Yspeed: 2
+  fl_range: 100
+  GO_bulletPrefab: {fileID: 0}
+  GO_chargeShotPrefab: {fileID: 0}
   turboPoints: 2
   ScoreBoardPoints: 250
   FlickingTextMesh: {fileID: 1290910010734344, guid: ed0f42747c3f53f4d8dc5c4f31cf2c91,

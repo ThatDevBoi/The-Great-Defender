@@ -25,10 +25,6 @@ public class Camera_Restriction_Points : MonoBehaviour
     private bool xMaxEnable = false;        // Flag used for how much the player can move up on y axis
     [SerializeField]
     private float xMaxValue = 2.55f;            // values used for how much the player can move up on y axis (Used as coordinates)
-    private void Awake()
-    {
-       
-    }
 
     private void FixedUpdate()
     {

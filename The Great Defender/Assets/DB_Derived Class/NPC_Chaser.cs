@@ -21,7 +21,7 @@ public class NPC_Chaser : Base_Class
     protected override void Start ()
     {
         base.Start();
-        PC_BC.isTrigger = true; // Makes Circle Collider Trigger true
+        IDE_PC_BC.isTrigger = true; // Makes Circle Collider Trigger true
         PC = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();      // Find Player
         ChargeBar = GameObject.FindGameObjectWithTag("Turbo_Shot_Bar").GetComponent<Slider>();  // Find Slider Component
     }
@@ -40,7 +40,7 @@ public class NPC_Chaser : Base_Class
 
         PC = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();      // Find Player
         transform.position += mvelocity * Time.deltaTime;
-        transform.position = Vector3.MoveTowards(transform.position, PC.position, speed * Time.deltaTime);
+        transform.position = Vector3.MoveTowards(transform.position, PC.position, fl_movement_speed * Time.deltaTime);
     }
 
     protected override void Movement_Restriction()
@@ -54,7 +54,7 @@ public class NPC_Chaser : Base_Class
         {
             Destroy(gameObject);
             GameObject Crit = Instantiate(Critter_Prefab, transform.position, Quaternion.identity);
-            ChargeBar.value += GameManager.s_GM.score;       // Add int value to charge bar value
+            ChargeBar.value += GameManager.s_GM.int_turbo_Shot_score_monitor;       // Add int value to charge bar value
             GameManager.s_GM.SendMessage("Leader_Board_Score", ScoreBoardPoints);
 
             GameObject TextMeshGO = Instantiate(FlickingTextMesh, transform.position, Quaternion.identity); // Spawn Text Mesh Object

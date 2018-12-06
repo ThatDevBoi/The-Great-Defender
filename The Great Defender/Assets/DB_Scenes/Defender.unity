@@ -279,6 +279,23 @@ Prefab:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
       objectReference: {fileID: 1266303129}
+    - target: {fileID: 224045814514080294, guid: 30bd56ff1cb161840bb45895916353ea,
+        type: 2}
+      propertyPath: m_AnchorMax.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1441024678848004, guid: 30bd56ff1cb161840bb45895916353ea, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1008137051382962, guid: 30bd56ff1cb161840bb45895916353ea, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1450170508915290, guid: 30bd56ff1cb161840bb45895916353ea, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 30bd56ff1cb161840bb45895916353ea, type: 2}
   m_IsPrefabAsset: 0
@@ -799,73 +816,58 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 114492617103288574, guid: 4ed129523f7f9dc46bb496946f08c8e0,
         type: 2}
-      propertyPath: WaveText
-      value: 
-      objectReference: {fileID: 1458117672}
-    - target: {fileID: 114492617103288574, guid: 4ed129523f7f9dc46bb496946f08c8e0,
-        type: 2}
-      propertyPath: score_Text
-      value: 
-      objectReference: {fileID: 1583902622}
-    - target: {fileID: 114492617103288574, guid: 4ed129523f7f9dc46bb496946f08c8e0,
-        type: 2}
-      propertyPath: Life_01
+      propertyPath: GO_Life_01
       value: 
       objectReference: {fileID: 861060540}
     - target: {fileID: 114492617103288574, guid: 4ed129523f7f9dc46bb496946f08c8e0,
         type: 2}
-      propertyPath: Life_02
+      propertyPath: GO_Life_02
       value: 
       objectReference: {fileID: 1300152287}
     - target: {fileID: 114492617103288574, guid: 4ed129523f7f9dc46bb496946f08c8e0,
         type: 2}
-      propertyPath: Life_03
+      propertyPath: GO_Life_03
       value: 
       objectReference: {fileID: 743077954}
     - target: {fileID: 114492617103288574, guid: 4ed129523f7f9dc46bb496946f08c8e0,
         type: 2}
-      propertyPath: StartMenu
+      propertyPath: UI_WaveText
       value: 
-      objectReference: {fileID: 788240019}
+      objectReference: {fileID: 1458117672}
     - target: {fileID: 114492617103288574, guid: 4ed129523f7f9dc46bb496946f08c8e0,
         type: 2}
-      propertyPath: GameOver
+      propertyPath: UI_score_Text
       value: 
-      objectReference: {fileID: 942158896}
-    - target: {fileID: 114492617103288574, guid: 4ed129523f7f9dc46bb496946f08c8e0,
-        type: 2}
-      propertyPath: inGame_UI
-      value: 
-      objectReference: {fileID: 1524701076}
-    - target: {fileID: 114492617103288574, guid: 4ed129523f7f9dc46bb496946f08c8e0,
-        type: 2}
-      propertyPath: Charge_Shot_Slider
-      value: 
-      objectReference: {fileID: 842150069}
-    - target: {fileID: 114492617103288574, guid: 4ed129523f7f9dc46bb496946f08c8e0,
-        type: 2}
-      propertyPath: PC_health_HUD
-      value: 
-      objectReference: {fileID: 1739305883}
+      objectReference: {fileID: 1583902622}
     - target: {fileID: 1520797214147004, guid: 4ed129523f7f9dc46bb496946f08c8e0, type: 2}
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 114492617103288574, guid: 4ed129523f7f9dc46bb496946f08c8e0,
         type: 2}
-      propertyPath: spawnDelay
-      value: 0.6
-      objectReference: {fileID: 0}
+      propertyPath: GO_StartMenu
+      value: 
+      objectReference: {fileID: 788240019}
     - target: {fileID: 114492617103288574, guid: 4ed129523f7f9dc46bb496946f08c8e0,
         type: 2}
-      propertyPath: Respawn_Human_Timer
-      value: 400
-      objectReference: {fileID: 0}
+      propertyPath: GO_GameOver
+      value: 
+      objectReference: {fileID: 942158896}
     - target: {fileID: 114492617103288574, guid: 4ed129523f7f9dc46bb496946f08c8e0,
         type: 2}
-      propertyPath: Enemies
-      value: 5
-      objectReference: {fileID: 0}
+      propertyPath: GO_inGame_UI
+      value: 
+      objectReference: {fileID: 1524701076}
+    - target: {fileID: 114492617103288574, guid: 4ed129523f7f9dc46bb496946f08c8e0,
+        type: 2}
+      propertyPath: GO_Charge_Shot_Slider
+      value: 
+      objectReference: {fileID: 842150069}
+    - target: {fileID: 114492617103288574, guid: 4ed129523f7f9dc46bb496946f08c8e0,
+        type: 2}
+      propertyPath: GO_PC_health_HUD
+      value: 
+      objectReference: {fileID: 1739305883}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4ed129523f7f9dc46bb496946f08c8e0, type: 2}
   m_IsPrefabAsset: 0

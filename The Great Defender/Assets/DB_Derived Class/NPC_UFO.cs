@@ -4,51 +4,62 @@ using UnityEngine;
 using UnityEngine.UI;
 public class NPC_UFO : Base_Class
 {
+    // IDE
     [SerializeField]
-    public int turboShotPoints = 1;
+    private Slider IDE_ChargeBarSlider;
+
+    // ints
+    private int int_turboShotPoints = 1;     // int value that makes charge shot slider value go up
+    private int int_ScoreBoardPoints = 500;     // Score that shows on TextMesh GameObject and shown on the scoreboard
+
+    // Floats
+    private float fl_next_time_to_move = 0.5f;   // float value to allow to gameObject to change direction when the value hits 
+    private float fl_UFO_LifeTimer = 20;    // When this float value hits 0 the gameObject dies
+
+    // GameObjects
     [SerializeField]
-    public int ScoreBoardPoints = 500;
+    private GameObject GO_FlickingTextMesh; // TeshMesh GameObject that appears when the player kills this gameObject
     [SerializeField]
-    private GameObject FlickingTextMesh;
-    [SerializeField]
-    private float Timer = .5f;
-    [SerializeField]
-    private float LifeTimer = 20;
-    [SerializeField]
-    private float nextFire;
-    [SerializeField]
-    private float fireRate;
-    [SerializeField]
-    private GameObject bullet;
-    [SerializeField]
-    private Slider ChargeBar;
+    private GameObject GO_bullet;       // Bullet GameObject that this gameObject shoots at the player
 
 
     // Use this for initialization
     protected override void Start ()
     {
         base.Start();   // Calls Base Class Start Function
-        PC_BC.isTrigger = true;     // Collider attached to this gameObject is a trigger
-        mvelocity = new Vector2(Random.Range(speed, speed), Random.Range(-speed, speed));   // On start computer decides a random position and movement speed
-        ChargeBar = GameObject.FindGameObjectWithTag("Turbo_Shot_Bar").GetComponent<Slider>();  // Find Slider Component
+        IDE_PC_BC.isTrigger = true;     // Collider attached to this gameObject is a trigger
+        mvelocity = new Vector2(Random.Range(fl_movement_speed, fl_movement_speed), Random.Range(-fl_movement_speed, fl_movement_speed));   // On start computer decides a random position and movement speed
 
     }
 	
 	// Update is called once per frame
 	void FixedUpdate ()
     {
-         //Functions
+        IDE_ChargeBarSlider = GameObject.FindGameObjectWithTag("Turbo_Shot_Bar").GetComponent<Slider>();  // Find Slider Component needs to be updated UI slider isnt active on start
+
+        //Functions
         DoMove();
         Movement_Restriction();
-        LifeTimer -= Time.deltaTime;        // When spawned Decrease the timer float
-        Timer -= Time.deltaTime;        // Decrease Float with time
-        if (Timer <= 0)
+        fl_UFO_LifeTimer -= Time.deltaTime;        // When spawned Decrease the timer float
+        fl_next_time_to_move -= Time.deltaTime;        // Decrease Float with time
+        if (fl_next_time_to_move <= 0)
         {
-            mvelocity = new Vector2(Random.Range(speed, speed), Random.Range(-speed, speed));   // Can change the speed at random value when timer is 0
-            Timer = .5f;  // Reset timer
+            mvelocity = new Vector2(Random.Range(fl_movement_speed, fl_movement_speed), Random.Range(-fl_movement_speed, fl_movement_speed));   // Can change the speed at random value when timer is 0
+            fl_next_time_to_move = .5f;  // Reset timer
         }
 
-        if(LifeTimer <= 0)      // When timer hits 0
+        if(GameManager.s_GM.bl_Player_Dead == true)
+        {
+            fl_movement_speed = 0;
+            fl_max_movement_Speed = 0;
+        }
+        else if(GameManager.s_GM.bl_Player_Dead == false)
+        {
+            fl_movement_speed = 2;
+            fl_max_movement_Speed = 7;
+        }
+
+        if(fl_UFO_LifeTimer <= 0)      // When timer hits 0
         {
             Destroy(gameObject);        // Destroy this gameObject
         }
@@ -67,11 +78,7 @@ public class NPC_UFO : Base_Class
 
     public void OnBecameVisible()
     {
-        if (Time.time > nextFire)
-        {
-            Instantiate(bullet, transform.position, Quaternion.identity);       // Spawn Bullet within the gameObjects transform position
-            nextFire = Time.time + fireRate;
-        }
+        Instantiate(GO_bullet, transform.position, Quaternion.identity);       // Spawn Bullet within the gameObjects transform position 
     }
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -79,11 +86,11 @@ public class NPC_UFO : Base_Class
         if(other.gameObject.tag == "Bullet")
         {
             Destroy(gameObject);        // Kills UFO
-            ChargeBar.value += GameManager.s_GM.score;       // Add int value to charge bar value
-            GameManager.s_GM.SendMessage("Leader_Board_Score", ScoreBoardPoints);
+            IDE_ChargeBarSlider.value += GameManager.s_GM.int_turbo_Shot_score_monitor;       // Add int value to charge bar value
+            GameManager.s_GM.SendMessage("Leader_Board_Score", int_ScoreBoardPoints);
 
-            GameObject TextMeshGO = Instantiate(FlickingTextMesh, transform.position, Quaternion.identity); // Spawn Text Mesh Object
-            TextMeshGO.GetComponent<TextMesh>().text = ScoreBoardPoints.ToString();   // Find the Text Mesh Component so the score can be shown 
+            GameObject TextMeshGO = Instantiate(GO_FlickingTextMesh, transform.position, Quaternion.identity); // Spawn Text Mesh Object
+            TextMeshGO.GetComponent<TextMesh>().text = int_ScoreBoardPoints.ToString();   // Find the Text Mesh Component so the score can be shown 
             Destroy(TextMeshGO, 1.25f); // Destroy when 1.25 seconds have passed
         }
     }
