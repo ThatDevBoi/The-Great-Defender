@@ -1,11 +1,16 @@
 ﻿//Help needed references
 // Used Asteroids workshop Week X to make my NPC abducter move mindlessly random
-
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-
+/// <summary>
+/// This Derived class uses the Base Class for inheritance however this class is able to abduct humanoid NPCs which it detects with a raycast and using a layer mask to tell what a human is
+/// It moves around Randomly and changes direction during play. 
+/// NPC can also fire bullets towards the player when the gameObject is be8ing Rendered on screen by a camera
+/// The NPCs can also screen wrap and are limited to the movement restrictions ive set
+/// This needs to be applied to a GameObject with the tag NPC_Abdcuter and the Layer NPC
+/// </summary>
 public class NPC_Abducter : Base_Class
 {
     // IDE Components
@@ -212,20 +217,23 @@ public class NPC_Abducter : Base_Class
     // When im about to die
     void OnDestroy()
     {
-        if (trans_human_Target == null)
-        {
-            Debug.Log("We Have No Human");
-        }
         // Resetting the Human NPC 
-        trans_human_Target.transform.parent = null;       // Let the human NPC detech from the parent when parent dies
-        Human_prefab.layer = 10;                            // When human deteches from the NPC Abductor Chnage Layer Back to 10 which is humanoid
-        trans_human_Target.GetComponent<Human_NPC>().enabled = true;      // Turn back on the Human_NPC script
-        trans_human_Target.GetComponent<BoxCollider2D>().enabled = true;  // Turn back on the Human NPC colliders
-        trans_human_Target.GetComponent<CircleCollider2D>().enabled = true;
-        trans_human_Target.GetComponent<Collider2D>().isTrigger = true;   // Make the Collider a trigger
-        // Make the Rigdbody dynamic so it will fall. When it gets to the ground it turns back to kinematic. This is controlled in the Human NPC script on line 39
-        trans_human_Target.GetComponent<Rigidbody2D>().isKinematic = false;
-        trans_human_Target.GetComponent<Rigidbody2D>().gravityScale = 0.2f;       // Gravity of a dynamic Rigidbody2D will be 0.2 
+        if (trans_human_Target != null)      // Let the human NPC detech from the parent when parent dies
+        {
+            trans_human_Target.transform.parent = null;
+            Human_prefab.layer = 10;                            // When human deteches from the NPC Abductor Chnage Layer Back to 10 which is humanoid
+            trans_human_Target.GetComponent<Human_NPC>().enabled = true;      // Turn back on the Human_NPC script
+            trans_human_Target.GetComponent<BoxCollider2D>().enabled = true;  // Turn back on the Human NPC colliders
+            trans_human_Target.GetComponent<CircleCollider2D>().enabled = true;
+            trans_human_Target.GetComponent<Collider2D>().isTrigger = true;   // Make the Collider a trigger
+                                                                              // Make the Rigdbody dynamic so it will fall. When it gets to the ground it turns back to kinematic. This is controlled in the Human NPC script on line 39
+            trans_human_Target.GetComponent<Rigidbody2D>().isKinematic = false;
+            trans_human_Target.GetComponent<Rigidbody2D>().gravityScale = 0.2f;       // Gravity of a dynamic Rigidbody2D will be 0.2 
+        }
+        else if (trans_human_Target == null)
+            return;
+        
+
     }
 
     public void OnTriggerEnter2D(Collider2D other)

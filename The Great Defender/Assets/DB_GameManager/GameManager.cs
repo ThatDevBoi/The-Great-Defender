@@ -6,7 +6,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
-
+/// <summary>
+/// This Class is used to manage references in the game and certain states the game can be in. 
+/// Its also in control of a WaveSpawner so it determins how many NPC abdcuters get spawned each wave
+/// Without this class the game wont function or work it holds Flags that ive used in all dervied classes to let them know when something has been changed or missing
+/// This Class can be emplied to an Empty GameObject and just left in the scene
+/// </summary>
 public class GameManager : MonoBehaviour
 {
     // Ints

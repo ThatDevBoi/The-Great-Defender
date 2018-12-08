@@ -23,7 +23,7 @@ GameObject:
   - component: {fileID: 102836952416073798}
   - component: {fileID: 114198029911693698}
   m_Layer: 0
-  m_Name: Destroy_NPC_Text
+  m_Name: Flickering_TextMesh
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

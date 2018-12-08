@@ -1,7 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+/// <summary>
+/// This script is just used to move the PC bullet GameObject
+/// </summary>
 public class DB_Bullet_Move : Base_Class
 {
     [SerializeField]
@@ -9,11 +11,13 @@ public class DB_Bullet_Move : Base_Class
 
     private void Update()
     {
+        // Function
         Movement_Restriction();
-        transform.Translate(Vector3.right * Time.deltaTime * fl_TravelSpeed);      // Moves this gameObject Right with time and a speed value
-        IDE_PC_BC.isTrigger = false;
-    }
 
+        transform.Translate(Vector3.right * Time.deltaTime * fl_TravelSpeed);      // Moves this gameObject Right with time and a speed value
+        IDE_PC_BC.isTrigger = false;        // Starts collider as trigger
+    }
+    // When not rendered with the camera destroy gameObject
     void OnBecameInvisible()
     {
         Destroy(gameObject);
@@ -26,6 +30,7 @@ public class DB_Bullet_Move : Base_Class
 
     private void OnTriggerEnter2D(Collider2D other)
     {
+        // Ways the gameObject can die if it hits any of these objects with the declared tags
         if(other.gameObject.tag == "NPC_Abducter")
         {
             Destroy(gameObject);

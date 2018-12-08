@@ -141,31 +141,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 38ed07cf087591848b198c4b67bc1069, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 2
-  max_Speed: 8
-  Yspeed: 2
-  mvelocity: {x: 0, y: 0, z: 0}
-  FacingRight: 1
-  travelSpeed: 10
-  range: 100
-  damage: 10
-  fire_position: {fileID: 0}
-  double_fire_position_1: {fileID: 0}
-  double_fire_position_2: {fileID: 0}
-  whatTohit:
+  IDE_layerMask_whatTohit:
     serializedVersion: 2
     m_Bits: 0
-  bulletPrefab: {fileID: 0}
-  chargeShotPrefab: {fileID: 0}
-  DefaultShot: 1
-  doubleShoot: 0
-  chargeShoot: 0
-  ScoreBoardPoints: 50
-  FlickingTextMesh: {fileID: 1290910010734344, guid: ed0f42747c3f53f4d8dc5c4f31cf2c91,
+  IDE_trans_fire_position: {fileID: 0}
+  IDE_trans_double_fire_position_1: {fileID: 0}
+  IDE_trans_double_fire_position_2: {fileID: 0}
+  fl_movement_speed: 5
+  fl_max_movement_Speed: 4
+  fl_movement_Yspeed: 2
+  fl_range: 100
+  GO_bulletPrefab: {fileID: 0}
+  GO_chargeShotPrefab: {fileID: 0}
+  int_ScoreBoardPoints: 50
+  GO_FlickingTextMesh: {fileID: 1290910010734344, guid: ed0f42747c3f53f4d8dc5c4f31cf2c91,
     type: 2}
-  deductSpeed: 0.5
-  Player: {fileID: 4976617377110006, guid: 28d28e806a47a8947a231ed5a292f533, type: 2}
-  ChargeBar: {fileID: 0}
+  fl_deductSpeed: 0.5
 --- !u!212 &212672665404633840
 SpriteRenderer:
   m_ObjectHideFlags: 1

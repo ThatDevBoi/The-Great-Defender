@@ -2,7 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-
+/// <summary>
+/// This Dervied Class allows for a playable Character to move around a scene when having Horizontal Input And can shoot bullets in different ways
+/// 1 tap shoots one bullet 5 Taps shoot 2 bullets at the same time and when a Slider value meets required Value Mouse click can shoot a Charge Shot
+/// The Class can also allow for ScreenWrapping and Movement Restrictions
+/// This Derived class can be applied to a GameObject with the Tag Player the same as its layer
+/// </summary>
 public class PC_Space_Ship_Controller : Base_Class
 {
     // IDE
@@ -12,8 +17,8 @@ public class PC_Space_Ship_Controller : Base_Class
     public int int_ButtonCount = 0;
     public int int_swirlButtonCount = 0;
     // Floats
-    public float fl_ButtonCooler = 0.5f;    // Half a second before reset
-    public float fl_swirlButtonCooler = 0.5f;  // When the input is being pressed players have half a second so its not spammed
+    private float fl_ButtonCooler = 0.1f;    // Half a second before reset
+    private float fl_swirlButtonCooler = 0.3f;  // When the input is being pressed players have half a second so its not spammed
     // GameObjects
     public GameObject GO_explosion_Effect;
 
@@ -49,7 +54,10 @@ public class PC_Space_Ship_Controller : Base_Class
         }
 
         if (IDE_ChargeBar_Slider != null)
-            Debug.Log("We Have The Slider Transform For The Humans");        
+            Debug.Log("We Have The Slider Transform For The Humans");
+
+        if (GameManager.int_Player_Lives == -1)
+            Destroy(gameObject);
 
 
         // allows player to remove the critter NPC from their ship

@@ -1,7 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+/// <summary>
+/// This script is applied to a TextMesh GameObject. in which will flicker. This is used for when an enemy dies a int value of points will be shown on the GameObject. 
+/// </summary>
 public class Blink_Text : MonoBehaviour
 {
     // Variables

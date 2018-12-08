@@ -2,6 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+/// <summary>
+/// This Dervied class makes a UFO NPC move around the scene when spawned declared by the GameManager
+/// It moves fast in different directions and can screenwrap keeping to the Movement Restrictions set
+/// This Dervied Class Can Be Applied to a GameObject With the Tag UFO
+/// </summary>
 public class NPC_UFO : Base_Class
 {
     // IDE

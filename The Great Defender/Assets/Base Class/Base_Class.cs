@@ -4,7 +4,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+/// <summary>
+/// This class will be ther Base for all over Dervied classes to inherite from. In this class i made movement for a PC and NPC to use. A shooting function with Movement Restrictions
+/// The class also holds references to important IDE Componenets like a Rigidbody2D and Collider2D so each Dervied class can have a applied IDE component however may need more if needed
+/// This class cant be applied to a GameObject its jut used for inheritance 
+/// </summary>
 public abstract class Base_Class : MonoBehaviour
 {
     #region Variables

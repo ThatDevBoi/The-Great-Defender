@@ -301,8 +301,6 @@ MonoBehaviour:
   IDE_ChargeBar_Slider: {fileID: 0}
   int_ButtonCount: 0
   int_swirlButtonCount: 0
-  fl_ButtonCooler: 0.5
-  fl_swirlButtonCooler: 0.5
   GO_explosion_Effect: {fileID: 1157948789589430, guid: 073aa48d978556e44b5fc1f8ded5dca0,
     type: 2}
 --- !u!212 &212322945450767572

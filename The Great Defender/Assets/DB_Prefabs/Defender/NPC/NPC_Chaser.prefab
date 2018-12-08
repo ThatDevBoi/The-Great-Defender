@@ -217,12 +217,12 @@ MonoBehaviour:
   fl_range: 100
   GO_bulletPrefab: {fileID: 0}
   GO_chargeShotPrefab: {fileID: 0}
-  turboPoints: 2
-  ScoreBoardPoints: 250
-  FlickingTextMesh: {fileID: 1290910010734344, guid: ed0f42747c3f53f4d8dc5c4f31cf2c91,
+  int_turboPoints: 2
+  int_ScoreBoardPoints: 250
+  GO_FlickingTextMesh: {fileID: 1290910010734344, guid: ed0f42747c3f53f4d8dc5c4f31cf2c91,
     type: 2}
-  PC: {fileID: 4976617377110006, guid: 28d28e806a47a8947a231ed5a292f533, type: 2}
-  Critter_Prefab: {fileID: 1557094822556820, guid: 59be6b18faef5ad408578b07a08656a3,
+  IDE_trans_PC: {fileID: 0}
+  GO_Critter_Prefab: {fileID: 1557094822556820, guid: 59be6b18faef5ad408578b07a08656a3,
     type: 2}
   ChargeBar: {fileID: 0}
 --- !u!212 &212889603056149490

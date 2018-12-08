@@ -1,7 +1,10 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+/// <summary>
+///  This Class Doesnt inherite from the Base Class but is used to follow the Players Transform position
+///  I made this script so i could have a camera following the player with a drag effect. So when the PC stops the camera catches up
+/// </summary>
 public class Camera_Restriction_Points : MonoBehaviour
 {
     Vector3 Velocity = Vector3.zero;        // Zeros out the velcoity 
@@ -29,15 +32,15 @@ public class Camera_Restriction_Points : MonoBehaviour
     private void FixedUpdate()
     {
 
-        if (Player == null && Time.time == 1.0f)
+        if (Player == null && Time.time == 1.0f)    // if there is no player and Time.time = 1
         {
             Player = GameObject.Find("PC(Clone)").GetComponent<Transform>();          // Finding the player GameObject in the game world
-            Debug.Log("There is no Player on the camera");
+            Debug.Log("There is no Player on the camera");      // Display in console
         }
 
-        if (Player != null)
+        if (Player != null) // if we have the Players Transform Componenet
         {
-            Debug.Log("We Have The PC Trabsform");
+            Debug.Log("We Have The PC Trabsform");      // Show in console
 
             if (Mathf.Abs(Player.transform.position.x) > 49.5f)    // If the absaltue value on the Players Transform componenet on the X axis is greater than 46.0
                 gameObject.transform.parent = Player.transform;     // Child the gameObject to the Players Trasnform
@@ -65,7 +68,8 @@ public class Camera_Restriction_Points : MonoBehaviour
             transform.position = Vector3.SmoothDamp(transform.position, Playerpos, ref Velocity, smoothTime);   // Using Smooth damp we will gradually change the camera transform position to the Players position based on the cameras transform velocity and out smooth time
 
         }
-        else if (Player == null && GameManager.s_GM.bl_Player_Dead == false)
+        // however if the player Transfor Componenet is not found and the player is alive
+        else if (Player == null && GameManager.s_GM.bl_Player_Dead == false) 
         {
             Player = GameObject.Find("PC(Clone)").GetComponent<Transform>();     // Finding the player GameObject in the game world
             return;
