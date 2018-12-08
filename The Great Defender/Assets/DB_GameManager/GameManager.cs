@@ -73,42 +73,38 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
-        GO_inGame_UI.SetActive(false);
-        GO_GameOver.SetActive(false);
+        // Call Functions
+        InitialiseGame();
 
-        int_Player_Lives = 3;
+        GO_inGame_UI.SetActive(false);  // On first run of script Turn off ingame UI GameObject
+        GO_GameOver.SetActive(false);   // Turn off GameOver GameObject in UI Canvas on Start
 
-        if (int_Player_Lives <= 3)
+        int_Player_Lives = 3;           // Start with 3 lives each time
+        if (int_Player_Lives <= 3)      // if the Players lifes are greater or equal to 3
         {
             // Turn on Lifes
             GO_Life_01.SetActive(true);
             GO_Life_02.SetActive(true);
             GO_Life_03.SetActive(true);
         }
-
-        Time.timeScale = 0.0f;
-       
-
-        InitialiseGame();
-
-        fl_waveCountdown = fl_time_between_waves;
+        Time.timeScale = 0.0f;      // TimeScale is 0 so everything is paused
+        fl_waveCountdown = fl_time_between_waves;   // The waveCountdown value will always equal time Between Waves value
     }
 
     void Update()
     {
-
         //Player Lifes
-        if(bl_Player_Dead)
+        if(bl_Player_Dead)      // if the player is dead
         {
-            if (int_Player_Lives == 2)
+            if (int_Player_Lives == 2)  // if player lives equals 2
             {
-                GO_Life_03.SetActive(false);
-                fl_PC_RespawnTimer -= Time.deltaTime;
-                if(fl_PC_RespawnTimer <= 0)
+                GO_Life_03.SetActive(false);    // turn off first life
+                fl_PC_RespawnTimer -= Time.deltaTime;   // cue the players respawn timer to decrease
+                if(fl_PC_RespawnTimer <= 0)     // when the players respawn timer value = 0 or greater
                 {
-                    fl_PC_RespawnTimer = 3;
-                    CreatePlayer();
-                    bl_Player_Dead = false;
+                    fl_PC_RespawnTimer = 3;     // reset the respawn value
+                    CreatePlayer();             // Call create Player Function
+                    bl_Player_Dead = false;     // boolean flag of PC Dead is no longer true
                 }
             } 
         }
@@ -143,58 +139,59 @@ public class GameManager : MonoBehaviour
             }
         }
 
-        if (int_Player_Lives == -1 || int_NPC_Human_Count <= 0)
+        if (int_Player_Lives == -1 || int_NPC_Human_Count <= 0)     // When the Players lives = -1 or Humans count int = 0
         {
+            // Turn off irrelevant GameObjects and que end screen
             GO_GameOver.SetActive(true);
             GO_inGame_UI.SetActive(false);
-            GO_Charge_Shot_Slider.SetActive(false);
+            GO_Charge_Shot_Slider.SetActive(true);
             GO_PC_health_HUD.SetActive(false);
             bl_Player_Dead = true;
         }
 
 
-        fl_Respawn_Human_Timer -= Time.deltaTime;
-        if(fl_Respawn_Human_Timer <= 0)
+        fl_Respawn_Human_Timer -= Time.deltaTime;   // Decrease this value overtime
+        if(fl_Respawn_Human_Timer <= 0)             // when the Humans respawn timer = 0 or greater
         {
-            fl_Respawn_Human_Timer = 30f;
-            CreateNPCHuman();
+            fl_Respawn_Human_Timer = 400f;          // reset the timer
+            CreateNPCHuman();                       // Make Another Human NPC
         }
 
-        if(state == SpawnState.WAITING)
+        if(state == SpawnState.WAITING)     // if the spawnstate is waiting 
         {
-            if (!EnemyisAlive())
+            if (!EnemyisAlive())            // if the enemyAlive Boolean is false 
             {
-                WaveCompleted();
+                WaveCompleted();            // Player Has Completed A Wave
             }
-            else
-                return;
+            else   // however if not true
+                return;         // return until completed
         }
-        fl_waveCountdown -= Time.deltaTime;
-        if(fl_waveCountdown <= 0)
+        fl_waveCountdown -= Time.deltaTime;     // Start to decline the waveCountdown for Spawning a wave of enemies
+        if(fl_waveCountdown <= 0)               // When the waveCountdown is more than or equal to 0
         {
-            if(state != SpawnState.SPAWNING)
+            if(state != SpawnState.SPAWNING)        // and if the Spawnstate is not in the state of Spawning enemies
             {
-                StartCoroutine(SpawnWave());
+                StartCoroutine(SpawnWave());        // Then start Coroutine to spawn the enemies
             }
         }
 
-        UI_WaveText.text = "Wave:" + int_nextWave.ToString();  // Display int on Text Componenet
-        UI_score_Text.text = "Score:"  + int_Score_Board.ToString();
+        UI_WaveText.text = "Wave:" + int_nextWave.ToString();       // Making sure UI Text for WaveText prints wave and shows the int of wave value
+        UI_score_Text.text = "Score:"  + int_Score_Board.ToString();    // Making sure UI Text for Score prints score and shows int value
 
-        fl_UFO_spawn_Timer -= Time.deltaTime;
+        fl_UFO_spawn_Timer -= Time.deltaTime;       // Decline UFO Spawn Timer 
 
-        if(fl_UFO_spawn_Timer <= 0)
+        if(fl_UFO_spawn_Timer <= 0)     // if the value of UFO Spawn Timer is more than or equal to 0
         {
-            StartCoroutine(SpawnUFO());
+            StartCoroutine(SpawnUFO());     // Start Couroutine to spawn another UFO
         }
 
     }
-
+    // Void Restarts the scene
     public void RestartScene(string nameofscene)
     {
         SceneManager.LoadSceneAsync(nameofscene);
     }
-
+    // void that Lets players quit the game when pressing a button
     public void QuitGame()
     {
         Application.Quit();
@@ -202,12 +199,12 @@ public class GameManager : MonoBehaviour
 
     public void WaveCompleted()
     {
-        Debug.Log("Wave Completed");
-        state = SpawnState.COUNTING;
-        fl_waveCountdown = fl_time_between_waves;
-        int_nextWave++;
+        Debug.Log("Wave Completed");    // Show wave is completed in console
+        state = SpawnState.COUNTING;    // Spawnstate is njow Counting again for next wave to begin
+        fl_waveCountdown = fl_time_between_waves;   // make sure the waveCountdown is Time Between Wave float
+        int_nextWave++;     // increase the wave int so wave 1 goes onto wave 2 ect
     }
-
+    // Void that turns on GameObjects needed in game and turns paused time fior start Function On
     public void StartGame()
     {
         GO_inGame_UI.SetActive(true);
@@ -215,16 +212,16 @@ public class GameManager : MonoBehaviour
         GO_PC_health_HUD.SetActive(true);
         Time.timeScale = 1.0f;
     }
-
+    // Boolean used to check if all enemies are dead
     bool EnemyisAlive()
     {
         s_GM.fl_Monitor_NPC_abductor_Alive -= Time.deltaTime;  // Decreases float value
         // If the Timer is more than or equal to 0 start to search for the GameObject
         if (fl_Monitor_NPC_abductor_Alive <= 0)
-            fl_Monitor_NPC_abductor_Alive = 1f;
-        if(GameObject.FindGameObjectWithTag("NPC_Abducter") == null)
+            fl_Monitor_NPC_abductor_Alive = 1f; // reset the value
+        if(GameObject.FindGameObjectWithTag("NPC_Abducter") == null)    // if no GameObjects are found with the NPC Abductor Tag
         {
-            int_Enemies += int_increase_Enemies;
+            int_Enemies += int_increase_Enemies;    // increase how many Enemies can be spawned and goes up per wave [Wave: 01 = 10 Enemies, Wave: 02 = 15 Enemies] Makes for endless waves
             return false;   // Return bool false if no enemies are found
         }
         return true;        // Enemies are found and are still active in the scene
@@ -273,44 +270,39 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    // Add Points Reciver
+    // Add Points Reciver for turbo shot used by the player
     void ScorePoints(int AddPoints)
     {
         int_turbo_Shot_score_monitor += AddPoints;
     }
-
+    // Reciver to add points to the ui Text of how much the player has scored by killing and saving NPCs
     void Leader_Board_Score(int AddPoints)
     {
         int_Score_Board += AddPoints;
     }
-
+    // Used to spawn the Abductors
     IEnumerator SpawnWave()
     {  
-        state = SpawnState.SPAWNING;
+        state = SpawnState.SPAWNING;        // Spawnstate is Spawning A Enemy Wave Will Spawn
         for (int i = 0; i < int_Enemies; i++)      // Let Computer Calculate how many Enemies it will spawn
-          {
-            GameObject GO_Spawn = Instantiate(s_GM.GO_spawning_effect, RandomScreenPosition, Quaternion.identity);
-            Destroy(GO_Spawn, 3);
+        {
+            GameObject GO_Spawn = Instantiate(s_GM.GO_spawning_effect, RandomScreenPosition, Quaternion.identity);  // Start by Spawning a Spawn effect so player knows where to NPC is going to spawn
+            Destroy(GO_Spawn, 3);       // Destroy this effect after 3 seconds
             yield return new WaitForSeconds(1 / fl_spawnDelay);    // Wait For Seconds and Divid 1 by spawnDelay
-            Instantiate(s_GM.GO_abducter_Prefab, GO_Spawn.transform.position, Quaternion.identity); int_enemy_Count++;
-           
-            if (!EnemyisAlive())
-            {
-                int_nextWave++;
-            }
-                yield return new WaitForSeconds(fl_waveWait);
+            Instantiate(s_GM.GO_abducter_Prefab, GO_Spawn.transform.position, Quaternion.identity); int_enemy_Count++;  // Allow NPC Abductor to spawn on the spawn Effect postion before its recyled
+            yield return new WaitForSeconds(fl_waveWait);
         }
-            state = SpawnState.WAITING;
+            state = SpawnState.WAITING;     // Spawnstate is now Waiting for countdown or Spawning to start
             yield break;
     }
 
     IEnumerator SpawnUFO()
     {
-        fl_UFO_spawn_Timer = 40;
-        GameObject UFO_Spawn_pos = Instantiate(s_GM.GO_spawning_effect, RandomScreenPosition, Quaternion.identity);
-        Destroy(UFO_Spawn_pos, 2);
-        yield return new WaitForSeconds(1);
-        Instantiate(s_GM.GO_ufo_Prefab, UFO_Spawn_pos.transform.position, Quaternion.identity);
+        fl_UFO_spawn_Timer = 40;        // Make sure the UFO SpawnTimer starts at 40 each time
+        GameObject UFO_Spawn_pos = Instantiate(s_GM.GO_spawning_effect, RandomScreenPosition, Quaternion.identity); // Spawn Spawing effect so player knows where the NPC will be (So its not unfair for the player to randomyl die from a randomly spawned enemy)
+        Destroy(UFO_Spawn_pos, 2);      // recyle spawn effect in 2 Seconds
+        yield return new WaitForSeconds(1);     // Wait 1 second
+        Instantiate(s_GM.GO_ufo_Prefab, UFO_Spawn_pos.transform.position, Quaternion.identity);     // Spawn the NPC UFO in the spawn effects position before its recyled
         
         yield break;
     }

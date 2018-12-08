@@ -21,10 +21,11 @@ public class PC_Space_Ship_Controller : Base_Class
     // Use this for initialization
     protected override void Start ()
     {
+        // Base Class Start Function
         base.Start();
-        IDE_PC_BC.isTrigger = true;
+        IDE_PC_BC.isTrigger = true; // BoxCollider will be a trigger
 
-        // Find the other shooting points
+        // Find the other shooting points for DoubleShot
         IDE_trans_double_fire_position_1 = GameObject.Find("Fire_Position_Double_Shot_Left_Wing").GetComponent<Transform>();
         IDE_trans_double_fire_position_2 = GameObject.Find("Fire_Position_Double_Shot_Right_Wing").GetComponent<Transform>();
     }
@@ -48,34 +49,32 @@ public class PC_Space_Ship_Controller : Base_Class
         }
 
         if (IDE_ChargeBar_Slider != null)
-            Debug.Log("We Have The Slider Transform For The Humans");
+            Debug.Log("We Have The Slider Transform For The Humans");        
+
 
         // allows player to remove the critter NPC from their ship
         #region Swirl
-        if (Input.GetKeyDown(KeyCode.W))     // if the W key is pressed down
+        if (Input.GetKeyDown(KeyCode.W) && transform.FindChild("Critter_NPC(Clone)"))     // if the W key is pressed down and a child that is critter_NPC(Clone) is found on this gameObject
         {
-                if(IDE_trans_Critterprefab != null)
-                {
-                    if (int_swirlButtonCount > 0 && int_swirlButtonCount == 2)   // if the input key is pressed 2 or more times
-                    {
-                    IDE_trans_Critterprefab = GameObject.FindGameObjectWithTag("Critter").GetComponent<Transform>();  // Find the Critter GameObject Transform
-                    transform.Find("Critter_NPC");      // Find the Critter in the heiary
-                    IDE_trans_Critterprefab.transform.parent = null;      // Unchild the Critter
-                    }  
-                }
+            IDE_trans_Critterprefab = transform.GetChild(5).GetComponentInChildren<Transform>();    // Search children to find the Transform Reference
+              if (int_swirlButtonCount > 0 && int_swirlButtonCount == 2)   // if the input key is pressed 2 or more times
+              {
+                 transform.Find("Critter_NPC(Clone)");      // Find the Critter in the heiary
+                 IDE_trans_Critterprefab.transform.parent = null;      // Unchild the Critter
+              }  
+            
             else// However if following hasnt been done
             {
-
-                IDE_trans_Critterprefab = null;
+                IDE_trans_Critterprefab = null; // There is no Transform reference for the critter
                 fl_swirlButtonCooler = 0.5f;   // Cooldown resets 
                 int_swirlButtonCount += 1;      // Adds to int
             }
         }
 
-        if (fl_swirlButtonCooler > 0)
-            fl_swirlButtonCooler -= 1 * Time.deltaTime;
-        else
-            int_swirlButtonCount = 0;
+        if (fl_swirlButtonCooler > 0)   // if the float value is greater then 0
+            fl_swirlButtonCooler -= 1 * Time.deltaTime; // start to decline the float
+        else                     // if not true
+            int_swirlButtonCount = 0;   // button counts will be 0 resets
 
         #endregion
 
@@ -90,28 +89,29 @@ public class PC_Space_Ship_Controller : Base_Class
         #endregion
 
         #region Double Shoot
-        if (Input.GetButtonDown("Jump"))
+        if (Input.GetButtonDown("Jump"))    // if the space bar is pressed down
         {
-            if(fl_ButtonCooler > 0 && int_ButtonCount == 4)
+            if(fl_ButtonCooler > 0 && int_ButtonCount == 4)     // and the float value is greater than 0 and the button has been pressed 4 times
             {
+                // Allow for double shot function in base class
                 bl_doubleShoot = true;
                 base.Double_Lazer_Beam();
             }
-            else
+            else   // however if, the if statement isnt true
             {
-                bl_doubleShoot = false;
-                fl_ButtonCooler = 0.3f;
-                int_ButtonCount += 1;
+                bl_doubleShoot = false; // revert double shot flag
+                fl_ButtonCooler = 0.3f; // reset float cooler
+                int_ButtonCount += 1;   // Button count goes up by 1
             }
         }
 
-        if (fl_ButtonCooler > 0)
+        if (fl_ButtonCooler > 0)    // if float is greater then 0
         {
-            fl_ButtonCooler -= 1 * Time.deltaTime;
+            fl_ButtonCooler -= 1 * Time.deltaTime;  // decrease Float
         }
-        else
+        else   // if not
         {
-            int_ButtonCount = 0;
+            int_ButtonCount = 0;    // reset the button count
         }
         #endregion
 
@@ -146,8 +146,9 @@ public class PC_Space_Ship_Controller : Base_Class
     #region Base Class Do Move
     protected override void DoMove()
     {
+        // Call base function for movement
         base.DoMove();
-
+        // make sure the Mvelocity Vector3 is clamped so it cant go beyond its max speed 
         mvelocity = Clamped_Move();
     }
     #endregion
@@ -159,19 +160,19 @@ public class PC_Space_Ship_Controller : Base_Class
         // This is used so humans when abducted can turn into a mutant without the player seeing this action
 
         // When the GameObject moves up or down on the Y axis
-        if (transform.position.y <= -8f)                                                              // If the Transform component position is more than or equal to -7.5
-            transform.position = new Vector3(transform.position.x, -8f, transform.position.z);        // The new position for any GameObject will be restricted to -7.5 (Down on the Y axis)
-        else if (transform.position.y >= 8.5f)                                                           // However if the transform position is less than 7.5
-            transform.position = new Vector3(transform.position.x, 8.5f, transform.position.z);         // The new position of any GameObject is restricted to 7.5 (Up on Y axis)
+        if (transform.position.y <= -8f)                                                              // If the Transform component position is more than or equal to -8
+            transform.position = new Vector3(transform.position.x, -8f, transform.position.z);        // The new position for any GameObject will be restricted to -8 (Down on the Y axis)
+        else if (transform.position.y >= 8.5f)                                                           // However if the transform position is less than 8.5
+            transform.position = new Vector3(transform.position.x, 8.5f, transform.position.z);         // The new position of any GameObject is restricted to 8.5 (Up on Y axis)
 
         // Screen Wrapping coordinates (X axis restriction)
         if (transform.position.x >= 50f)     // if the transforms position is greater then 70f
         {
-            transform.position = new Vector3(-50f, transform.position.y, transform.position.z); // Then wrap the object and place gameobject at -70 on the x 
+            transform.position = new Vector3(-50f, transform.position.y, transform.position.z); // Then wrap the object and place gameobject at -50 on the x 
         }
-        else if (transform.position.x <= -50f) // However if the transforms position is less than -70f
+        else if (transform.position.x <= -50f) // However if the transforms position is less than --50f
         {
-            transform.position = new Vector3(50, transform.position.y, transform.position.z); // Place gameobject at 70 on the x
+            transform.position = new Vector3(50, transform.position.y, transform.position.z); // Place gameobject at 50 on the x
         }
     }
     #endregion
@@ -179,6 +180,7 @@ public class PC_Space_Ship_Controller : Base_Class
     #region Fire Function
     protected override void Lazer_Beam()
     {
+        // bass class laser function
         base.Lazer_Beam();
     }
     #endregion
@@ -186,38 +188,39 @@ public class PC_Space_Ship_Controller : Base_Class
     #region Collsion
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if(other.gameObject.tag == "UFO")
+        // Ways gameObject can die
+        if(other.gameObject.tag == "UFO")   // When gameObject meets a trigger with the GameObject tag being UFO
         {
-            Destroy(gameObject);
-            GameManager.int_Player_Lives--;
-            GameManager.s_GM.bl_Player_Dead = true;
-            GameObject explosion = Instantiate(GO_explosion_Effect, transform.position, Quaternion.identity);
-            Destroy(explosion, 2f);
+            Destroy(gameObject);    // Destroy the gameObject
+            GameManager.int_Player_Lives--;     // Take away a life from the GameManager
+            GameManager.s_GM.bl_Player_Dead = true; // boolean flag for PC being Dead is true
+            GameObject explosion = Instantiate(GO_explosion_Effect, transform.position, Quaternion.identity);   // spawn explosion effect
+            Destroy(explosion, 2f); // recycle explosition effect after 2 seconds
         }
 
         if (other.gameObject.tag == "NPC_Abducter")
         {
             Destroy(gameObject);        // Destroy the PC for hitting the NPC
-            GameManager.int_Player_Lives--;
-            GameManager.s_GM.bl_Player_Dead = true;
-            GameObject explosion = Instantiate(GO_explosion_Effect, transform.position, Quaternion.identity);
-            Destroy(explosion, 2f);
+            GameManager.int_Player_Lives--; // Take away a life from the GameManager
+            GameManager.s_GM.bl_Player_Dead = true; // boolean flag for PC being Dead is true
+            GameObject explosion = Instantiate(GO_explosion_Effect, transform.position, Quaternion.identity);   // spawn explosion effect
+            Destroy(explosion, 2f); // recycle explosition effect after 2 seconds
         }
         if (other.gameObject.tag == "NPC_Chaser")
         {
-            Destroy(gameObject);
-            GameManager.int_Player_Lives--;
-            GameManager.s_GM.bl_Player_Dead = true;
-            GameObject explosion = Instantiate(GO_explosion_Effect, transform.position, Quaternion.identity);
-            Destroy(explosion, 2f);
+            Destroy(gameObject);    // Destroy the PC for hitting the NPC
+            GameManager.int_Player_Lives--; // Take away a life from the GameManager
+            GameManager.s_GM.bl_Player_Dead = true; // boolean flag for PC being Dead is true
+            GameObject explosion = Instantiate(GO_explosion_Effect, transform.position, Quaternion.identity);   // spawn explosion effect
+            Destroy(explosion, 2f); // recycle explosition effect after 2 seconds
         }
         if(other.gameObject.tag == "NPC_Bullet")
         {
-            Destroy(gameObject);
-            GameManager.int_Player_Lives--;
-            GameManager.s_GM.bl_Player_Dead = true;
-            GameObject explosion = Instantiate(GO_explosion_Effect, transform.position, Quaternion.identity);
-            Destroy(explosion, 2f);
+            Destroy(gameObject);    // Destroy the PC for hitting the NPC
+            GameManager.int_Player_Lives--; // Take away a life from the GameManager
+            GameManager.s_GM.bl_Player_Dead = true; // boolean flag for PC being Dead is true
+            GameObject explosion = Instantiate(GO_explosion_Effect, transform.position, Quaternion.identity);   // spawn explosion effect
+            Destroy(explosion, 2f); // recycle explosition effect after 2 seconds
         }
 
     }

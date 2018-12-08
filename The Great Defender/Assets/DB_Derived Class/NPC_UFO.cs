@@ -29,13 +29,15 @@ public class NPC_UFO : Base_Class
         base.Start();   // Calls Base Class Start Function
         IDE_PC_BC.isTrigger = true;     // Collider attached to this gameObject is a trigger
         mvelocity = new Vector2(Random.Range(fl_movement_speed, fl_movement_speed), Random.Range(-fl_movement_speed, fl_movement_speed));   // On start computer decides a random position and movement speed
+        IDE_ChargeBarSlider = GameObject.FindGameObjectWithTag("Turbo_Shot_Bar").GetComponent<Slider>();  // Find Slider Component needs to be updated UI slider isnt active on start
+        if (GameManager.int_Player_Lives == -1)
+            IDE_ChargeBarSlider = null;
 
     }
 	
 	// Update is called once per frame
 	void FixedUpdate ()
     {
-        IDE_ChargeBarSlider = GameObject.FindGameObjectWithTag("Turbo_Shot_Bar").GetComponent<Slider>();  // Find Slider Component needs to be updated UI slider isnt active on start
 
         //Functions
         DoMove();

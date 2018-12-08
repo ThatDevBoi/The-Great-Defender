@@ -47,6 +47,8 @@ public class NPC_Abducter : Base_Class
         IDE_PC_SR = GetComponent<SpriteRenderer>();     // Find Sprite Renderer on this gameObject   
         IDE_PC_BC = gameObject.GetComponent<Collider2D>();      // Find any Collider2D component attached to this gameObject
         IDE_PC_BC.isTrigger = true;        // Makes sure the Abducters arent a trigger, If the Abducter isnt a trigger. then other gameObjects like this can kill eachother
+        if (GameManager.int_Player_Lives == -1)
+            ChargeBarSlider = null;
         ChargeBarSlider = GameObject.Find("ChargeShotSlider").GetComponent<Slider>();
     }
 
@@ -213,11 +215,10 @@ public class NPC_Abducter : Base_Class
         if (trans_human_Target == null)
         {
             Debug.Log("We Have No Human");
-            return;
         }
         // Resetting the Human NPC 
         trans_human_Target.transform.parent = null;       // Let the human NPC detech from the parent when parent dies
-        Human_prefab.layer = 10;
+        Human_prefab.layer = 10;                            // When human deteches from the NPC Abductor Chnage Layer Back to 10 which is humanoid
         trans_human_Target.GetComponent<Human_NPC>().enabled = true;      // Turn back on the Human_NPC script
         trans_human_Target.GetComponent<BoxCollider2D>().enabled = true;  // Turn back on the Human NPC colliders
         trans_human_Target.GetComponent<CircleCollider2D>().enabled = true;

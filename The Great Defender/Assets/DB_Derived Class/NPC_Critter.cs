@@ -10,6 +10,7 @@ public class NPC_Critter : Base_Class
     private GameObject FlickingTextMesh;
     public float deductSpeed = 0.5f;
     public Transform Player;
+    [SerializeField]
     private PC_Space_Ship_Controller PC_script;
     [SerializeField]
     private Slider ChargeBar;
@@ -19,8 +20,9 @@ public class NPC_Critter : Base_Class
     {
         base.Start();
         IDE_PC_BC.isTrigger = true;
-        
-	}
+        Player = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
+        PC_script = GameObject.FindGameObjectWithTag("Player").GetComponent<PC_Space_Ship_Controller>();
+    }
 	
 	// Update is called once per frame
 	void Update ()
@@ -29,8 +31,20 @@ public class NPC_Critter : Base_Class
         DoMove();
         Movement_Restriction();
 
-        Player = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
-        PC_script = GameObject.FindGameObjectWithTag("Player").GetComponent<PC_Space_Ship_Controller>();        // Finding the Player Derived Script
+        if (Player == null && GameManager.s_GM.bl_Player_Dead == false)
+        {
+            Player = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
+        }
+        else if (Player != null && GameManager.s_GM.bl_Player_Dead == true)
+            return;
+
+        if (PC_script == null && GameManager.s_GM.bl_Player_Dead == false)
+            PC_script = GameObject.FindGameObjectWithTag("Player").GetComponent<PC_Space_Ship_Controller>();        // Finding the Player Derived Script
+        else if (PC_script != null && GameManager.s_GM.bl_Player_Dead == true)
+            return;
+
+
+
 
     }
 
@@ -63,6 +77,11 @@ public class NPC_Critter : Base_Class
             gameObject.transform.parent = Player.transform;
             PC_script.GetComponent<PC_Space_Ship_Controller>().fl_movement_speed -= deductSpeed;        // decreases players orgianl when it is a child
         }
+        else if(other.gameObject.tag == "Player" == null)
+        {
+            gameObject.transform.parent = null;
+            PC_script = null;
+        }
 
         if(other.gameObject.tag == "Bullet")
         {
@@ -82,5 +101,8 @@ public class NPC_Critter : Base_Class
         {
             PC_script.GetComponent<PC_Space_Ship_Controller>().fl_movement_speed += deductSpeed;        // adds players orgianl speed back when the NPC is no longer a child
         }
+
+        if (other.gameObject.tag == "Player" == null)
+            PC_script = null;
     }
 }
