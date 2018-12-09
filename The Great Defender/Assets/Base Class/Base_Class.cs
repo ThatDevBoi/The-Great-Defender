@@ -78,11 +78,10 @@ public abstract class Base_Class : MonoBehaviour
     #region Do Movement
     protected virtual void DoMove()
     {
-        // Moves on the X axis
+        // Moves on the X axis holding player input
         float Thrust = Input.GetAxis("Horizontal") * fl_movement_speed * Time.deltaTime;        // Making the thrust variable control the x axis which will move with the speed variable and move with time
         transform.position += mvelocity * Time.deltaTime;       // The transform and position of the gameObject will equal to the Vector3 Variable using fixed time
         mvelocity += Quaternion.Euler(0, 0, transform.rotation.z) * transform.right * Thrust;       // Moves the PC gameObject along the x axis right and left
-        //Debug.Log(Thrust);        // Shows the Thrust float value *Delete Later*
         if(Thrust > 0f && !bl_FacingRight)     // When float value thrust is greater than 0 and were not facing right Flip the PC
         {
             Flip();     // Calls the flip function to - sclae by 1

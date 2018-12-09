@@ -1,6 +1,4 @@
-﻿//Help needed references
-// Used Asteroids workshop Week X to make my NPC abducter move mindlessly random
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
